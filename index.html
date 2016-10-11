@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="strainKeeper">
+  <head>
+    <title>Strain Keeper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
+    <script src="main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body ng-controller="mainController as main">
+    <nav>
+      <h1>Strain Keeper</h1>
+    </nav>
+    <main>
+      <p><span>Welcome to Strain Keeper</span> - Your way to keep track of the many
+        different cannabis strains that you have tried and how you feel about each
+        strain.
+      </p>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+        Add New Strain
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">New Strain Information</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <label>Type:</label>
+                <select ng-model="main.type">
+                  <option>Sativa</option>
+                  <option>Hybrid</option>
+                  <option>Indica</option>
+                </select>
+                <label>Name</label>
+                <input type="text" ng-model="main.strain" placeholder="Enter strain name..."></input>
+                <label>Rating</label>
+                <select ng-model="main.rating">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" ng-click="main.addStrain()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div id="strainList">
+      <h2>My Strains:</h2>
+    </div>
+    </main>
+  </body>
+</html>

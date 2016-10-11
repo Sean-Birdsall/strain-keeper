@@ -1,0 +1,44 @@
+body {
+  text-align: center;
+}
+
+nav {
+  background-color: #449D44;
+  color: white;
+  height: 50px;
+}
+
+nav h1 {
+  margin: 0;
+}
+
+span {
+  font-size: 120%;
+  color: #449D44;
+}
+
+h2 {
+  color: #449D44;
+}
+
+.strain {
+  color: white;
+  background-color: #449D44;
+  border-radius: 15px;
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+label {
+  margin: 10px;
+}
+
+img {
+  width: 50px;
+}
+
+.strain h1, .strain h3 {
+  margin-top: 5px;
+}
