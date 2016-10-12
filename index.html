@@ -8,6 +8,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script src="main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -35,14 +36,17 @@
             </div>
             <div class="modal-body">
               <form>
+                <div>
                 <label>Type:</label>
-                <select ng-model="main.type">
-                  <option>Sativa</option>
-                  <option>Hybrid</option>
-                  <option>Indica</option>
-                </select>
+                  <input type="radio" value="Sativa" ng-model="main.type">&nbsp Sativa &nbsp
+                  <input type="radio" value="Hybrid" ng-model="main.type">&nbsp Hybrid &nbsp
+                  <input type="radio" value="Indica" ng-model="main.type">&nbsp Indica &nbsp
+                </div>
+                <div>
                 <label>Name</label>
                 <input type="text" ng-model="main.strain" placeholder="Enter strain name..."></input>
+                </div>
+                <div>
                 <label>Rating</label>
                 <select ng-model="main.rating">
                   <option>1</option>
@@ -51,6 +55,18 @@
                   <option>4</option>
                   <option>5</option>
                 </select>
+                </div>
+                <div>
+                  <label>Check all positive and negative effects:</label>
+                </div>
+                <h5>Positive:</h5>
+                <div class="effects" ng-repeat="effect in main.effects">
+                  <input type="checkbox" checklist-model="main.goodEffects" checklist-value="effect"> {{ effect }}
+                </div>
+                <h5 class="neg">Negative:</h5>
+                <div class="effects" ng-repeat="negEffect in main.negEffects">
+                  <input type="checkbox" checklist-model="main.badEffects" checklist-value="negEffect"> {{ negEffect }}
+                </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -60,8 +76,12 @@
           </div>
         </div>
       </div>
-    <div id="strainList">
+    <div class="strainList">
       <h2>My Strains:</h2>
+      <input type="text" placeholder="Search...">
+      <ul>
+        <li class="active">ALL</li><li>SATIVA</li><li>HYBRID</li><li>INDICA</li>
+      </ul>
     </div>
     </main>
   </body>

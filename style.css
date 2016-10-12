@@ -13,12 +13,14 @@ nav h1 {
 }
 
 span {
-  font-size: 120%;
+  font-size: 150%;
   color: #449D44;
 }
 
 h2 {
   color: #449D44;
+  text-align: left;
+  margin-left: 15px;
 }
 
 .strain {
@@ -29,6 +31,8 @@ h2 {
   margin: auto;
   margin-top: 10px;
   padding: 10px;
+  text-align: left;
+  position: relative;
 }
 
 label {
@@ -36,9 +40,62 @@ label {
 }
 
 img {
-  width: 50px;
+  width: 40px;
 }
 
 .strain h1, .strain h3 {
   margin-top: 5px;
+}
+
+.effects {
+  display: inline-block;
+  margin: 10px;
+}
+
+h5 {
+  margin: 0;
+  color: #449D44;
+  border-bottom: solid 1px #449D44;
+}
+
+.neg {
+
+  color: red;
+  border-bottom: solid 1px red;
+}
+
+.strain h5 {
+  color: white;
+  margin-top: 10px;
+  border-bottom: solid 1px blue;
+}
+
+.strainList input {
+  width: 80%;
+}
+
+.strainList ul {
+  list-style-type: none;
+}
+
+.strainList li {
+  display: inline-block;
+  border-bottom: solid 2px #449D44;
+  color: #449D44;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+#strainList li:hover, #strainList .active {
+  border-bottom: solid 2px red;
+}
+
+.eff {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: white;
+  text-align: center;
 }
