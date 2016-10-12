@@ -58,10 +58,12 @@ h5 {
   border-bottom: solid 1px #449D44;
 }
 
-.neg {
-
-  color: red;
-  border-bottom: solid 1px red;
+.eff {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  color: white;
+  text-align: center;
 }
 
 .strain h5 {
@@ -70,12 +72,19 @@ h5 {
   border-bottom: solid 1px blue;
 }
 
+.neg {
+
+  color: red;
+  border-bottom: solid 1px red;
+}
+
 .strainList input {
   width: 80%;
 }
 
 .strainList ul {
   list-style-type: none;
+  padding: 0;
 }
 
 .strainList li {
@@ -83,19 +92,15 @@ h5 {
   border-bottom: solid 2px #449D44;
   color: #449D44;
   padding: 10px;
-  margin: 10px;
+  margin: 5px;
   cursor: pointer;
   transition: all 1s;
 }
 
-#strainList li:hover, #strainList .active {
+.strainList li:hover, .strainList .active {
   border-bottom: solid 2px red;
 }
 
-.eff {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  color: white;
-  text-align: center;
+.strainHead {
+  width: 80%;
 }

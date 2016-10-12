@@ -17,16 +17,19 @@
       <h1>Strain Keeper</h1>
     </nav>
     <main>
+
+      <!-- INTRO -->
       <p><span>Welcome to Strain Keeper</span> - Your way to keep track of the many
         different cannabis strains that you have tried and how you feel about each
         strain.
       </p>
-      <!-- Button trigger modal -->
+
+      <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
       <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
         Add New Strain
       </button>
 
-      <!-- Modal -->
+      <!-- MODAL -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -35,6 +38,8 @@
               <h4 class="modal-title" id="myModalLabel">New Strain Information</h4>
             </div>
             <div class="modal-body">
+
+              <!-- NEW STRAIN FORM -->
               <form>
                 <div>
                 <label>Type:</label>
@@ -68,6 +73,8 @@
                   <input type="checkbox" checklist-model="main.badEffects" checklist-value="negEffect"> {{ negEffect }}
                 </div>
               </form>
+              <!-- END STRAIN FORM -->
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -76,6 +83,9 @@
           </div>
         </div>
       </div>
+      <!-- END MODAL -->
+
+    <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
     <div class="strainList">
       <h2>My Strains:</h2>
       <input type="text" placeholder="Search...">
@@ -83,6 +93,31 @@
         <li class="active">ALL</li><li>SATIVA</li><li>HYBRID</li><li>INDICA</li>
       </ul>
     </div>
+
+    <!-- STRAIN ITEM  -->
+    <div class='strain' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray">
+      <div class="strainHead">
+        <h1>{{ strain.name }}</h1>
+        <h3>{{ strain.type }}</h3>
+      </div>
+      
+      <!-- RATING -->
+      <img src='cannabis1.svg' ng-show="strain.rating > 0">
+        <img src='cannabis1.svg' ng-show="strain.rating > 1">
+          <img src='cannabis1.svg' ng-show="strain.rating > 2">
+            <img src='cannabis1.svg' ng-show="strain.rating > 3">
+              <img src='cannabis1.svg' ng-show="strain.rating > 4">
+
+      <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
+      <div class='eff'>
+        <h5>The Good:</h5>
+        <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }} </aside>
+        <h5 class='neg'>The Bad:</h5>
+        <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
+      </div>
+
+    </div>
     </main>
+
   </body>
 </html>
