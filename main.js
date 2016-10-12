@@ -23,7 +23,7 @@ function mainController() {
     'Tired'
   ]
 
-  // INITIALLY THERE IS NO STRAINS FOR NG-IF
+  // INITIALLY THERE IS NO STRAINS FOR NG-SHOW
   main.isThereStrains = false;
 
   // CONSTRUCTOR FOR A NEW STRAIN OBJECT
@@ -35,8 +35,45 @@ function mainController() {
     this.badEffects = badEffects;
   }
 
+  // FILTER
+  main.strainFilter = {};
+
   // EMPTY ARRAY WHERE THE NEW STRAINS WILL BE PUSHED
   main.strainArray = [];
+
+  // INITIAL TYPE FILTER IS SET TO ALL
+  main.typeFilter = 1;
+
+  // FUNCTION TO CHANGE TYPE FILTER
+  main.setActive = function($event) {
+
+    // DETERMINE WHICH FILTER IS BEING CLICKED
+    var clickedFilter = $event.currentTarget.getAttribute('id');
+    switch (clickedFilter) {
+      case 'All':
+        main.typeFilter = 1;
+        break;
+      case 'Sativa':
+        main.typeFilter = 2;
+        break;
+      case 'Hybrid':
+        main.typeFilter = 3;
+        break;
+      case 'Indica':
+        main.typeFilter = 4;
+        break;
+      default:
+        main.typeFilter = 1;
+    }
+
+    // CLICKING ON ANY FILTER BUT ALL WILL FILTER BY THAT STRAIN TYPE
+    if (clickedFilter != 'All'){
+      main.strainFilter.type = clickedFilter;
+    } else {
+      // CLICKING ALL WILL RESET THE FILTER
+      main.strainFilter.type = '';
+    }
+  }
 
   // FUNCTION CALLED WHEN SAVE BUTTON IN MODAL IS CLICKED
   main.addStrain = function() {
@@ -47,9 +84,9 @@ function mainController() {
 
     // PUSH THE NEW STRAIN OBJECT ONTO THE STRAIN ARRAY
     main.strainArray.push(newStrain);
-    console.log(main.strainArray);
+    localStorage.setItem('newStrain', JSON.stringify(newStrain));
 
-    // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-IF
+    // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-SHOW
     if (main.strainArray.length > 0) { main.isThereStrains = true; }
 
     // RESET ALL STRAIN VALUES
@@ -59,4 +96,5 @@ function mainController() {
     main.goodEffects = [];
     main.badEffects = [];
   }
+
 }

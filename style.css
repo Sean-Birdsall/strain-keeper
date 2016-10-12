@@ -23,6 +23,10 @@ h2 {
   margin-left: 15px;
 }
 
+.modal-title {
+  padding: 0;
+}
+
 .strain {
   color: white;
   background-color: #449D44;
@@ -41,6 +45,7 @@ label {
 
 img {
   width: 40px;
+  margin: -5px;
 }
 
 .strain h1, .strain h3 {
@@ -69,6 +74,8 @@ h5 {
 .strain h5 {
   color: white;
   margin-top: 10px;
+  margin-bottom: 4spx;
+  padding-bottom: 2px;
   border-bottom: solid 1px blue;
 }
 
@@ -103,4 +110,8 @@ h5 {
 
 .strainHead {
   width: 80%;
+}
+
+.strainList p {
+  margin: 0;
 }

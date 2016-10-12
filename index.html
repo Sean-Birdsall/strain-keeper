@@ -4,11 +4,11 @@
     <title>Strain Keeper</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
     <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script src="main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -88,19 +88,24 @@
     <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
     <div class="strainList">
       <h2>My Strains:</h2>
-      <input type="text" placeholder="Search...">
+      <input type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
+      <p> or </p>
+      <input type="text" placeholder="Search by positive effects..." ng-model="main.strainFilter.goodEffects">
       <ul>
-        <li class="active">ALL</li><li>SATIVA</li><li>HYBRID</li><li>INDICA</li>
+        <li id="All" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 1}" ng-click="main.setActive($event)">ALL</li>
+        <li id="Sativa" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 2}" ng-click="main.setActive($event)">SATIVA</li>
+        <li id="Hybrid" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 3}" ng-click="main.setActive($event)">HYBRID</li>
+        <li id="Indica" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 4}" ng-click="main.setActive($event)">INDICA</li>
       </ul>
     </div>
 
     <!-- STRAIN ITEM  -->
-    <div class='strain' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray">
+    <div class='strain' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter:main.strainFilter">
       <div class="strainHead">
         <h1>{{ strain.name }}</h1>
         <h3>{{ strain.type }}</h3>
       </div>
-      
+
       <!-- RATING -->
       <img src='cannabis1.svg' ng-show="strain.rating > 0">
         <img src='cannabis1.svg' ng-show="strain.rating > 1">
@@ -111,13 +116,11 @@
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
       <div class='eff'>
         <h5>The Good:</h5>
-        <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }} </aside>
+        <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</aside>
         <h5 class='neg'>The Bad:</h5>
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
-
     </div>
     </main>
-
   </body>
 </html>
