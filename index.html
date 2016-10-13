@@ -4,7 +4,6 @@
     <title>Strain Keeper</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
     <link rel="stylesheet" href="style.css">
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
@@ -100,7 +99,7 @@
     </div>
 
     <!-- STRAIN ITEM  -->
-    <div class='strain' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter:main.strainFilter">
+    <div class='strain' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead">
         <h1>{{ strain.name }}</h1>
         <h3>{{ strain.type }}</h3>
