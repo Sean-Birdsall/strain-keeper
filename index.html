@@ -97,9 +97,10 @@
         <li id="Indica" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 4}" ng-click="main.setActive($event)">INDICA</li>
       </ul>
     </div>
-
+    <div class="container-fluid">
+      <div class="row">
     <!-- STRAIN ITEM  -->
-    <div class='strain' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
+    <div class='strain col-xs-12 col-sm-6 col-md-4 col-lg-3' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead">
         <h1>{{ strain.name }}</h1>
         <h3>{{ strain.type }}</h3>
@@ -120,6 +121,8 @@
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
     </div>
+  </div>
+</div>
     </main>
   </body>
 </html>

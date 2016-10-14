@@ -31,9 +31,9 @@ h2 {
   color: white;
   background-color: #449D44;
   border-radius: 15px;
-  width: 90%;
-  margin: auto;
-  margin-top: 10px;
+  /*width: 90%;*/
+  box-sizing: border-box;
+  margin: 5px 5px;
   padding: 10px;
   text-align: left;
   position: relative;

@@ -11,7 +11,8 @@ function mainController() {
     'Energetic',
     'Relaxed',
     'Creative',
-    'Euphoric'
+    'Euphoric',
+    'Flavorful'
   ]
 
   // BAD EFFECTS TO CHOOSE FROM ADD NEW STRAIN FORM
@@ -20,7 +21,8 @@ function mainController() {
     'Red Eyes',
     'Paranoid',
     'Anxious',
-    'Tired'
+    'Tired',
+    'Foggy'
   ]
 
   // CONSTRUCTOR FOR A NEW STRAIN OBJECT
