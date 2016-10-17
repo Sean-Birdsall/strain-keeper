@@ -1,0 +1,29 @@
+{
+  "name": "strain-keeper",
+  "version": "1.0.0",
+  "description": "Your way to keep track of the many",
+  "main": "server.js",
+  "scripts": {
+    "test": "console.log('test');",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sean-Birdsall/strain-keeper.git"
+  },
+  "keywords": [
+    "cannabis",
+    "strain",
+    "weed",
+    "marijuana"
+  ],
+  "author": "Sean Birdsall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sean-Birdsall/strain-keeper/issues"
+  },
+  "homepage": "https://github.com/Sean-Birdsall/strain-keeper#readme",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}

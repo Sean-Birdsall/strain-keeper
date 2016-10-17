@@ -11,7 +11,6 @@ function mainController() {
     'Energetic',
     'Relaxed',
     'Creative',
-    'Euphoric',
     'Flavorful'
   ]
 
@@ -54,46 +53,49 @@ function mainController() {
   main.strainFilter = {};
 
   // ARRAY WHERE THE NEW STRAINS WILL BE KEPT
-  // main.strainArray = [
-  //   {
-  //   name: 'Blue Dream',
-  //   type: 'Hybrid',
-  //   rating: 3,
-  //   goodEffects: ['Happy', 'Creative', 'Energetic'],
-  //   badEffects: ['Red Eyes']
-  // }, {
-  //   name: 'Gorilla Glue',
-  //   type: 'Indica',
-  //   rating: 4,
-  //   goodEffects: ['Relaxed', 'Euphoric'],
-  //   badEffects: ['Tired']
-  // }, {
-  //   name: 'Jedi Kush',
-  //   type: 'Indica',
-  //   rating: 4,
-  //   goodEffects: ['Happy', 'Hungry'],
-  //   badEffects: ['Tired']
-  // }, {
-  //   name: 'Matanuska Thunder Fuck',
-  //   type: 'Sativa',
-  //   rating: 4,
-  //   goodEffects: ['Happy', 'Hungry'],
-  //   badEffects: ['Dry Mouth']
-  // }, {
-  //   name: 'Flo',
-  //   type: 'Sativa',
-  //   rating: 3,
-  //   goodEffects: ['Energetic', 'Hungry'],
-  //   badEffects: ['Red Eyes']
-  // }, {
-  //   name: 'Girl Scout Cookies',
-  //   type: 'Hybrid',
-  //   rating: 2,
-  //   goodEffects: ['Happy', 'Relaxed'],
-  //   badEffects: ['Anxious']
-  // },
-  //
-  // ];
+  main.strainArray = [
+    {
+    name: 'Blue Dream',
+    type: 'Hybrid',
+    rating: 3,
+    goodEffects: ['Happy', 'Creative', 'Energetic'],
+    badEffects: ['Red Eyes']
+  }, {
+    name: 'Gorilla Glue',
+    type: 'Indica',
+    rating: 4,
+    goodEffects: ['Relaxed', 'Euphoric'],
+    badEffects: ['Tired']
+  }, {
+    name: 'Jedi Kush',
+    type: 'Indica',
+    rating: 4,
+    goodEffects: ['Happy', 'Hungry'],
+    badEffects: ['Tired']
+  }, {
+    name: 'Matanuska Thunder Fuck',
+    type: 'Sativa',
+    rating: 4,
+    goodEffects: ['Happy', 'Hungry'],
+    badEffects: ['Dry Mouth']
+  }, {
+    name: 'Flo',
+    type: 'Sativa',
+    rating: 3,
+    goodEffects: ['Energetic', 'Hungry'],
+    badEffects: ['Red Eyes']
+  }, {
+    name: 'Girl Scout Cookies',
+    type: 'Hybrid',
+    rating: 2,
+    goodEffects: ['Happy', 'Relaxed'],
+    badEffects: ['Anxious']
+  },
+
+  ];
+
+    main.colorType = 0;
+
 
   // INITIAL TYPE FILTER IS SET TO ALL
   main.typeFilter = 1;
@@ -153,6 +155,21 @@ function mainController() {
     // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-SHOW
     if (main.strainArray.length > 0) { main.isThereStrains = true; }
 
+    if (main.type == 'Hybrid') {
+      main.colorType = 1;
+      console.log("I'm a Prius")
+    } else if (main.type == 'Indica') {
+      main.colorType = 2;
+      console.log("Yawn, you better be watching something funny");
+    } else {
+      main.colorType = 3;
+      console.log("Don't FUCK with my colors!");
+    }
+    console.log("Catch me I'm running");
+
+    console.log(main.colorType);
+
+
     // RESET ALL STRAIN VALUES
     main.strain = '';
     main.type = '';
@@ -160,5 +177,7 @@ function mainController() {
     main.goodEffects = [];
     main.badEffects = [];
   }
+
+
 
 }

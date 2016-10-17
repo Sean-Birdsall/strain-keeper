@@ -1,5 +1,8 @@
 body {
   text-align: center;
+  /*background-image: url('cannabis2.svg');*/
+  /*background-position: center;*/
+  /*background-repeat: no-repeat;*/
 }
 
 nav {
@@ -10,10 +13,16 @@ nav {
 
 nav h1 {
   margin: 0;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.intro {
+  padding: 5px;
 }
 
 span {
   font-size: 150%;
+  font-family: 'Permanent Marker', cursive;
   color: #449D44;
 }
 
@@ -29,15 +38,38 @@ h2 {
 
 .strain {
   color: white;
-  background-color: #449D44;
+  /*background-color: rgb(251,79,20);*/
   border-radius: 15px;
   /*width: 90%;*/
   box-sizing: border-box;
-  margin: 5px 5px;
+  margin: 5px auto;
   padding: 10px;
   text-align: left;
   position: relative;
+  width: 320px;
+  /*height: 200px;*/
+  font-family: 'Permanent Marker', cursive;
+  box-shadow: 0 4px 8px 0 rgba(0, 0 , 0, 0.3), 0 6px 20px 0
+	rgba(0, 0, 0, 0.19);
 }
+
+.green {
+  background-color: #449D44;
+}
+
+.grad {
+
+  background: #449D44; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #449D44 , purple); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #449D44, purple); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #449D44, purple); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #449D44 , purple); /* Standard syntax */
+}
+
+.indi {
+  background-color: purple;
+}
+
 
 label {
   margin: 10px;
@@ -61,6 +93,7 @@ h5 {
   margin: 0;
   color: #449D44;
   border-bottom: solid 1px #449D44;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .eff {
@@ -73,8 +106,8 @@ h5 {
 
 .strain h5 {
   color: white;
-  margin-top: 10px;
-  margin-bottom: 4spx;
+  margin-top: 5px;
+  margin-bottom: 4px;
   padding-bottom: 2px;
   border-bottom: solid 1px blue;
 }
@@ -109,9 +142,45 @@ h5 {
 }
 
 .strainHead {
-  width: 80%;
+  width: 75%;
 }
 
 .strainList p {
-  margin: 0;
+  margin: 5px;
+  color: #449D44;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.myFont {
+  font-family: 'Permanent Marker', cursive;
+  color: #449D44;
+}
+
+.triangle {
+  height: 0;
+  width: 0;
+  border-bottom: solid 20px black;
+  border-left: solid 20px rgb(251,79,20);
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.new-strain {
+  font-family: 'Permanent Marker', cursive;
+  margin-bottom: 15px;
+}
+
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid #449D44;
+}
+
+@media all and (min-width: 615px){
+  .strain {
+    display: inline-block;
+    margin: 5px 5px;
+  }
 }
