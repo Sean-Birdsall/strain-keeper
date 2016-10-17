@@ -3,10 +3,10 @@ console.log("The bot is starting!");
 var Twit = require('twit');
 
 var T = new Twit({
-  consumer_key:         'NkMdoItyeeZwd3eOUaOKH87AY',
-  consumer_secret:      't1MqvM8pswRUy4uRiAqesPLgk6DkwEuYex9w48b9YNbAac8q1U',
-  access_token:         '787810168692027393-He9ltr1DBi46sSqBg6usDouZLsCSDd6',
-  access_token_secret:  'XLJO9yXEjnXSUSYBW50qeB8UZmOBKChPSGgNfoLcKtpcG',
+  consumer_key:         '...',
+  consumer_secret:      '...',
+  access_token:         '...',
+  access_token_secret:  '...',
 });
 
 var strainFromKeeper = "blue dream";
