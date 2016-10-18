@@ -7,7 +7,7 @@ function mainController($http) {
   var main = this;
 
 
-
+// GETS CALLED ON NG-CLICK ON SAVE NEW STRAIN BUTTON
 main.getData = function(strainName){
 
   $http({
@@ -18,15 +18,13 @@ main.getData = function(strainName){
     }
   })
     .then(function(res, status){
+      // THIS MAKES SURE THAT THE API DATA EXIST BEFORE THE CONSTRUCTOR IS CALLED
        main.addStrain(res.data.data[0]);
     }, function(res, status) {
       console.log("API Failure:", status);
     });
 
 }
-
-// main.getData('flo');
-// var strainData = main.getData('flo');
 
   // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
   var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
@@ -95,7 +93,7 @@ main.getData = function(strainName){
   // FILTER OBJECT
   main.strainFilter = {};
 
-  // ARRAY FOR TESTING PURPOSES - NEED STRAIN IDS
+  // ARRAY FOR TESTING PURPOSES - NEEDS STRAIN IDS
   // main.strainArray = [
   //   {
   //   name: 'Blue Dream',
@@ -172,7 +170,7 @@ main.getData = function(strainName){
     }
   }
 
-  // FUNCTION CALLED WHEN SAVE BUTTON IN MODAL IS CLICKED
+  // FUNCTION CALLED WHEN SAVE BUTTON IN MODAL IS CLICKED - ARGUMENT COMES FROM MAIN.GETDATA FUNCTION
   main.addStrain = function(strainData) {
     $('#myModal').modal('hide');
 
@@ -181,12 +179,6 @@ main.getData = function(strainName){
 
     // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
     localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
-
-    // THIS IS WHERE I WANT TO GET THAT DATA AND ADD DATA AS ARGUMENTS TO CONSTRUCTOR BELOW
-    console.log(strainData.name);
-    console.log(strainData.image);
-    console.log(strainData.url);
-    console.log(strainData.reviews.count);
 
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
     var newStrain = new NewStrain(main.strain, main.type, main.rating,

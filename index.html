@@ -124,7 +124,9 @@
       </div>
 
       <!-- CORNER TRIANGE TRIGGERS ADDITIONAL INFO MODAL -->
-      <div class="triangle" data-toggle="modal" data-target='#modal{{ strain.strainId }}'></div>
+      <div class="triangle" data-toggle="modal" data-target='#modal{{ strain.strainId }}'>
+        <img src="{{ strain.image }}">
+      </div>
 
       <!-- ADDITIONAL INFO MODAL -->
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -150,32 +152,25 @@
             </div>
 
               <div class="edit-effects">
-                <!-- <h4>The Good:</h4> -->
-                  <!-- <span ng-repeat="goodEffect in strain.goodEffects" ng-if="!main.editingGoodEffects">{{ goodEffect }}</span>
-                  <div class="effects" ng-repeat="effect in main.effects" ng-if="main.editingEffects">
-                    <input type="checkbox" checklist-model="strain.goodEffects" checklist-value="effect"> {{ effect }}
-                  </div>
-               </div>
-               <div class="edit-effects">
-                 <h4>The Bad:</h4>
-                  <span ng-repeat="badEffect in strain.badEffects">{{ badEffect }} </span> -->
-
-                  <h5>Positive: </h5>
+                  <h5>Positive:</h5>
                   <div class="effects" ng-repeat="effect in main.effects">
                     <input type="checkbox" checklist-model="strain.goodEffects" checklist-value="effect"> {{ effect }}
                   </div>
-                  <h5 class="neg">Negative: </h5>
+                  <h5 class="neg">Negative:</h5>
                   <div class="effects" ng-repeat="negEffect in main.negEffects">
                     <input type="checkbox" checklist-model="strain.badEffects" checklist-value="negEffect"> {{ negEffect }}
                   </div>
               </div>
-              <div>
-                <h4>Cannabis Report information about {{ strain.name }} </h4>
-                <h6>{{ strain.dataName }}</h6>
-                <img class="weedPic" src="{{ strain.image }}">
-                <h6>There are {{ strain.reviewCount }} reviews on Cannabis Report</h6>
-                <a href="{{strain.dataUrl}}">Read the report</a>
+
+              <div class="data-report">
+                <h4>{{ strain.dataName }}</h4>
+                <img src="{{ strain.image }}">
+                <div class="report-info">
+                  <h6>There are {{ strain.reviewCount }} reviews online</h6>
+                  <a href="{{strain.dataUrl}}">Read the Cannabis Report</a>
+                </div>
               </div>
+
             </div>
 
             <div class="modal-footer">
