@@ -4,6 +4,20 @@ angular.module('strainKeeper', ['checklist-model'])
 function mainController() {
   var main = this;
 
+  // NO STRAINS TO START - COUNT USED TO MANAGE STRAIN ID'S
+  var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
+  if (countFromStorage != null) {
+    main.strainCount = countFromStorage;
+  } else {
+    main.strainCount = 0;
+  }
+
+  // EDITING FEATURE VARIABLES
+  main.editingName = false;
+  main.editingType = false;
+  main.editingRating = false;
+  main.editingEffects = false;
+
   // GOOD EFFECTS USERS CAN CHOOSE FROM ADD NEW STRAIN FORM
   main.effects = [
     'Happy',
@@ -31,6 +45,7 @@ function mainController() {
     this.rating = rating;
     this.goodEffects = goodEffects;
     this.badEffects = badEffects;
+    this.strainId = main.strainCount;
   }
 
   // CREATE REFERENCE TO ARRAY IN STORAGE
@@ -53,48 +68,49 @@ function mainController() {
   main.strainFilter = {};
 
   // ARRAY WHERE THE NEW STRAINS WILL BE KEPT
-  main.strainArray = [
-    {
-    name: 'Blue Dream',
-    type: 'Hybrid',
-    rating: 3,
-    goodEffects: ['Happy', 'Creative', 'Energetic'],
-    badEffects: ['Red Eyes']
-  }, {
-    name: 'Gorilla Glue',
-    type: 'Indica',
-    rating: 4,
-    goodEffects: ['Relaxed', 'Euphoric'],
-    badEffects: ['Tired']
-  }, {
-    name: 'Jedi Kush',
-    type: 'Indica',
-    rating: 4,
-    goodEffects: ['Happy', 'Hungry'],
-    badEffects: ['Tired']
-  }, {
-    name: 'Matanuska Thunder Fuck',
-    type: 'Sativa',
-    rating: 4,
-    goodEffects: ['Happy', 'Hungry'],
-    badEffects: ['Dry Mouth']
-  }, {
-    name: 'Flo',
-    type: 'Sativa',
-    rating: 3,
-    goodEffects: ['Energetic', 'Hungry'],
-    badEffects: ['Red Eyes']
-  }, {
-    name: 'Girl Scout Cookies',
-    type: 'Hybrid',
-    rating: 2,
-    goodEffects: ['Happy', 'Relaxed'],
-    badEffects: ['Anxious']
-  },
+  // main.strainArray = [
+  //   {
+  //   name: 'Blue Dream',
+  //   type: 'Hybrid',
+  //   rating: 3,
+  //   goodEffects: ['Happy', 'Creative', 'Energetic'],
+  //   badEffects: ['Red Eyes'],
+  //
+  // }, {
+  //   name: 'Gorilla Glue',
+  //   type: 'Indica',
+  //   rating: 4,
+  //   goodEffects: ['Relaxed', 'Euphoric'],
+  //   badEffects: ['Tired']
+  // }, {
+  //   name: 'Jedi Kush',
+  //   type: 'Indica',
+  //   rating: 4,
+  //   goodEffects: ['Happy', 'Hungry'],
+  //   badEffects: ['Tired']
+  // }, {
+  //   name: 'Matanuska Thunder Fuck',
+  //   type: 'Sativa',
+  //   rating: 4,
+  //   goodEffects: ['Happy', 'Hungry'],
+  //   badEffects: ['Dry Mouth']
+  // }, {
+  //   name: 'Flo',
+  //   type: 'Sativa',
+  //   rating: 3,
+  //   goodEffects: ['Energetic', 'Hungry'],
+  //   badEffects: ['Red Eyes']
+  // }, {
+  //   name: 'Girl Scout Cookies',
+  //   type: 'Hybrid',
+  //   rating: 2,
+  //   goodEffects: ['Happy', 'Relaxed'],
+  //   badEffects: ['Anxious']
+  // },
+  //
+  // ];
 
-  ];
-
-    main.colorType = 0;
+    // main.colorType = 0;
 
 
   // INITIAL TYPE FILTER IS SET TO ALL
@@ -135,6 +151,12 @@ function mainController() {
   main.addStrain = function() {
     $('#myModal').modal('hide');
 
+    // ADD ITERATION TO STRAIN COUNT
+    main.strainCount++;
+
+    // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
+    localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
+
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
     var newStrain = new NewStrain(main.strain, main.type, main.rating, main.goodEffects, main.badEffects);
 
@@ -148,29 +170,23 @@ function mainController() {
 
     // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
     localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
-    // var arrayFromStorage = localStorage.getItem('strainArray');
-    // console.log('arrayFromStorage: ', JSON.parse(arrayFromStorage));
-    // console.log(main.strainArray);
 
     // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-SHOW
     if (main.strainArray.length > 0) { main.isThereStrains = true; }
 
-    if (main.type == 'Hybrid') {
-      main.colorType = 1;
-      console.log("I'm a Prius")
-    } else if (main.type == 'Indica') {
-      main.colorType = 2;
-      console.log("Yawn, you better be watching something funny");
-    } else {
-      main.colorType = 3;
-      console.log("Don't FUCK with my colors!");
-    }
-    console.log("Catch me I'm running");
+    // TRYING TO MESS WITH COLORS
+    // if (main.type == 'Hybrid') {
+    //   main.colorType = 1;
+    //   console.log("I'm a Prius")
+    // } else if (main.type == 'Indica') {
+    //   main.colorType = 2;
+    //   console.log("Yawn, you better be watching something funny");
+    // } else {
+    //   main.colorType = 3;
+    //   console.log("Don't FUCK with my colors!");
+    // }
 
-    console.log(main.colorType);
-
-
-    // RESET ALL STRAIN VALUES
+    // RESET STRAIN VALUES
     main.strain = '';
     main.type = '';
     main.rating = 0;
@@ -178,6 +194,74 @@ function mainController() {
     main.badEffects = [];
   }
 
+  // Function to hide text when being edited
+    main.hideText = function($event) {
 
+        // Reference the element node that was clicked
+        var clickedElementNode = $event.currentTarget.nodeName;
+        console.log(clickedElementNode);
+        switch (clickedElementNode) {
+          case 'H1':
+            main.editingName = true;
+            break;
+          case 'H2':
+            main.editingType = true;
+            break;
+          case 'H3':
+            main.editingRating = true;
+        }
+      }
+
+      main.blurText = function($event) {
+        // Reference which element is being blurred by name of each element
+        var blurredElement = $event.currentTarget.getAttribute('name');
+        // Switch statement to take appropriate action depending on which element is being blurred
+        console.log(blurredElement);
+        switch (blurredElement){
+            case 'name':
+                main.editingName = false;
+                break;
+            case 'type':
+                main.editingType = false;
+                break;
+            case 'rating':
+                main.editingRating = false;
+
+        }
+      }
+
+      main.sortAndSave = function() {
+
+        // SORT ARRAY BY RATING
+        main.strainArray.sort(function(obj1, obj2){
+          return obj2.rating - obj1.rating;
+        });
+
+        // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
+        localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
+      }
+
+      main.trashStrain = function($event) {
+        var shouldDelete = confirm("Are you sure you want to delete strain?");
+        if (shouldDelete) {
+        var strainToTrash = $event.path[4].getAttribute('id').charAt(5);
+        console.log(strainToTrash);
+        var modalToClose = "#modal" + strainToTrash;
+
+        // CLOSE MODAL BASED ON STRAINID
+        $(modalToClose).modal('hide');
+
+        var remainingStrains = main.strainArray.filter(function(e){
+
+          return e.strainId != strainToTrash;
+
+        })
+        console.log(main.strainArray);
+        console.log(remainingStrains);
+        main.strainArray = remainingStrains;
+
+        main.sortAndSave();
+      }
+      }
 
 }

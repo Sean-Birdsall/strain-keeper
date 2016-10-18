@@ -20,7 +20,7 @@ nav h1 {
   padding: 5px;
 }
 
-span {
+.intro span {
   font-size: 150%;
   font-family: 'Permanent Marker', cursive;
   color: #449D44;
@@ -160,7 +160,7 @@ h5 {
   height: 0;
   width: 0;
   border-bottom: solid 20px black;
-  border-left: solid 20px rgb(251,79,20);
+  border-left: solid 20px white;
   border-bottom-right-radius: 5px;
   position: absolute;
   bottom: 0;
@@ -176,6 +176,61 @@ h5 {
 input[type=text] {
     border: none;
     border-bottom: 2px solid #449D44;
+}
+
+.edit-strain {
+  color: black;
+  padding: 15px;
+}
+
+.edit-strain h3 {
+  margin-left: 10px;
+  display: inline-block;
+  clear: both;
+}
+
+.edit-strain h2, .edit-strain h4, .edit-strain h1 {
+  margin: 0;
+}
+
+.edit-strain input {
+  height: 40px;
+  width: 200px;
+  font-size: 150%;
+}
+
+.modal-header, .modal-body {
+  margin: 0;
+  padding: 5px;
+}
+
+.trash {
+  width: 50px;
+  float: right;
+  cursor: pointer;
+}
+
+.edit-effects {
+  float: left;
+  margin-right: 20%;
+  margin-bottom: 10px;
+}
+
+.edit-effects span {
+  display: block;
+}
+
+.plusRate {
+  width: 15px;
+}
+
+.twit {
+  display: block;
+  clear: both;
+}
+
+.twit h4 {
+  margin: 10px;
 }
 
 @media all and (min-width: 615px){

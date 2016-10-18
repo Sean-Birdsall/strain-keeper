@@ -9,20 +9,21 @@ var T = new Twit({
   access_token_secret:  'XLJO9yXEjnXSUSYBW50qeB8UZmOBKChPSGgNfoLcKtpcG',
 });
 
-var strainFromKeeper = "blue dream";
+var strainFromKeeper = "Lemon Haze";
 
 var params = {
-  q: 'strain OR weed OR marijuana OR cannabis ' + strainFromKeeper + ' -RT -sale since:2010-01-01',
+  q: 'strain OR weed OR marijuana OR cannabis ' + strainFromKeeper + ' -filter:links -RT -sale',
   lang: 'en',
-  // result: 'mixed',
   count: 5
+
 }
 
 T.get('search/tweets', params, gotData);
 
 function gotData(err, data, response) {
   var tweets = data.statuses;
-  // console.log(data.statuses[0].text);
+  // console.log(data[0].text);
+  // console.log(data.statuses);
   for (var i = 0; i < tweets.length; i++) {
     console.log(tweets[i].text);
     console.log("========================================================================");

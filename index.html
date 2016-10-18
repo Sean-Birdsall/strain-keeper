@@ -97,9 +97,8 @@
         <li id="Indica" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 4}" ng-click="main.setActive($event)">INDICA</li>
       </ul>
     </div>
-    <div class="container-fluid">
-      <div class="row">
-    <!-- STRAIN ITEM  -->                                  
+
+    <!-- STRAIN ITEM  -->
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead">
         <h1>{{ strain.name }}</h1>
@@ -112,7 +111,7 @@
           <img src='cannabis1.svg' ng-show="strain.rating > 2">
             <img src='cannabis1.svg' ng-show="strain.rating > 3">
               <img src='cannabis1.svg' ng-show="strain.rating > 4">
-                <!--<img src='edit.svg' class="info-button">-->
+
 
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
       <div class='eff'>
@@ -121,9 +120,55 @@
         <h5 class='neg'>The Bad:</h5>
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
-      <div class="triangle"></div>
-    </div>
-  </div>
+
+      <!-- CORNER TRIANGE TRIGGERS ADDITIONAL INFO MODAL -->
+      <div class="triangle" data-toggle="modal" data-target='#modal{{ strain.strainId }}'></div>
+
+      <!-- ADDITIONAL INFO MODAL -->
+      <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content edit-strain">
+            <div class="modal-header">
+              <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
+              <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event)">{{ strain.name }}</h1>
+              <input type="text" name="name" ng-model="strain.name" ng-if="main.editingName" ng-blur="main.blurText($event)">
+              <h2 ng-if="!main.editingType" ng-click="main.hideText($event)"> - {{strain. type}}</h2>
+              <input type="text" name="type" ng-model="strain.type" ng-if="main.editingType" ng-blur="main.blurText($event)">
+            </div>
+            <div class="modal-body">
+              <div>
+              <h3>Rating : </h3><h3 ng-if="!main.editingRating" ng-click="main.hideText($event)"> {{ strain.rating }}</h3>
+              <select name="rating" ng-model="strain.rating" ng-if="main.editingRating" ng-blur="main.blurText($event)">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+
+              <div class="edit-effects">
+                <h4>The Good:</h4>
+                  <span ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</span>
+               </div>
+               <div class="edit-effects">
+                 <h4>The Bad:</h4>
+                  <span ng-repeat="badEffect in strain.badEffects">{{ badEffect }} </span>
+              </div>
+              <div class="twit">
+                <h4>What are people tweeting about {{ strain.name }} ?</h4>
+                <h6>Tweet 1</h6>
+                <h6>Tweet 2</h6>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" ng-click="main.sortAndSave()" data-dismiss="modal">Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL -->
 
 </div>
     </main>
