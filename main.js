@@ -4,7 +4,7 @@ angular.module('strainKeeper', ['checklist-model'])
 function mainController() {
   var main = this;
 
-  // NO STRAINS TO START - COUNT USED TO MANAGE STRAIN ID'S
+  // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
   var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
   if (countFromStorage != null) {
     main.strainCount = countFromStorage;
@@ -16,7 +16,7 @@ function mainController() {
   main.editingName = false;
   main.editingType = false;
   main.editingRating = false;
-  main.editingEffects = false;
+  main.editingGoodEffects = false;
 
   // GOOD EFFECTS USERS CAN CHOOSE FROM ADD NEW STRAIN FORM
   main.effects = [
@@ -203,12 +203,34 @@ function mainController() {
         switch (clickedElementNode) {
           case 'H1':
             main.editingName = true;
+
+            main.delayNameGrab = function(){
+              main.clickedInput = document.getElementsByName('name')[0];
+              main.clickedInput.focus();
+            }
+            var timeoutID = window.setTimeout(main.delayNameGrab, 0);
+
             break;
           case 'H2':
             main.editingType = true;
+
+            main.delayTypeGrab = function(){
+              main.clickedInput = document.getElementsByName('type')[0];
+              main.clickedInput.focus();
+            }
+            var timeoutID = window.setTimeout(main.delayTypeGrab, 0);
+
             break;
           case 'H3':
-            main.editingRating = true;
+          main.editingRating = true;
+
+          main.delayRatingGrab = function(){
+            main.clickedInput = document.getElementsByName('rating')[0];
+            main.clickedInput.focus();
+          }
+          var timeoutID = window.setTimeout(main.delayRatingGrab, 0);
+
+
         }
       }
 
@@ -229,7 +251,7 @@ function mainController() {
 
         }
       }
-
+      // FUNCTION SORTS THE ARRAY BASED ON RATING AND SAVES IT TO LOCAL STORAGE
       main.sortAndSave = function() {
 
         // SORT ARRAY BY RATING
@@ -248,7 +270,7 @@ function mainController() {
         console.log(strainToTrash);
         var modalToClose = "#modal" + strainToTrash;
 
-        // CLOSE MODAL BASED ON STRAINID
+        // CLOSE MODAL BASED ON STRAINID AFTER STRAIN IS DELETED
         $(modalToClose).modal('hide');
 
         var remainingStrains = main.strainArray.filter(function(e){

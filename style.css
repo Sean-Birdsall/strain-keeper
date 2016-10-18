@@ -193,10 +193,18 @@ input[type=text] {
   margin: 0;
 }
 
-.edit-strain input {
+.modal-header input {
   height: 40px;
   width: 200px;
   font-size: 150%;
+}
+
+.edit-effects {
+  text-align: center;
+}
+
+.edit-effects h5 {
+  color: black;
 }
 
 .modal-header, .modal-body {

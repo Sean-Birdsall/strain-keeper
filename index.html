@@ -128,7 +128,7 @@
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content edit-strain">
-            <div class="modal-header">
+            <div class="modal-header">Click to Edit <br>
               <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
               <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event)">{{ strain.name }}</h1>
               <input type="text" name="name" ng-model="strain.name" ng-if="main.editingName" ng-blur="main.blurText($event)">
@@ -148,12 +148,24 @@
             </div>
 
               <div class="edit-effects">
-                <h4>The Good:</h4>
-                  <span ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</span>
+                <!-- <h4>The Good:</h4> -->
+                  <!-- <span ng-repeat="goodEffect in strain.goodEffects" ng-if="!main.editingGoodEffects">{{ goodEffect }}</span>
+                  <div class="effects" ng-repeat="effect in main.effects" ng-if="main.editingEffects">
+                    <input type="checkbox" checklist-model="strain.goodEffects" checklist-value="effect"> {{ effect }}
+                  </div>
                </div>
                <div class="edit-effects">
                  <h4>The Bad:</h4>
-                  <span ng-repeat="badEffect in strain.badEffects">{{ badEffect }} </span>
+                  <span ng-repeat="badEffect in strain.badEffects">{{ badEffect }} </span> -->
+
+                  <h5>Positive: </h5>
+                  <div class="effects" ng-repeat="effect in main.effects">
+                    <input type="checkbox" checklist-model="strain.goodEffects" checklist-value="effect"> {{ effect }}
+                  </div>
+                  <h5 class="neg">Negative: </h5>
+                  <div class="effects" ng-repeat="negEffect in main.negEffects">
+                    <input type="checkbox" checklist-model="strain.badEffects" checklist-value="negEffect"> {{ negEffect }}
+                  </div>
               </div>
               <div class="twit">
                 <h4>What are people tweeting about {{ strain.name }} ?</h4>
