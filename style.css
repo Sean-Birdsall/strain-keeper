@@ -232,13 +232,8 @@ input[type=text] {
   width: 15px;
 }
 
-.twit {
-  display: block;
-  clear: both;
-}
-
-.twit h4 {
-  margin: 10px;
+.weedPic {
+  width: 100%;
 }
 
 @media all and (min-width: 615px){

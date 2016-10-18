@@ -1,8 +1,32 @@
 angular.module('strainKeeper', ['checklist-model'])
   .controller('mainController', mainController);
 
-function mainController() {
+mainController.$inject = ['$http'];
+
+function mainController($http) {
   var main = this;
+
+
+
+main.getData = function(strainName){
+
+  $http({
+    method: 'GET',
+    url: "https://www.cannabisreports.com/api/v1.0/strains/search/:" + strainName,
+    headers: {
+      'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
+    }
+  })
+    .then(function(res, status){
+       main.addStrain(res.data.data[0]);
+    }, function(res, status) {
+      console.log("API Failure:", status);
+    });
+
+}
+
+// main.getData('flo');
+// var strainData = main.getData('flo');
 
   // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
   var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
@@ -39,18 +63,22 @@ function mainController() {
   ]
 
   // CONSTRUCTOR FOR A NEW STRAIN OBJECT
-  function NewStrain(name, type, rating, goodEffects, badEffects) {
+  function NewStrain(name, type, rating, goodEffects, badEffects, dataName, image,
+    reviewCount, dataUrl) {
     this.name = name;
     this.type = type;
     this.rating = rating;
     this.goodEffects = goodEffects;
     this.badEffects = badEffects;
     this.strainId = main.strainCount;
+    this.dataName = dataName;
+    this.image = image;
+    this.reviewCount = reviewCount;
+    this.dataUrl = dataUrl;
   }
 
   // CREATE REFERENCE TO ARRAY IN STORAGE
   var arrayFromStorage = JSON.parse(localStorage.getItem('strainArray'));
-  console.log(arrayFromStorage);
 
   //IF ARRAY IN STORAGE EXIST, THEN STRAINARRAY
   if (arrayFromStorage != null) {
@@ -67,7 +95,7 @@ function mainController() {
   // FILTER OBJECT
   main.strainFilter = {};
 
-  // ARRAY WHERE THE NEW STRAINS WILL BE KEPT
+  // ARRAY FOR TESTING PURPOSES - NEED STRAIN IDS
   // main.strainArray = [
   //   {
   //   name: 'Blue Dream',
@@ -110,9 +138,6 @@ function mainController() {
   //
   // ];
 
-    // main.colorType = 0;
-
-
   // INITIAL TYPE FILTER IS SET TO ALL
   main.typeFilter = 1;
 
@@ -148,7 +173,7 @@ function mainController() {
   }
 
   // FUNCTION CALLED WHEN SAVE BUTTON IN MODAL IS CLICKED
-  main.addStrain = function() {
+  main.addStrain = function(strainData) {
     $('#myModal').modal('hide');
 
     // ADD ITERATION TO STRAIN COUNT
@@ -157,8 +182,16 @@ function mainController() {
     // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
     localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
 
+    // THIS IS WHERE I WANT TO GET THAT DATA AND ADD DATA AS ARGUMENTS TO CONSTRUCTOR BELOW
+    console.log(strainData.name);
+    console.log(strainData.image);
+    console.log(strainData.url);
+    console.log(strainData.reviews.count);
+
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
-    var newStrain = new NewStrain(main.strain, main.type, main.rating, main.goodEffects, main.badEffects);
+    var newStrain = new NewStrain(main.strain, main.type, main.rating,
+      main.goodEffects, main.badEffects, strainData.name, strainData.image,
+      strainData.reviews.count, strainData.url);
 
     // PUSH THE NEW STRAIN OBJECT ONTO THE STRAIN ARRAY
     main.strainArray.push(newStrain);
@@ -173,18 +206,6 @@ function mainController() {
 
     // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-SHOW
     if (main.strainArray.length > 0) { main.isThereStrains = true; }
-
-    // TRYING TO MESS WITH COLORS
-    // if (main.type == 'Hybrid') {
-    //   main.colorType = 1;
-    //   console.log("I'm a Prius")
-    // } else if (main.type == 'Indica') {
-    //   main.colorType = 2;
-    //   console.log("Yawn, you better be watching something funny");
-    // } else {
-    //   main.colorType = 3;
-    //   console.log("Don't FUCK with my colors!");
-    // }
 
     // RESET STRAIN VALUES
     main.strain = '';
@@ -266,13 +287,19 @@ function mainController() {
       main.trashStrain = function($event) {
         var shouldDelete = confirm("Are you sure you want to delete strain?");
         if (shouldDelete) {
-        var strainToTrash = $event.path[4].getAttribute('id').charAt(5);
+
+        // GRABS THREE DIGIT ID #'S - CAN HOLD 999 STRAINS WITHOUT PROBLEM
+        var strainToTrash = $event.path[4].getAttribute('id').charAt(5) +
+          $event.path[4].getAttribute('id').charAt(6) +
+          $event.path[4].getAttribute('id').charAt(7);
         console.log(strainToTrash);
+
         var modalToClose = "#modal" + strainToTrash;
 
         // CLOSE MODAL BASED ON STRAINID AFTER STRAIN IS DELETED
         $(modalToClose).modal('hide');
 
+        // FILTER RETURNS ALL OBJECTS THAT DO NOT MATCH THE STRAINID OF THE DELETED STRAIN
         var remainingStrains = main.strainArray.filter(function(e){
 
           return e.strainId != strainToTrash;

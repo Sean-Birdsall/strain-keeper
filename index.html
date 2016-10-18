@@ -9,6 +9,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
+    <script src="bot.js"></script>  -->
     <script src="main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -78,7 +80,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-success" ng-click="main.addStrain()">Save changes</button>
+              <button type="button" class="btn btn-success" ng-click="main.getData(main.strain)">Save changes</button>
             </div>
           </div>
         </div>
@@ -128,7 +130,7 @@
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content edit-strain">
-            <div class="modal-header">Click to Edit <br>
+            <div class="modal-header">Click to Edit (name/type/rating) <br>
               <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
               <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event)">{{ strain.name }}</h1>
               <input type="text" name="name" ng-model="strain.name" ng-if="main.editingName" ng-blur="main.blurText($event)">
@@ -167,15 +169,17 @@
                     <input type="checkbox" checklist-model="strain.badEffects" checklist-value="negEffect"> {{ negEffect }}
                   </div>
               </div>
-              <div class="twit">
-                <h4>What are people tweeting about {{ strain.name }} ?</h4>
-                <h6>Tweet 1</h6>
-                <h6>Tweet 2</h6>
+              <div>
+                <h4>Cannabis Report information about {{ strain.name }} </h4>
+                <h6>{{ strain.dataName }}</h6>
+                <img class="weedPic" src="{{ strain.image }}">
+                <h6>There are {{ strain.reviewCount }} reviews on Cannabis Report</h6>
+                <a href="{{strain.dataUrl}}">Read the report</a>
               </div>
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" ng-click="main.sortAndSave()" data-dismiss="modal">Done</button>
+              <button type="button" class="btn btn-primary" ng-click="main.sortAndSave()" data-dismiss="modal">Done</button>
             </div>
           </div>
         </div>
