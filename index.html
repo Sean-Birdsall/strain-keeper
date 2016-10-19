@@ -104,15 +104,15 @@
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead">
         <h1>{{ strain.name }}</h1>
-        <h3>{{ strain.type }}</h3>
+        <img class="strain-img" src="{{ strain.image }}"><h3>- {{ strain.type }}</h3>
       </div>
 
       <!-- RATING -->
-      <img src='cannabis1.svg' ng-show="strain.rating > 0">
-        <img src='cannabis1.svg' ng-show="strain.rating > 1">
-          <img src='cannabis1.svg' ng-show="strain.rating > 2">
-            <img src='cannabis1.svg' ng-show="strain.rating > 3">
-              <img src='cannabis1.svg' ng-show="strain.rating > 4">
+      <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 0">
+        <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 1">
+          <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 2">
+            <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 3">
+              <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 4">
 
 
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
@@ -123,11 +123,10 @@
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
 
-      <!-- CORNER TRIANGE TRIGGERS ADDITIONAL INFO MODAL -->
-      <div class="triangle" data-toggle="modal" data-target='#modal{{ strain.strainId }}'>
-        <img src="{{ strain.image }}">
-      </div>
 
+
+
+      <span class="strain-foot" data-toggle="modal" data-target="#modal{{ strain.strainId }}">EDIT / <br>MORE INFO -> </span>
       <!-- ADDITIONAL INFO MODAL -->
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

@@ -61,13 +61,24 @@ label {
   margin: 10px;
 }
 
-img {
+.strain-img {
+  width: 30%;
+  margin-right: 5px;
+  max-height: 75px;
+  border-radius: 5px;
+}
+
+.rating {
   width: 40px;
   margin: -5px;
 }
 
 .strain h1, .strain h3 {
   margin-top: 5px;
+}
+
+.strain h3 {
+  display: inline-block;
 }
 
 .effects {
@@ -152,6 +163,18 @@ h5 {
 
 .triangle img {
   border-bottom-right-radius: 15px;
+}
+
+.strain-foot {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.strain-foot:hover {
+  color: blue;
 }
 
 .new-strain {
