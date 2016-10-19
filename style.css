@@ -68,6 +68,31 @@ label {
   border-radius: 5px;
 }
 
+.zoom {
+-webkit-transition: all 0.35s ease-in-out;
+-moz-transition: all 0.35s ease-in-out;
+transition: all 0.35s ease-in-out;
+cursor: -webkit-zoom-in;
+cursor: -moz-zoom-in;
+cursor: zoom-in;
+}
+
+.zoom:hover,
+.zoom:active,
+.zoom:focus {
+/**adjust scale to desired size,
+add browser prefixes**/
+-ms-transform: scale(2.95);
+-moz-transform: scale(2.95);
+-webkit-transform: scale(2.95);
+-o-transform: scale(2.95);
+transform: scale(2.95);
+position:relative;
+margin-top: 25px;
+margin-left: 70px;
+z-index:100;
+}
+
 .rating {
   width: 40px;
   margin: -5px;
@@ -288,6 +313,12 @@ input[type=text] {
 
   .report-info h6, .report-info a {
     font-size: 150%;
+  }
+
+  .zoom:hover,
+  .zoom:active,
+  .zoom:focus {
+
   }
 
 }

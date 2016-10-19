@@ -4,27 +4,8 @@ angular.module('strainKeeper', ['checklist-model'])
 mainController.$inject = ['$http'];
 
 function mainController($http) {
+
   var main = this;
-
-
-// GETS CALLED ON NG-CLICK ON SAVE NEW STRAIN BUTTON
-main.getData = function(strainName){
-
-  $http({
-    method: 'GET',
-    url: "https://www.cannabisreports.com/api/v1.0/strains/search/:" + strainName,
-    headers: {
-      'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
-    }
-  })
-    .then(function(res, status){
-      // THIS MAKES SURE THAT THE API DATA EXIST BEFORE THE CONSTRUCTOR IS CALLED
-       main.addStrain(res.data.data[0]);
-    }, function(res, status) {
-      console.log("API Failure:", status);
-    });
-
-}
 
   // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
   var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
@@ -93,51 +74,16 @@ main.getData = function(strainName){
   // FILTER OBJECT
   main.strainFilter = {};
 
-  // ARRAY FOR TESTING PURPOSES - NEEDS STRAIN IDS
-  // main.strainArray = [
-  //   {
-  //   name: 'Blue Dream',
-  //   type: 'Hybrid',
-  //   rating: 3,
-  //   goodEffects: ['Happy', 'Creative', 'Energetic'],
-  //   badEffects: ['Red Eyes'],
-  //
-  // }, {
-  //   name: 'Gorilla Glue',
-  //   type: 'Indica',
-  //   rating: 4,
-  //   goodEffects: ['Relaxed', 'Euphoric'],
-  //   badEffects: ['Tired']
-  // }, {
-  //   name: 'Jedi Kush',
-  //   type: 'Indica',
-  //   rating: 4,
-  //   goodEffects: ['Happy', 'Hungry'],
-  //   badEffects: ['Tired']
-  // }, {
-  //   name: 'Matanuska Thunder Fuck',
-  //   type: 'Sativa',
-  //   rating: 4,
-  //   goodEffects: ['Happy', 'Hungry'],
-  //   badEffects: ['Dry Mouth']
-  // }, {
-  //   name: 'Flo',
-  //   type: 'Sativa',
-  //   rating: 3,
-  //   goodEffects: ['Energetic', 'Hungry'],
-  //   badEffects: ['Red Eyes']
-  // }, {
-  //   name: 'Girl Scout Cookies',
-  //   type: 'Hybrid',
-  //   rating: 2,
-  //   goodEffects: ['Happy', 'Relaxed'],
-  //   badEffects: ['Anxious']
-  // },
-  //
-  // ];
-
   // INITIAL TYPE FILTER IS SET TO ALL
   main.typeFilter = 1;
+
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     FUNCTIONS     ////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     ACTIVE TYPE FILTER     ///////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
   // FUNCTION TO CHANGE TYPE FILTER
   main.setActive = function($event) {
@@ -170,6 +116,44 @@ main.getData = function(strainName){
     }
   }
 
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     GET API DATA     /////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+  // GETS CALLED ON NG-CLICK ON SAVE NEW STRAIN BUTTON
+  main.getData = function(strainName){
+
+    // SIMPLE FORM VALIDATION
+    console.log("main.rating =" + main.rating);
+    if (main.strain == undefined) {
+      alert("Please enter a strain name. (Preferably a real one)");
+    } else if (main.type == undefined) {
+      alert("Please select a type.")
+    } else if (main.rating == undefined) {
+      alert("Please select a rating");
+    }
+    else {
+
+    $http({
+      method: 'GET',
+      url: "https://www.cannabisreports.com/api/v1.0/strains/search/:" + strainName,
+      headers: {
+        'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
+      }
+    })
+      .then(function(res, status){
+        // THIS MAKES SURE THAT THE API DATA EXIST BEFORE THE CONSTRUCTOR IS CALLED
+         main.addStrain(res.data.data[0]);
+      }, function(res, status) {
+        console.log("API Failure:", status);
+      });
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     ADD STRAIN     ////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
   // FUNCTION CALLED WHEN SAVE BUTTON IN MODAL IS CLICKED - ARGUMENT COMES FROM MAIN.GETDATA FUNCTION
   main.addStrain = function(strainData) {
     $('#myModal').modal('hide');
@@ -180,11 +164,15 @@ main.getData = function(strainName){
     // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
     localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
 
+try {
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
     var newStrain = new NewStrain(main.strain, main.type, main.rating,
       main.goodEffects, main.badEffects, strainData.name, strainData.image,
       strainData.reviews.count, strainData.url);
-
+    }
+catch(err) {
+  alert("Strain name not found. Please try again.");
+}
     // PUSH THE NEW STRAIN OBJECT ONTO THE STRAIN ARRAY
     main.strainArray.push(newStrain);
 
@@ -207,6 +195,10 @@ main.getData = function(strainName){
     main.badEffects = [];
   }
 
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     EDIT-IN-PLACE FUNCTIONS    ///////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
   // Function to hide text when being edited
     main.hideText = function($event) {
 
@@ -218,8 +210,9 @@ main.getData = function(strainName){
             main.editingName = true;
 
             main.delayNameGrab = function(){
-              main.clickedInput = document.getElementsByName('name')[0];
-              main.clickedInput.focus();
+              var clickedInput = document.getElementsByName('name')[0];
+              console.log(document.getElementsByName('name')[0]);
+              clickedInput.focus();
             }
             var timeoutID = window.setTimeout(main.delayNameGrab, 0);
 
@@ -264,6 +257,11 @@ main.getData = function(strainName){
 
         }
       }
+
+      //////////////////////////////////////////////////////////////////////////
+      ////////////////////     SORT AND SAVE     ///////////////////////////////
+      //////////////////////////////////////////////////////////////////////////
+
       // FUNCTION SORTS THE ARRAY BASED ON RATING AND SAVES IT TO LOCAL STORAGE
       main.sortAndSave = function() {
 
@@ -275,6 +273,10 @@ main.getData = function(strainName){
         // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
         localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
       }
+
+      //////////////////////////////////////////////////////////////////////////
+      ////////////////////     DELETE STRAIN    ////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////
 
       main.trashStrain = function($event) {
         var shouldDelete = confirm("Are you sure you want to delete strain?");

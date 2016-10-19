@@ -9,8 +9,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.js"></script>
-    <script src="bot.js"></script>  -->
     <script src="main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -104,7 +102,7 @@
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead">
         <h1>{{ strain.name }}</h1>
-        <img class="strain-img" src="{{ strain.image }}"><h3>- {{ strain.type }}</h3>
+        <img class="strain-img zoom" ng-click="main.showInfo()" src="{{ strain.image }}"><h3>- {{ strain.type }}</h3>
       </div>
 
       <!-- RATING -->
@@ -126,7 +124,7 @@
 
 
 
-      <span class="strain-foot" data-toggle="modal" data-target="#modal{{ strain.strainId }}">EDIT / <br>MORE INFO -> </span>
+      <span class="strain-foot" data-toggle="modal" data-target="#modal{{ strain.strainId }}">EDIT /<br>MORE INFO -> </span>
       <!-- ADDITIONAL INFO MODAL -->
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
