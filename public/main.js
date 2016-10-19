@@ -136,16 +136,24 @@ function mainController($http) {
 
     $http({
       method: 'GET',
-      url: "https://www.cannabisreports.com/api/v1.0/strains/search/:" + strainName,
-      headers: {
-        'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
+      // url: "https://www.cannabisreports.com/api/v1.0/strains/search/:" + strainName,
+      // headers: {
+      //   'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
+      // }
+      url: "/api/strains",
+      params: {
+        q: strainName
       }
+
     })
-      .then(function(res, status){
+      .then(function(res){
         // THIS MAKES SURE THAT THE API DATA EXIST BEFORE THE CONSTRUCTOR IS CALLED
-         main.addStrain(res.data.data[0]);
-      }, function(res, status) {
-        console.log("API Failure:", status);
+        main.addStrain(res.data.data[0]);
+        // console.log(res);
+        // console.log(res.data);
+        console.log('Success');
+      }, function(res) {
+        console.log("API Failure:", res);
       });
     }
   }

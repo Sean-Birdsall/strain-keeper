@@ -131,14 +131,18 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content edit-strain">
             <div class="modal-header">Click to Edit (name/type/rating) <br>
+              <!-- TRASH STRAIN ICON -->
               <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
+              <!-- EDIT STRAIN NAME -->
               <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event)">{{ strain.name }}</h1>
               <input type="text" name="name" ng-model="strain.name" ng-if="main.editingName" ng-blur="main.blurText($event)">
+              <!-- EDIT STRAIN TYPE -->
               <h2 ng-if="!main.editingType" ng-click="main.hideText($event)"> - {{strain. type}}</h2>
               <input type="text" name="type" ng-model="strain.type" ng-if="main.editingType" ng-blur="main.blurText($event)">
             </div>
             <div class="modal-body">
               <div>
+              <!-- EDIT STRAIN RATING -->
               <h3>Rating : </h3><h3 ng-if="!main.editingRating" ng-click="main.hideText($event)"> {{ strain.rating }}</h3>
               <select name="rating" ng-model="strain.rating" ng-if="main.editingRating" ng-blur="main.blurText($event)">
                 <option>1</option>
@@ -148,7 +152,7 @@
                 <option>5</option>
               </select>
             </div>
-
+              <!-- EDIT STRAIN EFFECTS -->
               <div class="edit-effects">
                   <h5>Positive:</h5>
                   <div class="effects" ng-repeat="effect in main.effects">
