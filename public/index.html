@@ -25,7 +25,7 @@
       </p>
 
       <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
-      <button type="button" class="btn btn-success btn-lg new-strain t-shadow" data-toggle="modal" data-target="#myModal">
+      <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
         Add New Strain
       </button>
 
@@ -78,7 +78,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-success" ng-click="main.getData(main.strain)">Save changes</button>
+              <button type="button" class="btn btn-success green" ng-click="main.getData(main.strain)">Save changes</button>
             </div>
           </div>
         </div>
@@ -116,9 +116,9 @@
 
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
       <div class='eff t-shadow'>
-        <h5>The Good:</h5>
+        <h5 class="eff-head">The Good:</h5>
         <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</aside>
-        <h5 class='neg'>The Bad:</h5>
+        <h5 class="eff-head">The Bad:</h5>
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
 
@@ -128,7 +128,7 @@
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content edit-strain">
-            <div class="modal-header">Click to Edit (name/type/rating) <br>
+            <div class="modal-header">Click on the name/type/rating to edit <br>
               <!-- TRASH STRAIN ICON -->
               <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
               <!-- EDIT STRAIN NAME -->
@@ -139,7 +139,7 @@
               <input type="text" name="type" ng-model="strain.type" ng-if="main.editingType" ng-blur="main.blurText($event)">
             </div>
             <div class="modal-body">
-              <div>
+              <div class="text-green">
               <!-- EDIT STRAIN RATING -->
               <h3>Rating : </h3><h3 ng-if="!main.editingRating" ng-click="main.hideText($event, $index)"> {{ strain.rating }}</h3>
               <select name="rating" ng-model="strain.rating" ng-if="main.editingRating" ng-blur="main.blurText($event)">
@@ -152,7 +152,7 @@
             </div>
               <!-- EDIT STRAIN EFFECTS -->
               <div class="edit-effects">
-                  <h5>Positive:</h5>
+                  <h5 class="text-green">Positive:</h5>
                   <div class="effects" ng-repeat="effect in main.effects">
                     <input type="checkbox" checklist-model="strain.goodEffects" checklist-value="effect"> {{ effect }}
                   </div>

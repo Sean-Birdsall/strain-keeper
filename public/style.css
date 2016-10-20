@@ -105,7 +105,7 @@ h5 {
   text-align: center;
 }
 
-.strain h5 {
+.eff-head {
   color: white;
   margin-top: 5px;
   margin-bottom: 4px;
@@ -216,8 +216,12 @@ input[type=text] {
   text-align: center;
 }
 
-.edit-effects h5 {
-  color: black;
+.text-green {
+  color: #449D44;
+}
+
+.text-red {
+  color: red;
 }
 
 .modal-header, .modal-body {
@@ -291,7 +295,7 @@ input[type=text] {
   left: 25%;
   z-index: 10000;
   position: absolute;
-  opacity: 0.7;
+
 }
 
 @media all and (min-width: 615px){
@@ -301,11 +305,11 @@ input[type=text] {
   }
 
   .data-report h4 {
-    font-size: 300%;
+    font-size: 250%;
   }
 
   .report-info h6, .report-info a {
-    font-size: 150%;
+    font-size: 125%;
   }
 
   .zoom {
