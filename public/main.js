@@ -15,6 +15,8 @@ function mainController($http) {
     main.strainCount = 0;
   }
 
+  main.loading = false;
+
   // EDITING FEATURE VARIABLES
   main.editingName = false;
   main.editingType = false;
@@ -62,10 +64,8 @@ function mainController($http) {
   //IF ARRAY IN STORAGE EXIST, THEN STRAINARRAY
   if (arrayFromStorage != null) {
     main.strainArray = arrayFromStorage;
-    console.log("I got it from storage");
   } else {
     main.strainArray = [];
-    console.log("There was nothing in storage");
   }
 
   // INITIALLY THERE IS(true) OR IS NOT(false) STRAINS FOR NG-SHOW
@@ -124,7 +124,7 @@ function mainController($http) {
   main.getData = function(strainName){
 
     // SIMPLE FORM VALIDATION
-    console.log("main.rating =" + main.rating);
+
     if (main.strain == undefined) {
       alert("Please enter a strain name. (Preferably a real one)");
     } else if (main.type == undefined) {
@@ -133,13 +133,10 @@ function mainController($http) {
       alert("Please select a rating");
     }
     else {
-
+    main.loading = true;
     $http({
       method: 'GET',
-      // url: "https://www.cannabisreports.com/api/v1.0/strains/search/:" + strainName,
-      // headers: {
-      //   'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
-      // }
+      
       url: "/api/strains",
       params: {
         q: strainName
@@ -149,9 +146,8 @@ function mainController($http) {
       .then(function(res){
         // THIS MAKES SURE THAT THE API DATA EXIST BEFORE THE CONSTRUCTOR IS CALLED
         main.addStrain(res.data.data[0]);
-        // console.log(res);
-        // console.log(res.data);
         console.log('Success');
+        main.loading = false;
       }, function(res) {
         console.log("API Failure:", res);
       });
@@ -210,18 +206,17 @@ catch(err) {
   ///////////////////////////////////////////////////////////////////////////
 
   // Function to hide text when being edited
-    main.hideText = function($event) {
+    main.hideText = function($event, $index) {
 
         // Reference the element node that was clicked
         var clickedElementNode = $event.currentTarget.nodeName;
-        console.log(clickedElementNode);
+
         switch (clickedElementNode) {
           case 'H1':
             main.editingName = true;
 
             main.delayNameGrab = function(){
-              var clickedInput = document.getElementsByName('name')[0];
-              console.log(document.getElementsByName('name')[0]);
+              var clickedInput = document.getElementsByName('name')[$index];
               clickedInput.focus();
             }
             var timeoutID = window.setTimeout(main.delayNameGrab, 0);
@@ -231,7 +226,7 @@ catch(err) {
             main.editingType = true;
 
             main.delayTypeGrab = function(){
-              main.clickedInput = document.getElementsByName('type')[0];
+              main.clickedInput = document.getElementsByName('type')[$index];
               main.clickedInput.focus();
             }
             var timeoutID = window.setTimeout(main.delayTypeGrab, 0);
@@ -241,7 +236,7 @@ catch(err) {
           main.editingRating = true;
 
           main.delayRatingGrab = function(){
-            main.clickedInput = document.getElementsByName('rating')[0];
+            main.clickedInput = document.getElementsByName('rating')[$index];
             main.clickedInput.focus();
           }
           var timeoutID = window.setTimeout(main.delayRatingGrab, 0);
@@ -254,7 +249,7 @@ catch(err) {
         // Reference which element is being blurred by name of each element
         var blurredElement = $event.currentTarget.getAttribute('name');
         // Switch statement to take appropriate action depending on which element is being blurred
-        console.log(blurredElement);
+
         switch (blurredElement){
             case 'name':
                 main.editingName = false;
@@ -298,7 +293,6 @@ catch(err) {
         var strainToTrash = $event.path[4].getAttribute('id').charAt(5) +
           $event.path[4].getAttribute('id').charAt(6) +
           $event.path[4].getAttribute('id').charAt(7);
-        console.log(strainToTrash);
 
         var modalToClose = "#modal" + strainToTrash;
 
@@ -311,8 +305,7 @@ catch(err) {
           return e.strainId != strainToTrash;
 
         })
-        console.log(main.strainArray);
-        console.log(remainingStrains);
+
         main.strainArray = remainingStrains;
 
         main.sortAndSave();

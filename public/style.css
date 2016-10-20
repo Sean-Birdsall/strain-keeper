@@ -1,8 +1,5 @@
 body {
   text-align: center;
-  /*background-image: url('cannabis2.svg');*/
-  /*background-position: center;*/
-  /*background-repeat: no-repeat;*/
 }
 
 nav {
@@ -14,10 +11,15 @@ nav {
 nav h1 {
   margin: 0;
   font-family: 'Permanent Marker', cursive;
+
 }
 
 .intro {
   padding: 5px;
+}
+
+.t-shadow {
+  text-shadow: 1px 1px 1px black;
 }
 
 .intro span {
@@ -39,6 +41,7 @@ h2 {
 .strain {
   color: white;
   /*background-color: rgb(251,79,20);*/
+
   border-radius: 15px;
   /*width: 90%;*/
   box-sizing: border-box;
@@ -66,31 +69,7 @@ label {
   margin-right: 5px;
   max-height: 75px;
   border-radius: 5px;
-}
-
-.zoom {
--webkit-transition: all 0.35s ease-in-out;
--moz-transition: all 0.35s ease-in-out;
-transition: all 0.35s ease-in-out;
-cursor: -webkit-zoom-in;
-cursor: -moz-zoom-in;
-cursor: zoom-in;
-}
-
-.zoom:hover,
-.zoom:active,
-.zoom:focus {
-/**adjust scale to desired size,
-add browser prefixes**/
--ms-transform: scale(2.95);
--moz-transform: scale(2.95);
--webkit-transform: scale(2.95);
--o-transform: scale(2.95);
-transform: scale(2.95);
-position:relative;
-margin-top: 25px;
-margin-left: 70px;
-z-index:100;
+  cursor: pointer;
 }
 
 .rating {
@@ -199,7 +178,7 @@ h5 {
 }
 
 .strain-foot:hover {
-  color: blue;
+  color: #2A7FFF;
 }
 
 .new-strain {
@@ -254,7 +233,7 @@ input[type=text] {
 
 .edit-effects {
   /*float: left;*/
-  margin-right: 20%;
+  /*margin-right: 20%;*/
   margin-bottom: 10px;
 }
 
@@ -262,16 +241,18 @@ input[type=text] {
   display: block;
 }
 
-.plusRate {
-  width: 15px;
+.margin-center {
+  margin: auto;
 }
 
 .data-report {
   position: relative;
+  max-width: 375px;
 }
 
 .data-report img {
   width: 100%;
+
 }
 
 .data-report h4 {
@@ -301,6 +282,18 @@ input[type=text] {
   margin: 0;
 }
 
+.loading {
+  display: inline-block;
+  background-color: black;
+  width: 50%;
+  border-radius: 15px;
+  top: 25%;
+  left: 25%;
+  z-index: 10000;
+  position: absolute;
+  opacity: 0.7;
+}
+
 @media all and (min-width: 615px){
   .strain {
     display: inline-block;
@@ -315,10 +308,29 @@ input[type=text] {
     font-size: 150%;
   }
 
+  .zoom {
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
+  }
+
   .zoom:hover,
   .zoom:active,
   .zoom:focus {
-
+  /**adjust scale to desired size,
+  add browser prefixes**/
+  -ms-transform: scale(2.95);
+  -moz-transform: scale(2.95);
+  -webkit-transform: scale(2.95);
+  -o-transform: scale(2.95);
+  transform: scale(2.95);
+  position:relative;
+  margin-top: 25px;
+  margin-left: 70px;
+  z-index:100;
   }
 
 }

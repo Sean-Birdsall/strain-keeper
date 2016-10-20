@@ -4,10 +4,12 @@ var request = require('request');
 // create an express APP object
 var app = express();
 
-
+var bodyParser = require('body-parser');
 
 // instead of writing a GET route for every file going to the client, we can use express to set up a static file server
 app.use(express.static('public'));
+
+app.use(bodyParser.json(), bodyParser.urlencoded({extended: true}));
 
 app.get('/api/strains', (req, res) => {
 
@@ -20,8 +22,13 @@ app.get('/api/strains', (req, res) => {
 
   request(options, (err, response, body) => {
     // console.log(err, response, body);
+    
     res.end(body);
   });
+
+
+
+
 });
 
 // listen for connections

@@ -13,19 +13,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body ng-controller="mainController as main">
-    <nav>
+    <nav class="t-shadow">
       <h1>Strain Keeper</h1>
     </nav>
     <main>
 
       <!-- INTRO -->
-      <p class="intro"><span>Welcome to Strain Keeper</span> - Your way to keep track of the many
+      <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
         different cannabis strains that you have tried and how you feel about each
         strain.
       </p>
 
       <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
-      <button type="button" class="btn btn-success btn-lg new-strain" data-toggle="modal" data-target="#myModal">
+      <button type="button" class="btn btn-success btn-lg new-strain t-shadow" data-toggle="modal" data-target="#myModal">
         Add New Strain
       </button>
 
@@ -100,7 +100,7 @@
 
     <!-- STRAIN ITEM  -->
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
-      <div class="strainHead">
+      <div class="strainHead t-shadow">
         <h1>{{ strain.name }}</h1>
         <img class="strain-img zoom" ng-click="main.showInfo()" src="{{ strain.image }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">
         <h3>- {{ strain.type }}</h3>
@@ -115,17 +115,15 @@
 
 
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
-      <div class='eff'>
+      <div class='eff t-shadow'>
         <h5>The Good:</h5>
         <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</aside>
         <h5 class='neg'>The Bad:</h5>
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
 
+      <span class="strain-foot t-shadow" data-toggle="modal" data-target="#modal{{ strain.strainId }}">EDIT /<br>MORE INFO -> </span>
 
-
-
-      <span class="strain-foot" data-toggle="modal" data-target="#modal{{ strain.strainId }}">EDIT /<br>MORE INFO -> </span>
       <!-- ADDITIONAL INFO MODAL -->
       <div class="modal fade" id="modal{{ strain.strainId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -134,16 +132,16 @@
               <!-- TRASH STRAIN ICON -->
               <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
               <!-- EDIT STRAIN NAME -->
-              <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event)">{{ strain.name }}</h1>
+              <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event, $index)">{{ strain.name }}</h1>
               <input type="text" name="name" ng-model="strain.name" ng-if="main.editingName" ng-blur="main.blurText($event)">
               <!-- EDIT STRAIN TYPE -->
-              <h2 ng-if="!main.editingType" ng-click="main.hideText($event)"> - {{strain. type}}</h2>
+              <h2 ng-if="!main.editingType" ng-click="main.hideText($event, $index)"> - {{strain. type}}</h2>
               <input type="text" name="type" ng-model="strain.type" ng-if="main.editingType" ng-blur="main.blurText($event)">
             </div>
             <div class="modal-body">
               <div>
               <!-- EDIT STRAIN RATING -->
-              <h3>Rating : </h3><h3 ng-if="!main.editingRating" ng-click="main.hideText($event)"> {{ strain.rating }}</h3>
+              <h3>Rating : </h3><h3 ng-if="!main.editingRating" ng-click="main.hideText($event, $index)"> {{ strain.rating }}</h3>
               <select name="rating" ng-model="strain.rating" ng-if="main.editingRating" ng-blur="main.blurText($event)">
                 <option>1</option>
                 <option>2</option>
@@ -164,7 +162,7 @@
                   </div>
               </div>
 
-              <div class="data-report">
+              <div class="data-report margin-center">
                 <h4>{{ strain.dataName }}</h4>
                 <img src="{{ strain.image }}">
                 <div class="report-info">
@@ -183,7 +181,10 @@
       </div>
       <!-- END MODAL -->
 
-</div>
+    </div>
+      <div class="loading" ng-if="main.loading">
+        <img src="cannabis-loading.gif" dynsrc="cannabis-loading.gif" loop="infinite">
+      </div>
     </main>
   </body>
 </html>
