@@ -19,15 +19,35 @@
     <main>
 
       <!-- INTRO -->
-      <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
+      <!-- <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
         different cannabis strains that you have tried and how you feel about each
         strain.
-      </p>
+      </p> -->
+      <div class="user myFont">
+        <img class="profile-pic" src="//placehold.it/100x100"><h2>Sean's Strains</h2>
+      </div>
+      <div class="links myFont">
+        <a href="">MyStrains</a> | <a href=''>Friends</a> | <a href=''>Explore</a>
+      </div>
 
-      <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
-      <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
-        Add New Strain
-      </button>
+      <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
+      <div class="strainList">
+        <input type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
+
+        <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
+        <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
+          Add New Strain
+        </button>
+
+
+        <input type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
+        <ul>
+          <li id="All" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 1}" ng-click="main.setActive($event)">ALL</li>
+          <li id="Sativa" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 2}" ng-click="main.setActive($event)">SATIVA</li>
+          <li id="Hybrid" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 3}" ng-click="main.setActive($event)">HYBRID</li>
+          <li id="Indica" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 4}" ng-click="main.setActive($event)">INDICA</li>
+        </ul>
+      </div>
 
       <!-- MODAL -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -85,18 +105,7 @@
       </div>
       <!-- END MODAL -->
 
-    <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
-    <div class="strainList">
-      <input type="text" placeholder="Search your strains by name..." ng-model="main.strainFilter.name">
-      <p> or </p>
-      <input type="text" placeholder="Search your strains by positive effects..." ng-model="main.strainFilter.goodEffects">
-      <ul>
-        <li id="All" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 1}" ng-click="main.setActive($event)">ALL</li>
-        <li id="Sativa" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 2}" ng-click="main.setActive($event)">SATIVA</li>
-        <li id="Hybrid" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 3}" ng-click="main.setActive($event)">HYBRID</li>
-        <li id="Indica" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 4}" ng-click="main.setActive($event)">INDICA</li>
-      </ul>
-    </div>
+
 
     <!-- STRAIN ITEM  -->
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
