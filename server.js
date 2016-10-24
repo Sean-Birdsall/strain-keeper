@@ -1,6 +1,7 @@
 // bring in express
 var express = require('express');
 var request = require('request');
+var lame = require('./lame.js');
 // create an express APP object
 var app = express();
 
@@ -16,13 +17,13 @@ app.get('/api/strains', (req, res) => {
   var options = {
     url: `https://www.cannabisreports.com/api/v1.0/strains/search/${encodeURIComponent(req.query.q)}`,
     headers: {
-      'X-API-Key': '40564bdd11accde2290fbd5ea668cc7d7c17707b'
+      'X-API-Key': lame.key
     }
   };
 
   request(options, (err, response, body) => {
     // console.log(err, response, body);
-    
+
     res.end(body);
   });
 

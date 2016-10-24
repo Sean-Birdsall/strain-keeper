@@ -24,10 +24,11 @@
         strain.
       </p> -->
       <div class="user myFont">
-        <img class="profile-pic" src="//placehold.it/100x100"><h2>Sean's Strains</h2>
+        <img class="profile-pic" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAfLAAAAJDc0ODJhYTc5LWJmMDYtNDgwMS05OWRiLWMxNzc4MWRjNzNjNA.jpg">
+        <h2 class="text-green">Sean's Strains</h2>
       </div>
       <div class="links myFont">
-        <a href="">MyStrains</a> | <a href=''>Friends</a> | <a href=''>Explore</a>
+        <a href="">My Strains</a> | <a href=''>Friends</a> | <a href=''>Explore</a>
       </div>
 
       <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
@@ -38,9 +39,8 @@
         <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
           Add New Strain
         </button>
-
-
         <input type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
+        <!-- TYPE FILTERS -->
         <ul>
           <li id="All" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 1}" ng-click="main.setActive($event)">ALL</li>
           <li id="Sativa" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 2}" ng-click="main.setActive($event)">SATIVA</li>
