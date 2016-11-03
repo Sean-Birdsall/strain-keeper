@@ -1,9 +1,9 @@
 // bring in express
 var express = require('express');
-var request = require('request');
-var lame = require('./lame.js');
+var Routes = require('./routes.js');
 // create an express APP object
 var app = express();
+var PORT = process.env.PORT || 3000;
 
 var bodyParser = require('body-parser');
 
@@ -12,27 +12,13 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json(), bodyParser.urlencoded({extended: true}));
 
-app.get('/api/strains', (req, res) => {
-
-  var options = {
-    url: `https://www.cannabisreports.com/api/v1.0/strains/search/${encodeURIComponent(req.query.q)}`,
-    headers: {
-      'X-API-Key': lame.key
-    }
-  };
-
-  request(options, (err, response, body) => {
-    // console.log(err, response, body);
-
-    res.end(body);
-  });
-
-
-
-
-});
+Routes(app);
 
 // listen for connections
-app.listen(process.env.PORT || 3000, () => {
+app.listen(PORT, '192.168.173.116', (error) => {
+  if (error){
+    console.log('Server Error: ', error);
+  } else {
     console.log("Server up and running!");
+  }
 });

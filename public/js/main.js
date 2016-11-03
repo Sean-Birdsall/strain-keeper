@@ -124,7 +124,6 @@ function mainController($http) {
   main.getData = function(strainName){
 
     // SIMPLE FORM VALIDATION
-
     if (main.strain == undefined) {
       alert("Please enter a strain name. (Preferably a real one)");
     } else if (main.type == undefined) {
@@ -136,7 +135,7 @@ function mainController($http) {
     main.loading = true;
     $http({
       method: 'GET',
-      
+
       url: "/api/strains",
       params: {
         q: strainName

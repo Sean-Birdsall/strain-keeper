@@ -4,12 +4,12 @@
     <title>Strain Keeper</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script src="main.js"></script>
+    <script src="../js/main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body ng-controller="mainController as main">
@@ -116,11 +116,11 @@
       </div>
 
       <!-- RATING -->
-      <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 0">
-        <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 1">
-          <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 2">
-            <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 3">
-              <img class="rating" src='cannabis1.svg' ng-show="strain.rating > 4">
+      <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 0">
+        <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 1">
+          <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 2">
+            <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 3">
+              <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 4">
 
 
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
@@ -139,7 +139,7 @@
           <div class="modal-content edit-strain">
             <div class="modal-header">Click on the name/type/rating to edit <br>
               <!-- TRASH STRAIN ICON -->
-              <img class="trash" src="trash.svg" ng-click="main.trashStrain($event)">
+              <img class="trash" src="../resources/trash.svg" ng-click="main.trashStrain($event)">
               <!-- EDIT STRAIN NAME -->
               <h1 class="modal-title myFont" id="myModalLabel" ng-if="!main.editingName" ng-click="main.hideText($event, $index)">{{ strain.name }}</h1>
               <input type="text" name="name" ng-model="strain.name" ng-if="main.editingName" ng-blur="main.blurText($event)">
@@ -192,7 +192,7 @@
 
     </div>
       <div class="loading" ng-if="main.loading">
-        <img src="cannabis-loading.gif" dynsrc="cannabis-loading.gif" loop="infinite">
+        <img src="http://giphy.com/gifs/marijuana-pot-photobucket-nNXIr4vMUYkKI" dynsrc="http://giphy.com/gifs/marijuana-pot-photobucket-nNXIr4vMUYkKI" loop="infinite">
       </div>
     </main>
   </body>

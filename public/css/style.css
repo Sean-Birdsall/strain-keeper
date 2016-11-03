@@ -15,10 +15,10 @@ nav h1 {
 }
 
 .user {
-  width: 375px;
+  width: 70%;
   margin: auto;
   padding-top: 5px;
-
+  max-width: 693px;
   text-align: left;
 }
 
@@ -36,11 +36,9 @@ nav h1 {
 }
 
 .links {
- text-align: left;
- width: 400px;
+ width: 95%;
  margin: auto;
- position: relative;
- left: 10px;
+ clear: left;
 }
 
 .links a {
@@ -327,7 +325,7 @@ input[type=text] {
 
 }
 
-@media all and (min-width: 615px){
+@media all and (min-width: 627px){
   .strain {
     display: inline-block;
     margin: 5px 5px;
@@ -366,4 +364,14 @@ input[type=text] {
   z-index:100;
   }
 
+  .links {
+    clear: none;
+    text-align: left;
+  }
+}
+
+@media all and (min-width: 1005px){
+  .new-strain {
+    margin: 0 100px;
+  }
 }
