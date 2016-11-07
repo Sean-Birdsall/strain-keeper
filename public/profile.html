@@ -33,13 +33,13 @@
 
       <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
       <div class="strainList">
-        <input type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
+        <input class="input" type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
 
         <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
         <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
           Add New Strain
         </button>
-        <input type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
+        <input class="input" type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
         <!-- TYPE FILTERS -->
         <ul>
           <li id="All" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 1}" ng-click="main.setActive($event)">ALL</li>

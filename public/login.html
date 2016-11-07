@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="module.login">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="../js/module.auth.js"></script>
+  </head>
+  <body ng-controller="loginController as login">
+    <div>
+      <h4>Log-in</h4>
+      <form ng-submit="login.auth()">
+        <input type="email" placeholder="Enter email">
+        <input type="password" placeholder="Password">
+        <input type="submit">
+    </form>
+    </div>
+    <div>
+      <h4>Register</h4>
+      <form ng-submit="login.register()">
+        <input type="email" ng-model="login.newUser.email" placeholder="Enter email">
+        <input type="password" ng-model="login.newUser.password" placeholder="Password">
+        <input type="submit">
+    </form>
+    </div>
+  </body>
+</html>

@@ -1,15 +1,16 @@
 // bring in express
 var express = require('express');
 var Routes = require('./routes.js');
+var mongoose = require('mongoose');
 // create an express APP object
 var app = express();
 var PORT = process.env.PORT || 3000;
-
 var bodyParser = require('body-parser');
+
+mongoose.connect('mongodb://localhost/strain-keeper');
 
 // instead of writing a GET route for every file going to the client, we can use express to set up a static file server
 app.use(express.static('public'));
-
 app.use(bodyParser.json(), bodyParser.urlencoded({extended: true}));
 
 Routes(app);

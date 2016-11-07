@@ -213,7 +213,7 @@ h5 {
   color: #2A7FFF;
 }
 
-input[type=text] {
+.input {
     border: none;
     border-bottom: 2px solid #449D44;
 }
@@ -323,6 +323,24 @@ input[type=text] {
   z-index: 10000;
   position: absolute;
 
+}
+
+.screenshot {
+  width: 75%;
+}
+
+.log-in {
+  background-color: #449D44;
+  color: white;
+  border-radius: 15px;
+  display: inline-block;
+  width: 90%;
+  margin: auto;
+  padding: 5px 15px 15px 15px;
+}
+
+.log-in h4 {
+  margin: 5px;
 }
 
 @media all and (min-width: 627px){

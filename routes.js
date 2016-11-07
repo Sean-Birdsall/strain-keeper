@@ -1,11 +1,13 @@
 var request = require('request');
 var lame = require('./lame.js');
+var Auth = require('./controllers/auth');
 
 module.exports = (app) => {
 
-  app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: './public/html'});
-  });
+  // app.get('/login')
+  app.post('/login', Auth.login);
+  // app.get('/register')
+  app.post('/register', Auth.register);
 
   app.get('/api/strains', (req, res) => {
     // set up options object to add api key
