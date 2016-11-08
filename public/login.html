@@ -10,8 +10,8 @@
     <div>
       <h4>Log-in</h4>
       <form ng-submit="login.auth()">
-        <input type="email" placeholder="Enter email">
-        <input type="password" placeholder="Password">
+        <input type="email" ng-model="login.email"placeholder="Enter email">
+        <input type="password" ng-model="login.password"placeholder="Password">
         <input type="submit">
     </form>
     </div>

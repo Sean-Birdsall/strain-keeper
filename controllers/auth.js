@@ -27,6 +27,7 @@ module.exports = {
             console.warn('Password mismatch');
             res.status(403).json({ message: 'Nope' });
           } else {
+            req.session.userId = user._id;
             res.send({message: 'Login Success!'});
           }
         });
@@ -48,8 +49,12 @@ module.exports = {
   }
   ,
   middlewares: {
-    session: (req, res) => { // this will be the middleware that checks for a loggedin user
-
+    session: (req, res, next) => { // this will be the middleware that checks for a loggedin user
+      if( req.session.userId ) {
+              next();
+          } else {
+              res.redirect('/login.html');
+          }
     }
   }
 }

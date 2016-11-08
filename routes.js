@@ -1,6 +1,7 @@
 var request = require('request');
 var lame = require('./lame.js');
 var Auth = require('./controllers/auth');
+var express = require('express');
 
 module.exports = (app) => {
 
@@ -8,6 +9,8 @@ module.exports = (app) => {
   app.post('/login', Auth.login);
   // app.get('/register')
   app.post('/register', Auth.register);
+
+  app.get('/profile.html', Auth.middlewares.session);
 
   app.get('/api/strains', (req, res) => {
     // set up options object to add api key
@@ -22,5 +25,5 @@ module.exports = (app) => {
       res.end(body);
     });
   });
-
+  app.use(express.static('public'));
 }

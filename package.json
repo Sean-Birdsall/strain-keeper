@@ -26,6 +26,7 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
+    "client-sessions": "^0.7.0",
     "cors": "^2.8.1",
     "express": "^4.14.0",
     "mongoose": "^4.6.6",
