@@ -9,14 +9,15 @@ angular.module('strainKeeper')
 
         $routeProvider
             .when('/', {
-                templateUrl: '/templates/home.html'
+                templateUrl: '../templates/home.html'
             })
             .when('/login', {
-                templateUrl: '/templates/login.html',
+                templateUrl: '../templates/login.html',
                 controller: "loginController as login"
             })
             .when('/profile', {
-                templateUrl: '/templates/profile.html'
+                templateUrl: '../templates/profile.html',
+                controller: "mainController as main"
             })
             .otherwise({
                 redirectTo: '/'

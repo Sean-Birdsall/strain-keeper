@@ -3,7 +3,7 @@ angular.module('strainKeeper')
 
 usersFactory.$inject = ['$http', '$location'];
 
-function usersFactory ($http) {
+function usersFactory ($http, $location) {
 
 
   var userData = {};
@@ -21,7 +21,7 @@ function usersFactory ($http) {
               }).then(function(res) {
                   console.log(res.data);
                   userData = res.data;
-                  location.href = '/profile.html';
+                  $location.url('/profile');
               }, function(err) {
                   // DO NOT FORGET!!!! an error callback
                   // when things go bad, you need this!!!!!!!!

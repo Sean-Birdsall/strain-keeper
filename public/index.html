@@ -1,41 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="strainKeeper">
   <head>
     <title>Strain Keeper</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script src="/js/module.strainkeeper.js"></script>
+    <script src="/js/login.controller.js"></script>
+    <script src="/js/main.controller.js"></script>
+    <script src="/js/factory.user-info.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <nav class="t-shadow">
       <h1>Strain Keeper</h1>
     </nav>
-    <main>
-      <!-- INTRO  -->
-       <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
-        different cannabis strains that you have tried and how you feel about each
-        strain.
-       </p>
-       <a href="/login.html">Log-in/Register</a>
-       <div>
-         <h4>Keep track of strains on your profile</h4>
-         <img class="screenshot" src="../resources/screencapture2.png">
-     </div>
-     <div>
-       <h4>Add buddies to see what they have tried</h4>
-       <img class="screenshot" src="//placehold.it/400x400">
-   </div>
-   <div>
-     <h4>Explore the different strains our users have tried and see their effects</h4>
-     <img class="screenshot" src="//placehold.it/400x400">
- </div>
+    <ng-view>
 
-    </main>
+
+    </ng-view>
   </body>
 </html>

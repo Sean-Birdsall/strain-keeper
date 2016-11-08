@@ -1,0 +1,19 @@
+
+    <div ng-controller="loginController as login">
+      {{ login.greeting }}
+      <h4>Log-in</h4>
+      <form ng-submit="login.auth()">
+        <input type="email" ng-model="login.email"placeholder="Enter email">
+        <input type="password" ng-model="login.password"placeholder="Password">
+        <input type="submit">
+    </form>
+    </div>
+    <div>
+      <h4>Register</h4>
+      <form ng-submit="login.register()">
+        <input type="text" ng-model="login.newUser.username" placeholder="Enter username">
+        <input type="email" ng-model="login.newUser.email" placeholder="Enter email">
+        <input type="password" ng-model="login.newUser.password" placeholder="Password">
+        <input type="submit">
+    </form>
+    </div>
