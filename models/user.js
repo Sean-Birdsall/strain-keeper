@@ -2,8 +2,11 @@ var mongoose = require('mongoose'),
     bcrypt = require('bcryptjs'),
     SALT_INDEX = 10, // the larger it is , the stronger the encryption, but it will take longer
     UserSchema = new mongoose.Schema({
+      username: { type: String, unique: true },
       email: { type: String, unique: true },
       password: String,
+      strainCount: { type: Number, default: 0},
+      strainArray: { type: Array, default: []},
       created: { type: Number, default: () => Date.now() }
     });
 

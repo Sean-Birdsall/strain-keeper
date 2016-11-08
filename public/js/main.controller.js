@@ -1,11 +1,13 @@
-angular.module('strainKeeper', ['checklist-model'])
+angular.module('strainKeeper')
   .controller('mainController', mainController);
 
-mainController.$inject = ['$http'];
+mainController.$inject = ['usersFactory', '$http'];
 
-function mainController($http) {
+
+function mainController(usersFactory, $http) {
 
   var main = this;
+  console.log(usersFactory.getUserData());
 
   // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
   var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
@@ -147,14 +149,14 @@ function mainController($http) {
         main.addStrain(res.data.data[0]);
         console.log('Success');
         main.loading = false;
-      }, function(res) {
-        console.log("API Failure:", res);
+      }, function(err) {
+        console.log("API Failure:", err);
       });
     }
   }
 
   ///////////////////////////////////////////////////////////////////////////
-  ////////////////////     ADD STRAIN     ////////////////////////////////////
+  ////////////////////     ADD STRAIN     ///////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
 
   // FUNCTION CALLED WHEN SAVE BUTTON IN MODAL IS CLICKED - ARGUMENT COMES FROM MAIN.GETDATA FUNCTION

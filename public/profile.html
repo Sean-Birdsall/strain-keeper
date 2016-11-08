@@ -9,7 +9,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="/js/module.strainkeeper.js"></script>
+    <script src="/js/main.controller.js"></script>
+    <script src="/js/factory.user-info.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body ng-controller="mainController as main">
@@ -111,7 +113,7 @@
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead t-shadow">
         <h1>{{ strain.name }}</h1>
-        <img class="strain-img zoom" ng-click="main.showInfo()" src="{{ strain.image }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">
+        <img class="strain-img zoom" ng-click="main.showInfo()" ng-srcset="{{ strain.image }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">
         <h3>- {{ strain.type }}</h3>
       </div>
 
@@ -173,7 +175,7 @@
 
               <div class="data-report margin-center">
                 <h4>{{ strain.dataName }}</h4>
-                <img src="{{ strain.image }}">
+                <img ng-srcset="{{ strain.image }}">
                 <div class="report-info">
                   <h6>There are {{ strain.reviewCount }} reviews online</h6>
                   <a href="{{strain.dataUrl}}">Read the Cannabis Report</a>

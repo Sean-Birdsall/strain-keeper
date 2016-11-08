@@ -28,7 +28,7 @@ module.exports = {
             res.status(403).json({ message: 'Nope' });
           } else {
             req.session.userId = user._id;
-            res.send({message: 'Login Success!'});
+            res.send(user);
           }
         });
       }
