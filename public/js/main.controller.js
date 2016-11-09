@@ -170,7 +170,7 @@ function mainController(usersFactory, $http) {
     main.userData.strainCount++;
 
     // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
-    localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
+    // localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
 
 try {
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
@@ -192,7 +192,7 @@ catch(err) {
     });
 
     // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
-    localStorage.setItem('strainArray', JSON.stringify(main.userData.strainArray));
+    // localStorage.setItem('strainArray', JSON.stringify(main.userData.strainArray));
 
     // NEED A 'PUT' REQUEST HERE TO REPLACE SAVING TO STORAGE ABOVE
     $http.put('/users', main.userData)

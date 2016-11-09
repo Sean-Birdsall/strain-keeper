@@ -19,7 +19,6 @@ function usersFactory ($http, $location) {
                       password: loginPassword
                   }
               }).then(function(res) {
-                  console.log(res.data);
                   userData = res.data;
                   $location.url('/profile');
               }, function(err) {
@@ -27,6 +26,19 @@ function usersFactory ($http, $location) {
                   // when things go bad, you need this!!!!!!!!
                   console.error(err);
               });
+    },
+
+    register: function(newUser) {
+        console.log('did we get here?');
+        return $http.post('/register', newUser)
+          .then(function(res){
+            console.log('where is this');
+            console.log('res.data from login controller', res.data);
+            userData = res.data;
+            $location.url('/profile');
+          }, function(err){
+            console.log(err);
+          });
     },
 
     getUserData: function() {

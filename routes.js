@@ -12,7 +12,7 @@ module.exports = (app) => {
 
   app.put('/users', Auth.updateUser);
 
-  app.get('/profile.html', Auth.middlewares.session);
+  app.get('/profile', Auth.middlewares.session);
 
   app.get('/api/strains', (req, res) => {
     // set up options object to add api key

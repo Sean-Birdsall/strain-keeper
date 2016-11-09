@@ -3,7 +3,7 @@ var User = require('../models/user'),
 
 module.exports = {
   login: (req, res) => {
-    console.log('LOGIN::POST::PAYLOAD::', req.body);
+    // console.log('LOGIN::POST::PAYLOAD::', req.body);
 
     User.findOne({
       email: req.body.email
@@ -53,7 +53,7 @@ module.exports = {
       if( req.session.userId ) {
               next();
           } else {
-              res.redirect('/login.html');
+              res.redirect('/');
           }
     }
   },
