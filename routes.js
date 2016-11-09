@@ -1,16 +1,19 @@
 var request = require('request');
 var lame = require('./lame.js');
 var Auth = require('./controllers/auth');
+var Strain = require('./controllers/strain');
 var express = require('express');
 
 module.exports = (app) => {
 
-  // app.get('/login')
+  app.get('/logout', Auth.logout);
   app.post('/login', Auth.login);
   // app.get('/register')
   app.post('/register', Auth.register);
 
   app.put('/users', Auth.updateUser);
+
+  app.post('/strains', Strain.addStrain);
 
   app.get('/profile', Auth.middlewares.session);
 

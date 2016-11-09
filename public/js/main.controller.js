@@ -138,6 +138,7 @@ function mainController(usersFactory, $http) {
     }
     else {
     main.loading = true;
+
     $http({
       method: 'GET',
 
@@ -185,16 +186,24 @@ catch(err) {
     // PUSH THE NEW STRAIN OBJECT ONTO THE STRAIN ARRAY
     if (strainFound != false){
     main.userData.strainArray.push(newStrain);
+
+    $http.post('/strains', newStrain)
+      .then(
+        function(response){
+          console.log('Sent new strain to mongo');
+        },
+        function(err){
+          console.error('post strain error:', err);
+        });
+
     }
     // SORT ARRAY BY RATING
     main.userData.strainArray.sort(function(obj1, obj2){
       return obj2.rating - obj1.rating;
     });
 
-    // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
-    // localStorage.setItem('strainArray', JSON.stringify(main.userData.strainArray));
 
-    // NEED A 'PUT' REQUEST HERE TO REPLACE SAVING TO STORAGE ABOVE
+    // UPDATE THE USERS STRAIN DATA
     $http.put('/users', main.userData)
       .then(
         function(response){
@@ -287,13 +296,26 @@ catch(err) {
 
         // SORT ARRAY BY RATING
 
-          main.strainArray.sort(function(obj1, obj2){
+          main.userData.strainArray.sort(function(obj1, obj2){
             return obj2.rating - obj1.rating;
 
           });
 
         // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
-        localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
+        // localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
+
+        // NEED A 'PUT' REQUEST HERE TO REPLACE SAVING TO STORAGE ABOVE
+        $http.put('/users', main.userData)
+          .then(
+            function(response){
+              // success callback
+            },
+            function(err){
+              if (err) {
+                console.log(err);
+              }
+            }
+          );
       }
 
       //////////////////////////////////////////////////////////////////////////
@@ -315,13 +337,13 @@ catch(err) {
         $(modalToClose).modal('hide');
 
         // FILTER RETURNS ALL OBJECTS THAT DO NOT MATCH THE STRAINID OF THE DELETED STRAIN
-        var remainingStrains = main.strainArray.filter(function(e){
+        var remainingStrains = main.userData.strainArray.filter(function(e){
 
           return e.strainId != strainToTrash;
 
         })
 
-        main.strainArray = remainingStrains;
+        main.userData.strainArray = remainingStrains;
 
         main.sortAndSave();
       }

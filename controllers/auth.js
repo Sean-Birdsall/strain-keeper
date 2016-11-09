@@ -35,7 +35,8 @@ module.exports = {
     })
   },
   logout: (req, res) => {
-
+    req.session.reset();
+    res.redirect('/index.html');                              
   },
   register: (req, res) => {
     var newUser = new User(req.body);
