@@ -44,7 +44,7 @@ module.exports = {
       if(err){
         return res.send(err);
       }
-      res.send(user)
+      res.send(user);
     });
   }
   ,
@@ -56,5 +56,16 @@ module.exports = {
               res.redirect('/login.html');
           }
     }
+  },
+  updateUser: (req, res) => {
+    // console.log(req.body);
+    User.update({ username: req.body.username}, req.body, (err, user) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(user);
+      }
+    });
+    res.send('Profile updated');
   }
 }

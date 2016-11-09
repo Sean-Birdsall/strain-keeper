@@ -1,4 +1,4 @@
-    <main ng-controller="mainController as main">
+    <main>
 
       <!-- INTRO -->
       <!-- <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
@@ -90,7 +90,7 @@
 
 
     <!-- STRAIN ITEM  -->
-    <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.strainArray | filter: main.strainFilter track by $index">
+    <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.userData.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead t-shadow">
         <h1>{{ strain.name }}</h1>
         <img class="strain-img zoom" ng-click="main.showInfo()" ng-srcset="{{ strain.image }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">

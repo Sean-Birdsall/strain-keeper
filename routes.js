@@ -10,6 +10,8 @@ module.exports = (app) => {
   // app.get('/register')
   app.post('/register', Auth.register);
 
+  app.put('/users', Auth.updateUser);
+
   app.get('/profile.html', Auth.middlewares.session);
 
   app.get('/api/strains', (req, res) => {

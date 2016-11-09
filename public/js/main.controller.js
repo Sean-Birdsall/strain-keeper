@@ -9,13 +9,16 @@ function mainController(usersFactory, $http) {
   var main = this;
   console.log(usersFactory.getUserData());
 
+  main.userData = usersFactory.getUserData();
+  console.log('The strain count of this user is ', main.userData.strainCount);
+
   // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
-  var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
-  if (countFromStorage != null) {
-    main.strainCount = countFromStorage;
-  } else {
-    main.strainCount = 0;
-  }
+  // var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
+  // if (countFromStorage != null) {
+  //   main.strainCount = countFromStorage;
+  // } else {
+  //   main.strainCount = 0;
+  // }
 
   main.loading = false;
 
@@ -53,7 +56,7 @@ function mainController(usersFactory, $http) {
     this.rating = rating;
     this.goodEffects = goodEffects;
     this.badEffects = badEffects;
-    this.strainId = main.strainCount;
+    this.strainId = main.userData.strainCount;
     this.dataName = dataName;
     this.image = image;
     this.reviewCount = reviewCount;
@@ -61,14 +64,14 @@ function mainController(usersFactory, $http) {
   }
 
   // CREATE REFERENCE TO ARRAY IN STORAGE
-  var arrayFromStorage = JSON.parse(localStorage.getItem('strainArray'));
+  var arrayFromStorage = main.userData.strainArray;
 
   //IF ARRAY IN STORAGE EXIST, THEN STRAINARRAY
-  if (arrayFromStorage != null) {
-    main.strainArray = arrayFromStorage;
-  } else {
-    main.strainArray = [];
-  }
+  // if (arrayFromStorage != null) {
+  //   main.strainArray = arrayFromStorage;
+  // } else {
+  //   main.strainArray = [];
+  // }
 
   // INITIALLY THERE IS(true) OR IS NOT(false) STRAINS FOR NG-SHOW
   main.isThereStrains = true;
@@ -164,7 +167,7 @@ function mainController(usersFactory, $http) {
     $('#myModal').modal('hide');
 
     // ADD ITERATION TO STRAIN COUNT
-    main.strainCount++;
+    main.userData.strainCount++;
 
     // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
     localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
@@ -181,18 +184,29 @@ catch(err) {
 }
     // PUSH THE NEW STRAIN OBJECT ONTO THE STRAIN ARRAY
     if (strainFound != false){
-    main.strainArray.push(newStrain);
+    main.userData.strainArray.push(newStrain);
     }
     // SORT ARRAY BY RATING
-    main.strainArray.sort(function(obj1, obj2){
+    main.userData.strainArray.sort(function(obj1, obj2){
       return obj2.rating - obj1.rating;
     });
 
     // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
-    localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
+    localStorage.setItem('strainArray', JSON.stringify(main.userData.strainArray));
+
+    // NEED A 'PUT' REQUEST HERE TO REPLACE SAVING TO STORAGE ABOVE
+    $http.put('/users', main.userData)
+      .then(
+        function(response){
+          // success callback
+        },
+        function(err){
+          // failure callback
+        }
+      );
 
     // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-SHOW
-    if (main.strainArray.length > 0) { main.isThereStrains = true; }
+    if (main.userData.strainArray.length > 0) { main.isThereStrains = true; }
 
     // RESET STRAIN VALUES
     main.strain = '';
