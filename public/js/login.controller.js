@@ -1,9 +1,9 @@
 angular.module('strainKeeper')
   .controller('loginController', loginController);
 
-loginController.$inject = ['usersFactory', '$http'];
+loginController.$inject = ['usersFactory'];
 
-function loginController(usersFactory, $http) {
+function loginController(usersFactory) {
   var login = this;
 
   login.newUser = {};
@@ -15,7 +15,6 @@ function loginController(usersFactory, $http) {
   }
 
   login.register = function() {
-    console.log('we got this far');
     // Calls the register function in the factory
     usersFactory.register(login.newUser);
   }

@@ -2,6 +2,20 @@ body {
   text-align: center;
 }
 
+.get-started {
+  background-color: #449D44;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Permanent Marker', cursive;
+  padding: 10px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.get-started:hover {
+  color: white;
+  text-decoration: none;
+}
+
 nav {
   background-color: #449D44;
   color: white;

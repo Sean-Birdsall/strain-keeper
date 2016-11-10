@@ -1,20 +1,36 @@
 <main>
-  <!-- INTRO  -->
-   <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
-    different cannabis strains that you have tried and how you feel about each
-    strain.
-   </p>
-   <a href="#/login">Log-in/Register</a>
-   <div>
-     <h4>Keep track of strains on your profile</h4>
+    <!-- INTRO  -->
+     <p class="intro"><span class="t-shadow">Welcome to Strain Keeper</span> - Your way to keep track of the many
+      different cannabis strains that you have tried and how you feel about each
+      strain.
+     </p>
+     <h4>Click button below to start tracking your strains</h4>
+     <a class="get-started" href="#/login">Get Started</a>
+     <h4>Explore the different strains our users have tried and see their effects</h4>
+      <!-- STRAIN ITEM  -->
+      <div class='strain green' ng-repeat="strain in home.homeStrains">
+        <div class="strainHead t-shadow">
+          <h1>{{ strain.name }}</h1>
+          <img class="strain-img zoom" ng-click="main.showInfo()" ng-srcset="{{ strain.image }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">
+          <h3>- {{ strain.type }}</h3>
+        </div>
 
- </div>
- <div>
-   <h4>Add buddies to see what they have tried</h4>
+        <!-- RATING -->
+        <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 0">
+          <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 1">
+            <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 2">
+              <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 3">
+                <img class="rating" src='../resources/cannabis1.svg' ng-show="strain.rating > 4">
 
-</div>
-<div>
- <h4>Explore the different strains our users have tried and see their effects</h4>
-</div>
+
+        <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
+        <div class='eff t-shadow'>
+          <h5 class="eff-head">The Good:</h5>
+          <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</aside>
+          <h5 class="eff-head">The Bad:</h5>
+          <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
+        </div>
+
+    </div>
 
 </main>

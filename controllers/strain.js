@@ -12,7 +12,17 @@ module.exports = {
       res.send(strain);
 
 
-  })
+    })
 
-}
+  },
+
+  getStrains: (req, res) => {
+    Strain.find({}, (err, strains) =>{
+      if (err) {
+        console.error(err);
+      } else {
+        res.send(strains);
+      }
+    })
+  }
 }

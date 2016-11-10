@@ -9,7 +9,8 @@ angular.module('strainKeeper')
 
         $routeProvider
             .when('/', {
-                templateUrl: '../templates/home.html'
+                templateUrl: '../templates/home.html',
+                controller: "homeController as home"
             })
             .when('/login', {
                 templateUrl: '../templates/login.html',
