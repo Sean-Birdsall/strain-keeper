@@ -3,17 +3,31 @@ body {
 }
 
 .get-started {
+  display: inline-block;
   background-color: #449D44;
   border-radius: 5px;
   color: white;
   font-family: 'Permanent Marker', cursive;
+  box-sizing: border-box;
   padding: 10px;
   text-shadow: 1px 1px 1px black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0 , 0, 0.3), 0 6px 20px 0
+	rgba(0, 0, 0, 0.19);
 }
 
 .get-started:hover {
   color: white;
   text-decoration: none;
+}
+
+.home-head {
+  margin: 10px;
+}
+
+.home-card-head {
+  height: 78px;
+  text-align: center;
+  font-size: 32px;
 }
 
 nav {
@@ -39,7 +53,7 @@ nav h1 {
 .user h2 {
   padding-bottom: 5px;
   padding-left: 100px;
-  border-bottom: solid 3px blue;
+  border-bottom: solid 3px #2A7FFF;
 }
 
 .profile-pic {
@@ -80,17 +94,14 @@ nav h1 {
 
 .strain {
   color: white;
-  /*background-color: rgb(251,79,20);*/
-
   border-radius: 15px;
-  /*width: 90%;*/
   box-sizing: border-box;
   margin: 5px auto;
   padding: 10px;
   text-align: left;
   position: relative;
   width: 320px;
-  /*height: 200px;*/
+  height: 230px;
   font-family: 'Permanent Marker', cursive;
   box-shadow: 0 4px 8px 0 rgba(0, 0 , 0, 0.3), 0 6px 20px 0
 	rgba(0, 0, 0, 0.19);
@@ -100,6 +111,8 @@ nav h1 {
   background-color: #449D44;
 }
 
+
+
 label {
   margin: 10px;
 }
@@ -107,9 +120,10 @@ label {
 .strain-img {
   width: 30%;
   margin-right: 5px;
-  max-height: 75px;
+  height: 75px;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
 }
 
 .rating {
@@ -150,7 +164,7 @@ h5 {
   margin-top: 5px;
   margin-bottom: 4px;
   padding-bottom: 2px;
-  border-bottom: solid 1px blue;
+  border-bottom: solid 1px #2A7FFF;
 }
 
 .neg {
@@ -196,7 +210,8 @@ h5 {
 }
 
 .strainHead {
-  width: 75%;
+  height: 165px;
+  margin-right: 75px;
 }
 
 .myFont {
@@ -259,6 +274,10 @@ h5 {
 
 .text-green {
   color: #449D44;
+}
+
+.text-blue {
+  color: #2A7FFF;
 }
 
 .text-red {
@@ -393,7 +412,7 @@ h5 {
   -o-transform: scale(2.95);
   transform: scale(2.95);
   position:relative;
-  margin-top: 25px;
+  /*margin-bottom: 55px;*/
   margin-left: 70px;
   z-index:100;
   }

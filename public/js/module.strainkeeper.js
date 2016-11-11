@@ -20,6 +20,10 @@ angular.module('strainKeeper')
                 templateUrl: '../templates/profile.html',
                 controller: "mainController as main"
             })
+            .when('/explore', {
+                templateUrl: '../templates/explore.html',
+                controller: "homeController as home"
+            })
             .otherwise({
                 redirectTo: '/'
             })
