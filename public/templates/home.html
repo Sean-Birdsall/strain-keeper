@@ -10,6 +10,7 @@
       <!-- STRAIN ITEM  -->
       <div class='strain green' ng-repeat="strain in home.displayStrains track by $index">
           <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
+          <h1 class="t-shadow">Avg. Rating: {{ strain.avgRating }}</h1>
     </div>
     <div>
       <a href="#/explore">See more...</a>

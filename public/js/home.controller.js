@@ -18,39 +18,44 @@ function homeController(strainFactory) {
       home.filteredStrains = [];
 
       var seen = {};
-    home.homeStrains = home.homeStrains.filter(function(entry) {
+    home.homeStrains = home.homeStrains.filter(function(strain) {
       var previous;
-      home.allDupes = [];
 
-     // Have we seen this label before?
-     if (seen.hasOwnProperty(entry.dataName)) {
+     // Have we seen this strain before?
+     if (seen.hasOwnProperty(strain.dataName)) {
          // Yes, grab it and add this data to it
-         previous = seen[entry.dataName];
-         previous.goodEffects.push(entry.goodEffects);
-         previous.rating.push(entry.rating);
-         home.allDupes.push(previous)
-         // Don't keep this entry, we've merged it into the previous one
+         previous = seen[strain.dataName];
+         for (var i = 0; i < strain.goodEffects.length; i++){
+           previous.goodEffects.push(strain.goodEffects[i]);
+        }
+         previous.rating.push(strain.rating);
+         // Don't keep this strain, we've merged it into the previous one
          return false;
      }
 
-     // entry.data probably isn't an array; make it one for consistency
-     if (!Array.isArray(entry.rating)) {
-       entry.rating = [entry.rating];
+     // strain.rating probably isn't an array; make it one for consistency
+     if (!Array.isArray(strain.rating)) {
+       strain.rating = [strain.rating];
      }
 
      // Remember that we've seen it
-     seen[entry.dataName] = entry;
+     seen[strain.dataName] = strain;
 
      // Keep this one, we'll merge any others that match into it
      return true;
  });
 
-      console.log(home.allDupes);
-
+      // Create an avgRating property on each strain using reduce function
       for (var i = 0; i < home.homeStrains.length; i++){
+        home.homeStrains[i].avgRating = home.homeStrains[i].rating.reduce(function(a, b){return a+b;}, 0) / home.homeStrains[i].rating.length;
+        console.log(home.homeStrains[i].name,
+          home.homeStrains[i].goodEffects,
+          home.homeStrains[i].rating,
+          home.homeStrains[i].avgRating);
 
-      home.homeStrains[i].avgRating = home.homeStrains[i].rating.reduce(function(a, b){return a+b;}, 0) / home.homeStrains[i].rating.length;
-      console.log(home.homeStrains[i].name, home.homeStrains[i].goodEffects, home.homeStrains[i].rating, home.homeStrains[i].avgRating);
+        home.homeStrains[i].goodEffects.forEach(function(element){
+
+        })
       }
 
       // if statement to deteremine how many strains to show on landing page depending on device width
