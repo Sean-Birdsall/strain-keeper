@@ -53,10 +53,81 @@ function homeController(strainFactory) {
           home.homeStrains[i].rating,
           home.homeStrains[i].avgRating);
 
+          // Declare new effects objects
+          var goodEffectsObj = {
+              happy : 0,
+              hungry : 0,
+              energetic : 0,
+              relaxed : 0,
+              creative : 0,
+              flavorful : 0
+            }
+
+            var badEffectsObj = {
+                dryMouth : 0,
+                redEyes : 0,
+                paranoid : 0,
+                anxious : 0,
+                tired : 0,
+                foggy : 0
+              }
+
+        // Go through each bad effect and add 1 to each variable for each effect
         home.homeStrains[i].goodEffects.forEach(function(element){
 
+          switch (element){
+            case "Happy":
+              goodEffectsObj.happy++;
+              break;
+            case "Hungry":
+              goodEffectsObj.hungry++;
+              break;
+            case "Energetic":
+              goodEffectsObj.energetic++;
+              break;
+            case "Relaxed":
+              goodEffectsObj.relaxed++;
+              break;
+            case "Creative":
+              goodEffectsObj.creative++;
+              break;
+            case "Flavorful":
+              goodEffectsObj.flavorful++;
+              break;
+          }
         })
+
+        // Go through each bad effect and add 1 to each variable for each effect
+        home.homeStrains[i].badEffects.forEach(function(element){
+
+          switch (element){
+            case "Dry Mouth":
+              badEffectsObj.dryMouth++;
+              break;
+            case "Red Eyes":
+              badEffectsObj.redEyes++;
+              break;
+            case "Paranoid":
+              badEffectsObj.paranoid++;
+              break;
+            case "Anxious":
+              badEffectsObj.anxious++;
+              break;
+            case "Tired":
+              badEffectsObj.tired++;
+              break;
+            case "Foggy":
+              goodEffectsObj.foggy++;
+              break;
+          }
+        })
+                  // Create new properties for effectsValues
+                  home.homeStrains[i].goodEffectsValues = goodEffectsObj;
+                  home.homeStrains[i].badEffectsValues = badEffectsObj;
+                  console.log(home.homeStrains[i].goodEffectsValues)
+                  console.log(home.homeStrains[i].badEffectsValues)
       }
+
 
       // if statement to deteremine how many strains to show on landing page depending on device width
       if (viewWidth < 675) {
