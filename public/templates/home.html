@@ -10,8 +10,64 @@
       <!-- STRAIN ITEM  -->
       <div class='strain green' ng-repeat="strain in home.displayStrains track by $index">
           <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
-          <h1 class="t-shadow">Avg. Rating: {{ strain.avgRating }}</h1>
-          {{ strain.goodEffectsValues.happy }}
+          <!-- <h3 class="t-shadow">Avg. Rating: {{ strain.avgRating }}</h3> -->
+
+          <table class="barchart t-shadow">
+			    		<tr>
+			    			<!-- <th>Happy: </th> -->
+			    			<td><div style="width: {{(strain.goodEffectsValues.happy/strain.effectsVotesSum)*100}}%">{{(strain.goodEffectsValues.happy/strain.effectsVotesSum)*100}}%Happy</div></td>
+			    		</tr>
+			    		<tr>
+			    			<!-- <th>Hungry: </th> -->
+			    			<td><div style="width: {{(strain.goodEffectsValues.hungry/strain.effectsVotesSum)*100}}%">Hungry</div></td>
+			    		</tr>
+			    		<tr>
+			    			<!-- <th>Energetic: </th> -->
+			    			<td><div style="width: {{(strain.goodEffectsValues.energetic/strain.effectsVotesSum)*100}}%">Energetic</div></td>
+			    		</tr>
+			    		<tr>
+			    			<!-- <th>Relaxed: </th> -->
+			    			<td><div style="width: {{(strain.goodEffectsValues.relaxed/strain.effectsVotesSum)*100}}%">Relaxed</div></td>
+			    		</tr>
+			    		<tr>
+			    			<!-- <th>Creative: </th> -->
+			    			<td><div style="width: {{(strain.goodEffectsValues.creative/strain.effectsVotesSum)*100}}%">Creative</div></td>
+			    		</tr>
+              <tr>
+			    			<!-- <th>Flavorful: </th> -->
+			    			<td><div style="width: {{(strain.goodEffectsValues.flavorful/strain.effectsVotesSum)*100}}%">Flavorful</div></td>
+			    		</tr>
+			    	</table>
+
+            <table class="barchart t-shadow neg-barchart">
+  			    		<tr>
+  			    			<!-- <th>Happy: </th> -->
+  			    			<td><div style="width: {{(strain.badEffectsValues.dryMouth/strain.effectsVotesSum)*100}}%">Dry Mouth</div></td>
+  			    		</tr>
+  			    		<tr>
+  			    			<!-- <th>Hungry: </th> -->
+  			    			<td><div style="width: {{(strain.badEffectsValues.redEyes/strain.effectsVotesSum)*100}}%">Red Eyes</div></td>
+  			    		</tr>
+  			    		<tr>
+  			    			<!-- <th>Energetic: </th> -->
+  			    			<td><div style="width: {{(strain.badEffectsValues.paranoid/strain.effectsVotesSum)*100}}%">Paranoid</div></td>
+  			    		</tr>
+  			    		<tr>
+  			    			<!-- <th>Relaxed: </th> -->
+  			    			<td><div style="width: {{(strain.badEffectsValues.anxious/strain.effectsVotesSum)*100}}%">Anxious</div></td>
+  			    		</tr>
+  			    		<tr>
+  			    			<!-- <th>Creative: </th> -->
+  			    			<td><div style="width: {{(strain.badEffectsValues.tired/strain.effectsVotesSum)*100}}%">Tired</div></td>
+  			    		</tr>
+                <tr>
+  			    			<!-- <th>Flavorful: </th> -->
+  			    			<td><div style="width: {{(strain.badEffectsValues.foggy/strain.effectsVotesSum)*100}}%">Foggy</div></td>
+  			    		</tr>
+  			    	</table>
+
+
+
     </div>
     <div>
       <a href="#/explore">See more...</a>

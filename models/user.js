@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
       password: String,
       strainCount: { type: Number, default: 0},
       strainArray: { type: Array, default: []},
-      created: { type: Number, default: () => Date.now() }
+      created: { type: Number, default: () => Date.now() },
     });
 
     UserSchema.pre('save', function(next){

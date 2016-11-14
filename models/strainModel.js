@@ -11,6 +11,8 @@ var strainSchema = mongoose.Schema({
   image: String,
   reviewCount: Number,
   dataUrl: String,
+  created: { type: Number, default: () => Date.now() },
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
 
 })
 

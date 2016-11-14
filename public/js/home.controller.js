@@ -5,24 +5,25 @@ homeController.$inject = ['strainFactory'];
 
 function homeController(strainFactory) {
   var home = this;
-  home.greeting = "WTF!";
+  // home.greeting = "WTF!";
   home.displayStrains = [];
-  home.allStrains = [];
+  // home.allStrains = [];
   var viewWidth = $(window).width();
 
     strainFactory.getStrains()
     .then(function(res) {
-      home.allStrains = res.data;
+      // home.allStrains = res.data;
       home.homeStrains = res.data;
 
-      home.filteredStrains = [];
+      // home.filteredStrains = [];
 
+      // Merge and get rid of duplicate strains
       var seen = {};
     home.homeStrains = home.homeStrains.filter(function(strain) {
       var previous;
 
-     // Have we seen this strain before?
-     if (seen.hasOwnProperty(strain.dataName)) {
+      // Have we seen this strain before?
+      if (seen.hasOwnProperty(strain.dataName)) {
          // Yes, grab it and add this data to it
          previous = seen[strain.dataName];
          for (var i = 0; i < strain.goodEffects.length; i++){
@@ -124,8 +125,21 @@ function homeController(strainFactory) {
                   // Create new properties for effectsValues
                   home.homeStrains[i].goodEffectsValues = goodEffectsObj;
                   home.homeStrains[i].badEffectsValues = badEffectsObj;
-                  console.log(home.homeStrains[i].goodEffectsValues)
-                  console.log(home.homeStrains[i].badEffectsValues)
+
+                  // Total up the number of good effects that were chosen for that strain
+                  var goodEffectsVotes = Object.values(goodEffectsObj).reduce(function(a, b){return a+b;});
+
+                  // Total up the number of bad effects that were chosen for that strain
+                  var badEffectsVotes = Object.values(badEffectsObj).reduce(function(a, b){return a+b;});
+
+                  home.homeStrains[i].effectsVotesSum = goodEffectsVotes + badEffectsVotes;
+
+                  // If no effects are chosen use 1 as default vote value so they width on the chart equals 0%
+                  if (home.homeStrains[i].goodEffectsVotes < 1) {home.homeStrains[i].goodEffectsVotes = 1;}
+                  if (home.homeStrains[i].badEffectsVotes < 1) {home.homeStrains[i].badEffectsVotes = 1;}
+                  // console.log(home.homeStrains[i].goodEffectsValues)
+                  // console.log(home.homeStrains[i].badEffectsValues)
+                  // console.log('total good effect votes:', home.homeStrains[i].goodEffectsVotes);
       }
 
 

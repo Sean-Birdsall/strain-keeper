@@ -50,7 +50,7 @@ function mainController(usersFactory, $http) {
 
   // CONSTRUCTOR FOR A NEW STRAIN OBJECT
   function NewStrain(name, type, rating, goodEffects, badEffects, dataName, image,
-    reviewCount, dataUrl) {
+    reviewCount, dataUrl, userId) {
     this.name = name;
     this.type = type;
     this.rating = rating;
@@ -61,6 +61,7 @@ function mainController(usersFactory, $http) {
     this.image = image;
     this.reviewCount = reviewCount;
     this.dataUrl = dataUrl;
+    this.createdBy = userId;
   }
 
   // CREATE REFERENCE TO ARRAY IN STORAGE
@@ -170,14 +171,13 @@ function mainController(usersFactory, $http) {
     // ADD ITERATION TO STRAIN COUNT
     main.userData.strainCount++;
 
-    // SEND THE STRAIN COUNT LOCAL STORAGE - THIS COULD ALSO BE ACCOMPLISHED WITH MAIN.STRAINARRAY.LENGTH
-    // localStorage.setItem('strainCount', JSON.stringify(main.strainCount));
+    console.log(main.userData);
 
 try {
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
     var newStrain = new NewStrain(main.strain, main.type, main.rating,
       main.goodEffects, main.badEffects, strainData.name, strainData.image,
-      strainData.reviews.count, strainData.url);
+      strainData.reviews.count, strainData.url, main.userData._id);
     }
 catch(err) {
   var strainFound = false;
@@ -301,10 +301,7 @@ catch(err) {
 
           });
 
-        // SEND ARRAY TO LOCAL STORAGE - OVERRIDES PREVIOUS ARRAY IN STORAGE WITH SAME NAME
-        // localStorage.setItem('strainArray', JSON.stringify(main.strainArray));
-
-        // NEED A 'PUT' REQUEST HERE TO REPLACE SAVING TO STORAGE ABOVE
+        // NEED A 'PUT' REQUEST HERE TO SEND DATA TO BACK-END
         $http.put('/users', main.userData)
           .then(
             function(response){
@@ -316,6 +313,22 @@ catch(err) {
               }
             }
           );
+
+        // $http.put('/strains', updateStrainInfo)
+        //     .then(
+        //       function(response){
+        //         // success callback
+        //       },
+        //       function(err){
+        //         if (err) {
+        //           console.log(err);
+        //         }
+        //       }
+        //     );
+
+
+
+
       }
 
       //////////////////////////////////////////////////////////////////////////
@@ -339,9 +352,34 @@ catch(err) {
         // FILTER RETURNS ALL OBJECTS THAT DO NOT MATCH THE STRAINID OF THE DELETED STRAIN
         var remainingStrains = main.userData.strainArray.filter(function(e){
 
-          return e.strainId != strainToTrash;
+          if (e.strainId != strainToTrash) {
+            console.log(e);
+            return true;
+          } else {
+            main.strainToDelete = e.name;
+            console.log(main.strainToDelete);
+            main.strainCreatedBy = e.createdBy;
+            console.log(main.strainCreatedBy);
+
+            return false;
+          }
 
         })
+
+        $http({
+          method: 'DELETE',
+
+          url: "/strains",
+          params: {
+            strainToDelete: main.strainToDelete,
+            strainCreatedBy: main.strainCreatedBy
+          }
+
+        }).then(function(response){
+          console.log('Delete request was successful', response);
+        }, function(err){
+            console.log('Error with delete request:', err);
+        });
 
         main.userData.strainArray = remainingStrains;
 

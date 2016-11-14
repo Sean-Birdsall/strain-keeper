@@ -24,5 +24,16 @@ module.exports = {
         res.send(strains);
       }
     })
+  },
+
+  deleteStrain: (req, res) => {
+    console.log('From the deleteStrain function:', req.params)
+    Strain.remove( {name: req.params.strainToDelete}, (err, strain) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send('YA FIRED');
+      }
+    })
   }
 }

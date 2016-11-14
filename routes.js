@@ -15,6 +15,8 @@ module.exports = (app) => {
 
   app.post('/strains', Strain.addStrain);
 
+  app.delete('/strains', Strain.deleteStrain)
+
   app.get('/strains', Strain.getStrains);
 
   app.get('/profile', Auth.middlewares.session);
