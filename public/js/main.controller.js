@@ -256,6 +256,22 @@ catch(err) {
         }
       }
 
+      main.editStrainDB = function($event) {
+        var updatedStrain = main.userData.strainArray.find(function(element){
+          return element.name == $event.srcElement.dataset.name;
+        });
+
+        console.log(updatedStrain);
+
+
+        $http.put('/strains', updatedStrain)
+          .then(function(response){
+            console.log('StrainDB update request sent');
+          }, function(err){
+            console.log(err);
+          })
+      }
+
       //////////////////////////////////////////////////////////////////////////
       ////////////////////     SORT AND SAVE     ///////////////////////////////
       //////////////////////////////////////////////////////////////////////////
@@ -264,17 +280,15 @@ catch(err) {
       main.sortAndSave = function() {
 
         // SORT ARRAY BY RATING
-
           main.userData.strainArray.sort(function(obj1, obj2){
             return obj2.rating - obj1.rating;
-
           });
 
-        // NEED A 'PUT' REQUEST HERE TO SEND DATA TO BACK-END
+        // 'PUT' REQUEST HERE TO SEND DATA TO BACK-END
         $http.put('/users', main.userData)
           .then(
             function(response){
-              console.log('Strain Updated by sortAndSave function');
+              console.log('Strain Update Request Sent by sortAndSave Function');
             },
             function(err){
               if (err) {

@@ -165,7 +165,10 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" ng-click="main.sortAndSave()" data-dismiss="modal">Done</button>
+              <button type="button" class="btn btn-primary"
+              ng-click="main.sortAndSave(); main.editStrainDB($event)" data-dismiss="modal"
+              data-name="{{strain.name}}">Done
+            </button>
             </div>
           </div>
         </div>

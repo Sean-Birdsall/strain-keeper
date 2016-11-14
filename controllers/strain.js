@@ -10,8 +10,6 @@ module.exports = {
         return res.send(err);
       }
       res.send(strain);
-
-
     })
 
   },
@@ -27,12 +25,23 @@ module.exports = {
   },
 
   deleteStrain: (req, res) => {
-    console.log('From the deleteStrain function:', req.query)
     Strain.remove( {name: req.query.strainToDelete, createdBy: req.query.strainCreatedBy}, (err, strain) => {
       if (err) {
         console.log(err);
       } else {
         res.send(`Deleted instance of ${req.query.strainToDelete} from database`);
+      }
+    })
+  },
+
+  updateStrain: (req, res) => {
+    console.log(req.body.name, req.body.createdBy);
+    Strain.update({ name: req.body.name, createdBy: req.body.createdBy }, req.body, (err, strain) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Succes');
+        res.send(`${req.body.name} updated in StrainDB`);
       }
     })
   }
