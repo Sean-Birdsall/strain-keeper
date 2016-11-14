@@ -30,7 +30,6 @@ module.exports = (app) => {
       }
     };
     request(options, (err, response, body) => {
-      // console.log(err, response, body);
       res.end(body);
     });
   });

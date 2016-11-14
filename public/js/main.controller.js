@@ -7,19 +7,11 @@ mainController.$inject = ['usersFactory', '$http'];
 function mainController(usersFactory, $http) {
 
   var main = this;
-  console.log(usersFactory.getUserData());
 
+  // FIND OUT ABOUT THE USER WHO LOGGED IN
   main.userData = usersFactory.getUserData();
-  console.log('The strain count of this user is ', main.userData.strainCount);
 
-  // IF THERE IS STRAINS TO START GET COUNT FROM STORAGE - COUNT USED TO MANAGE STRAIN ID'S
-  // var countFromStorage = JSON.parse(localStorage.getItem('strainCount'));
-  // if (countFromStorage != null) {
-  //   main.strainCount = countFromStorage;
-  // } else {
-  //   main.strainCount = 0;
-  // }
-
+  // LOADING GIF WILL ONLY DISPLAY WHEN TRUE
   main.loading = false;
 
   // EDITING FEATURE VARIABLES
@@ -66,13 +58,6 @@ function mainController(usersFactory, $http) {
 
   // CREATE REFERENCE TO ARRAY IN STORAGE
   var arrayFromStorage = main.userData.strainArray;
-
-  //IF ARRAY IN STORAGE EXIST, THEN STRAINARRAY
-  // if (arrayFromStorage != null) {
-  //   main.strainArray = arrayFromStorage;
-  // } else {
-  //   main.strainArray = [];
-  // }
 
   // INITIALLY THERE IS(true) OR IS NOT(false) STRAINS FOR NG-SHOW
   main.isThereStrains = true;
@@ -171,8 +156,6 @@ function mainController(usersFactory, $http) {
     // ADD ITERATION TO STRAIN COUNT
     main.userData.strainCount++;
 
-    console.log(main.userData);
-
 try {
     // INSTANTIATE A NEW STRAIN FROM CONSTRUCTOR
     var newStrain = new NewStrain(main.strain, main.type, main.rating,
@@ -190,29 +173,15 @@ catch(err) {
     $http.post('/strains', newStrain)
       .then(
         function(response){
-          console.log('Sent new strain to mongo');
+          console.log('Sent new strain to strain database');
         },
         function(err){
           console.error('post strain error:', err);
         });
 
     }
-    // SORT ARRAY BY RATING
-    main.userData.strainArray.sort(function(obj1, obj2){
-      return obj2.rating - obj1.rating;
-    });
 
-
-    // UPDATE THE USERS STRAIN DATA
-    $http.put('/users', main.userData)
-      .then(
-        function(response){
-          // success callback
-        },
-        function(err){
-          // failure callback
-        }
-      );
+    main.sortAndSave();
 
     // IF THE STRAIN ARRAY HAS ITEMS SET VARIABLE TO TRUE FOR NG-SHOW
     if (main.userData.strainArray.length > 0) { main.isThereStrains = true; }
@@ -305,7 +274,7 @@ catch(err) {
         $http.put('/users', main.userData)
           .then(
             function(response){
-              // success callback
+              console.log('Strain Updated by sortAndSave function');
             },
             function(err){
               if (err) {
@@ -313,21 +282,6 @@ catch(err) {
               }
             }
           );
-
-        // $http.put('/strains', updateStrainInfo)
-        //     .then(
-        //       function(response){
-        //         // success callback
-        //       },
-        //       function(err){
-        //         if (err) {
-        //           console.log(err);
-        //         }
-        //       }
-        //     );
-
-
-
 
       }
 
@@ -339,10 +293,11 @@ catch(err) {
         var shouldDelete = confirm("Are you sure you want to delete strain?");
         if (shouldDelete) {
 
-        // GRABS THREE DIGIT ID #'S - CAN HOLD 999 STRAINS WITHOUT PROBLEM
+        // GRABS FOUR DIGIT ID #'S - CAN HOLD 9999 STRAINS WITHOUT PROBLEM
         var strainToTrash = $event.path[4].getAttribute('id').charAt(5) +
           $event.path[4].getAttribute('id').charAt(6) +
-          $event.path[4].getAttribute('id').charAt(7);
+          $event.path[4].getAttribute('id').charAt(7) +
+          $event.path[4].getAttribute('id').charAt(8);
 
         var modalToClose = "#modal" + strainToTrash;
 
@@ -366,20 +321,12 @@ catch(err) {
 
         })
 
-        $http({
-          method: 'DELETE',
-
-          url: "/strains",
-          params: {
-            strainToDelete: main.strainToDelete,
-            strainCreatedBy: main.strainCreatedBy
-          }
-
-        }).then(function(response){
-          console.log('Delete request was successful', response);
-        }, function(err){
-            console.log('Error with delete request:', err);
-        });
+        $http.delete(`/strains?strainToDelete=${main.strainToDelete}&strainCreatedBy=${main.strainCreatedBy}`)
+          .then(function(response){
+              console.log('Delete request was successful', response);
+            }, function(err){
+              console.log('Error with delete request:', err);
+            });
 
         main.userData.strainArray = remainingStrains;
 
