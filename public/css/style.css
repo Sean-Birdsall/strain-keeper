@@ -67,6 +67,21 @@ body {
   background-color: red;
 }
 
+.add-strain {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 5px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+.add-strain:hover {
+  cursor: pointer;
+}
+
 nav {
   background-color: #449D44;
   color: white;

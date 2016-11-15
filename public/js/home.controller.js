@@ -1,9 +1,9 @@
 angular.module('strainKeeper')
   .controller('homeController', homeController);
 
-homeController.$inject = ['strainFactory'];
+homeController.$inject = ['$http', 'strainFactory', 'usersFactory'];
 
-function homeController(strainFactory) {
+function homeController($http, strainFactory, usersFactory) {
   var home = this;
   // home.greeting = "WTF!";
   home.displayStrains = [];
@@ -60,7 +60,7 @@ function homeController(strainFactory) {
       // THIS LOOP IS TO ADD AVERAGE RATING AND EFFECTS-ARRAY TO EACH STRAIN
       for (var i = 0; i < home.homeStrains.length; i++){
         // Create an avgRating property on each strain using reduce function
-        home.homeStrains[i].avgRating = home.homeStrains[i].rating.reduce(function(a, b){return a+b;}, 0) / home.homeStrains[i].rating.length;
+        home.homeStrains[i].avgRating = Math.round( home.homeStrains[i].rating.reduce(function(a, b){return a+b;}, 0) / home.homeStrains[i].rating.length * 10 ) / 10;
 
           // Declare new effects objects
           var goodEffectsObj = {
@@ -261,6 +261,48 @@ function homeController(strainFactory) {
   });
 
 
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     ACTIVE TYPE FILTER     ///////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+  // FILTER OBJECT
+  home.strainFilter = {};
+
+  // INITIAL TYPE FILTER IS SET TO ALL
+  home.typeFilter = 1;
+
+  // FUNCTION TO CHANGE TYPE FILTER
+  home.setActive = function($event) {
+
+    // DETERMINE WHICH FILTER IS BEING CLICKED
+    var clickedFilter = $event.currentTarget.getAttribute('id');
+    switch (clickedFilter) {
+      case 'All':
+        home.typeFilter = 1;
+        break;
+      case 'Sativa':
+        home.typeFilter = 2;
+        break;
+      case 'Hybrid':
+        home.typeFilter = 3;
+        break;
+      case 'Indica':
+        home.typeFilter = 4;
+        break;
+      default:
+        home.typeFilter = 1;
+    }
+
+    // CLICKING ON ANY FILTER EXCEPT 'ALL' WILL FILTER BY THAT STRAIN TYPE
+    if (clickedFilter != 'All'){
+      home.strainFilter.type = clickedFilter;
+    } else {
+      // CLICKING ALL WILL RESET THE FILTER
+      home.strainFilter.type = '';
+    }
+  }
+
+
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -268,6 +310,129 @@ function homeController(strainFactory) {
   }
 
 
+
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     EDIT-IN-PLACE FUNCTIONS    ///////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+
+  // GOOD EFFECTS USERS CAN CHOOSE FROM ADD NEW STRAIN FORM
+  home.effects = [
+    'Happy',
+    'Hungry',
+    'Energetic',
+    'Relaxed',
+    'Creative',
+    'Flavorful'
+  ]
+
+  // BAD EFFECTS TO CHOOSE FROM ADD NEW STRAIN FORM
+  home.negEffects = [
+    'Dry Mouth',
+    'Red Eyes',
+    'Paranoid',
+    'Anxious',
+    'Tired',
+    'Foggy'
+  ]
+
+  // Function to hide text when being edited
+    home.hideText = function($event, $index) {
+
+        // Reference the element node that was clicked
+        var clickedElementNode = $event.currentTarget.nodeName;
+
+        switch (clickedElementNode) {
+
+          case 'H3':
+          home.editingRating = true;
+
+          home.delayRatingGrab = function(){
+            home.clickedInput = document.getElementsByName('rating')[$index];
+            home.clickedInput.focus();
+          }
+          var timeoutID = window.setTimeout(home.delayRatingGrab, 0);
+
+        }
+      }
+
+      home.blurText = function($event) {
+        // Reference which element is being blurred by name of each element
+        var blurredElement = $event.currentTarget.getAttribute('name');
+        // Switch statement to take appropriate action depending on which element is being blurred
+
+        switch (blurredElement){
+            case 'rating':
+                home.editingRating = false;
+
+        }
+      }
+
+
+  home.strainFromDB = {};
+
+  home.addFromDB = function(strainName, strainType, strainDataName, strainDataUrl, strainImage, strainReviewCount) {
+
+    $http.get('/api/me')
+      .then(function(res){
+        home.updateId = res.data;
+
+        $http.get(`/user?id=${home.updateId}`)
+          .then(function(res){
+            console.log('user request got');
+
+            var userToUpdate = res.data;
+
+
+
+            home.strainFromDB.name = strainName;
+            home.strainFromDB.type = strainType;
+            home.strainFromDB.strainId = userToUpdate.strainCount + 1;
+            home.strainFromDB.dataName = strainDataName;
+            home.strainFromDB.image = strainImage;
+            home.strainFromDB.dataUrl = strainDataUrl;
+            home.strainFromDB.reviewCount = strainReviewCount;
+            home.strainFromDB.createdBy = home.updateId;
+
+
+            console.log(home.strainFromDB);
+
+            userToUpdate.strainArray.push(home.strainFromDB);
+
+            console.log(userToUpdate);
+
+            $http.post('/strains', home.strainFromDB)
+              .then(
+                function(response){
+                  console.log('Sent new strain to strain database');
+                  // home.strainFromDB = {};
+                },
+                function(err){
+                  console.error('post strain error:', err);
+                });
+
+            $http.put('/users', userToUpdate)
+              .then(function(res){
+                console.log("User Update Request Sent");
+              }, function(err){
+                if (err){
+                  console.log(err);
+                }
+              })
+
+          }, function(err){
+            if (err){
+              console.log(err);
+            }
+          })
+
+      }, function(err){
+        if (err){
+          console.log(err);
+        }
+      })
+
+
+  }
 
 
 

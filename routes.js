@@ -24,6 +24,12 @@ module.exports = (app) => {
 
   app.get('/profile', Auth.middlewares.session);
 
+  app.get('/user', Auth.findUser);
+
+  app.get('/api/me', (req, res) => {
+    res.send(req.session.userId);
+  })
+
   app.get('/api/strains', (req, res) => {
     // set up options object to add api key
     var options = {

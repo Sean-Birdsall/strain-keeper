@@ -36,7 +36,7 @@ module.exports = {
   },
   logout: (req, res) => {
     req.session.reset();
-    res.redirect('/index.html');                              
+    res.redirect('/index.html');
   },
   register: (req, res) => {
     var newUser = new User(req.body);
@@ -68,5 +68,17 @@ module.exports = {
       }
     });
     res.send('Profile updated');
+  },
+
+  findUser: (req, res) => {
+    console.log(req.query.id);
+    console.log('findUser route working');
+    User.findOne({_id: req.query.id}, (err, user) =>{
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(user);
+      }
+    })
   }
 }
