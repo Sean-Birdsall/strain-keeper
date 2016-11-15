@@ -5,7 +5,9 @@ usersFactory.$inject = ['$http', '$location'];
 
 function usersFactory ($http, $location) {
 
+  var userFact = this;
 
+  var currentUser = {};
   var userData = {};
 
   return {
@@ -42,7 +44,32 @@ function usersFactory ($http, $location) {
     },
 
     getUserData: function() {
-      return userData;
-    }
+
+      // var idToGet;
+      //
+      // $http.get('/api/me')
+      //   .then(function(res) {
+      //      idToGet = res.data;
+      //
+      //     $http.get(`/user?id=${idToGet}`)
+      //        .then(function(res){
+      //          console.log('Getting User Data For Profile');
+      //          currentUser = res.data;
+      //          console.log('User Data Retrieved:', currentUser);
+      //          currentUser;
+      //        }, function(err){
+      //          if (err){
+      //            console.log(err);
+      //          }
+      //        })
+      //   }, function(err) {
+      //     if (err){
+      //       console.log(err);
+      //     }
+      //   })
+
+    },
+
+    userProfile: currentUser
   }
 }

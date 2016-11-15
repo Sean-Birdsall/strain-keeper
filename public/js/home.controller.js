@@ -1,9 +1,9 @@
 angular.module('strainKeeper')
   .controller('homeController', homeController);
 
-homeController.$inject = ['$http', 'strainFactory', 'usersFactory'];
+homeController.$inject = ['$http', 'strainFactory', 'usersFactory', '$location'];
 
-function homeController($http, strainFactory, usersFactory) {
+function homeController($http, strainFactory, usersFactory, $location) {
   var home = this;
   // home.greeting = "WTF!";
   home.displayStrains = [];
@@ -378,11 +378,8 @@ function homeController($http, strainFactory, usersFactory) {
 
         $http.get(`/user?id=${home.updateId}`)
           .then(function(res){
-            console.log('user request got');
 
             var userToUpdate = res.data;
-
-
 
             home.strainFromDB.name = strainName;
             home.strainFromDB.type = strainType;
@@ -393,10 +390,13 @@ function homeController($http, strainFactory, usersFactory) {
             home.strainFromDB.reviewCount = strainReviewCount;
             home.strainFromDB.createdBy = home.updateId;
 
-
             console.log(home.strainFromDB);
 
             userToUpdate.strainArray.push(home.strainFromDB);
+
+            userToUpdate.strainArray.sort(function(obj1, obj2){
+              return obj2.rating - obj1.rating;
+            });
 
             console.log(userToUpdate);
 
@@ -404,7 +404,7 @@ function homeController($http, strainFactory, usersFactory) {
               .then(
                 function(response){
                   console.log('Sent new strain to strain database');
-                  // home.strainFromDB = {};
+                  home.strainFromDB = {};
                 },
                 function(err){
                   console.error('post strain error:', err);
@@ -418,6 +418,8 @@ function homeController($http, strainFactory, usersFactory) {
                   console.log(err);
                 }
               })
+
+              $location.url('#/explore');
 
           }, function(err){
             if (err){

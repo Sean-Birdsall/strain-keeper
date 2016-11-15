@@ -73,6 +73,7 @@ module.exports = {
   findUser: (req, res) => {
     console.log(req.query.id);
     console.log('findUser route working');
+    if(req.query.id == ""){ res.redirect('/');}
     User.findOne({_id: req.query.id}, (err, user) =>{
       if (err) {
         console.log(err);
