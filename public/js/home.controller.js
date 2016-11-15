@@ -29,6 +29,9 @@ function homeController(strainFactory) {
          for (var i = 0; i < strain.goodEffects.length; i++){
            previous.goodEffects.push(strain.goodEffects[i]);
         }
+        for (var i = 0; i < strain.badEffects.length; i++){
+          previous.badEffects.push(strain.badEffects[i]);
+       }
          previous.rating.push(strain.rating);
          // Don't keep this strain, we've merged it into the previous one
          return false;
@@ -45,8 +48,16 @@ function homeController(strainFactory) {
      // Keep this one, we'll merge any others that match into it
      return true;
  });
+// FUNCTION USED IN STRAIN EFFECT ARRAYS TO DETERMINE IF IT IS A POSITIVE OR NEGATIVE EFFECT
+ function checkToSeeIfGood(effectName) {
+   if (effectName === "Dry Mouth" || effectName === "Red Eyes" || effectName === "Paranoid" || effectName === "Anxious" || effectName === "Tired" || effectName === "Foggy") {
+     return true;
+   } else {
+     return false;
+   }
+ }
 
-      // THIS LOOP IS TO ADD RATING AND PERCENTAGE PROPS TO STRAINS
+      // THIS LOOP IS TO ADD AVERAGE RATING AND EFFECTS-ARRAY TO EACH STRAIN
       for (var i = 0; i < home.homeStrains.length; i++){
         // Create an avgRating property on each strain using reduce function
         home.homeStrains[i].avgRating = home.homeStrains[i].rating.reduce(function(a, b){return a+b;}, 0) / home.homeStrains[i].rating.length;
@@ -115,13 +126,10 @@ function homeController(strainFactory) {
               badEffectsObj.tired++;
               break;
             case "Foggy":
-              goodEffectsObj.foggy++;
+              badEffectsObj.foggy++;
               break;
           }
         })
-                  // Create new properties for effectsValues
-                  home.homeStrains[i].goodEffectsValues = goodEffectsObj;
-                  home.homeStrains[i].badEffectsValues = badEffectsObj;
 
                   // Total up the number of good effects that were chosen for that strain
                   var goodEffectsVotes = Object.values(goodEffectsObj).reduce(function(a, b){return a+b;});
@@ -131,30 +139,84 @@ function homeController(strainFactory) {
 
                   var effectsVotesSum = goodEffectsVotes + badEffectsVotes;
 
-                  // HAVE TO ASSIGN NEW PERCENTAGE PROPERTY TO AN EMPTY OBJECT SO I CAN ASSIGN
-                  // ADDITIONAL PROPERTIES TO THAT NEW ONE
-                  home.homeStrains[i].effectsPercentage = {};
+                  var happyPercent = Math.round((goodEffectsObj.happy/effectsVotesSum)*100);
+                  var hungryPercent = Math.round((goodEffectsObj.hungry/effectsVotesSum)*100);
+                  var energeticPercent = Math.round((goodEffectsObj.energetic/effectsVotesSum)*100);
+                  var relaxedPercent = Math.round((goodEffectsObj.relaxed/effectsVotesSum)*100);
+                  var creativePercent = Math.round((goodEffectsObj.creative/effectsVotesSum)*100);
+                  var flavorfulPercent = Math.round((goodEffectsObj.flavorful/effectsVotesSum)*100);
 
-                  home.homeStrains[i].effectsPercentage.happy = Math.round((home.homeStrains[i].goodEffectsValues.happy/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.hungry = Math.round((home.homeStrains[i].goodEffectsValues.hungry/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.energetic = Math.round((home.homeStrains[i].goodEffectsValues.energetic/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.relaxed = Math.round((home.homeStrains[i].goodEffectsValues.relaxed/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.creative = Math.round((home.homeStrains[i].goodEffectsValues.creative/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.flavorful = Math.round((home.homeStrains[i].goodEffectsValues.flavorful/effectsVotesSum)*100);
+                  var dryMouthPercent = Math.round((badEffectsObj.dryMouth/effectsVotesSum)*100);
+                  var redEyesPercent = Math.round((badEffectsObj.redEyes/effectsVotesSum)*100);
+                  var paranoidPercent = Math.round((badEffectsObj.paranoid/effectsVotesSum)*100);
+                  var anxiousPercent = Math.round((badEffectsObj.anxious/effectsVotesSum)*100);
+                  var tiredPercent = Math.round((badEffectsObj.tired/effectsVotesSum)*100);
+                  var foggyPercent = Math.round((badEffectsObj.foggy/effectsVotesSum)*100);
 
-                  home.homeStrains[i].effectsPercentage.dryMouth = Math.round((home.homeStrains[i].badEffectsValues.dryMouth/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.redEyes = Math.round((home.homeStrains[i].badEffectsValues.redEyes/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.paranoid = Math.round((home.homeStrains[i].badEffectsValues.paranoid/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.anxious = Math.round((home.homeStrains[i].badEffectsValues.anxious/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.tired = Math.round((home.homeStrains[i].badEffectsValues.tired/effectsVotesSum)*100);
-                  home.homeStrains[i].effectsPercentage.foggy = Math.round((home.homeStrains[i].badEffectsValues.foggy/effectsVotesSum)*100);
 
-                  // If no effects are chosen use 1 as default vote value so they width on the chart equals 0%
-                  if (home.homeStrains[i].goodEffectsVotes < 1) {home.homeStrains[i].goodEffectsVotes = 1;}
-                  if (home.homeStrains[i].badEffectsVotes < 1) {home.homeStrains[i].badEffectsVotes = 1;}
-                  // console.log(home.homeStrains[i].goodEffectsValues)
-                  // console.log(home.homeStrains[i].badEffectsValues)
-                  // console.log('total good effect votes:', home.homeStrains[i].goodEffectsVotes);
+                  home.homeStrains[i].effectsArray = [{
+                    effectName: 'Happy',
+                    percent: happyPercent,
+                    value: goodEffectsObj.happy,
+                    isBad: checkToSeeIfGood('Happy')
+                  }, {
+                    effectName: 'Hungry',
+                    percent: hungryPercent,
+                    value: goodEffectsObj.hungry,
+                    isBad: checkToSeeIfGood('Hungry')
+                  }, {
+                    effectName: 'Energetic',
+                    percent: energeticPercent,
+                    value: goodEffectsObj.energetic,
+                    isBad: checkToSeeIfGood('Energetic')
+                  }, {
+                    effectName: 'Relaxed',
+                    percent: relaxedPercent,
+                    value: goodEffectsObj.relaxed,
+                    isBad: checkToSeeIfGood('Relaxed')
+                  }, {
+                    effectName: 'Creative',
+                    percent: creativePercent,
+                    value: goodEffectsObj.creative,
+                    isBad: checkToSeeIfGood('Creative')
+                  }, {
+                    effectName: 'Flavorful',
+                    percent: flavorfulPercent,
+                    value: goodEffectsObj.flavorful,
+                    isBad: checkToSeeIfGood('Flavorful')
+                  }, {
+                    effectName: 'Dry Mouth',
+                    percent: dryMouthPercent,
+                    value: badEffectsObj.dryMouth,
+                    isBad: checkToSeeIfGood('Dry Mouth')
+                  }, {
+                    effectName: 'Red Eyes',
+                    percent: redEyesPercent,
+                    value: badEffectsObj.redEyes,
+                    isBad: checkToSeeIfGood('Red Eyes')
+                  }, {
+                    effectName: 'Paranoid',
+                    percent: paranoidPercent,
+                    value: badEffectsObj.paranoid,
+                    isBad: checkToSeeIfGood('Paranoid')
+                  }, {
+                    effectName: 'Anxious',
+                    percent: anxiousPercent,
+                    value: badEffectsObj.anxious,
+                    isBad: checkToSeeIfGood('Anxious')
+                  }, {
+                    effectName: 'Tired',
+                    percent: tiredPercent,
+                    value: badEffectsObj.tired,
+                    isBad: checkToSeeIfGood('Tired')
+                  }, {
+                    effectName: 'Foggy',
+                    percent: foggyPercent,
+                    value: badEffectsObj.foggy,
+                    isBad: checkToSeeIfGood('Foggy')
+                  }
+                ];
+
       }
 
       // ASSIGN STRAINS TO DISPLAY TO exploreStrains ARRAY
@@ -166,28 +228,28 @@ function homeController(strainFactory) {
       // if statement to deteremine how many strains to show on landing page depending on device width
       if (viewWidth < 675) {
 
-        for (var i = 0; i < 3; i++){
+        for (var i = 0; i < 2; i++){
           var displayStrain = home.homeStrains.splice(getRandomInt(0, home.homeStrains.length), 1);
           home.displayStrains.push(displayStrain[0]);
         }
 
       } else if (viewWidth < 1335) {
 
-        for (var i = 0; i < 6; i++){
+        for (var i = 0; i < 3; i++){
           var displayStrain = home.homeStrains.splice(getRandomInt(0, home.homeStrains.length), 1);
           home.displayStrains.push(displayStrain[0]);
         }
 
       } else if (viewWidth < 1650) {
 
-        for (var i = 0; i < 8; i++){
+        for (var i = 0; i < 4; i++){
           var displayStrain = home.homeStrains.splice(getRandomInt(0, home.homeStrains.length), 1);
           home.displayStrains.push(displayStrain[0]);
         }
 
       } else {
 
-        for (var i = 0; i < 10; i++){
+        for (var i = 0; i < 5; i++){
           var displayStrain = home.homeStrains.splice(getRandomInt(0, home.homeStrains.length), 1);
           home.displayStrains.push(displayStrain[0]);
         }

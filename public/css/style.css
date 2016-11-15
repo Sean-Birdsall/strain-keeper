@@ -9,6 +9,7 @@ body {
   color: white;
   font-family: 'Permanent Marker', cursive;
   box-sizing: border-box;
+  margin: 5px 15px;
   padding: 10px;
   text-shadow: 1px 1px 1px black;
   box-shadow: 0 4px 8px 0 rgba(0, 0 , 0, 0.3), 0 6px 20px 0
@@ -30,31 +31,41 @@ body {
   font-size: 30px;
 }
 
-.barchart {
-  display: inline-block;
+.display-strain-pic {
+  height: 65px;
+  border-radius: 5px;
+  position: absolute;
+  right: 20px;
 }
 
-.barchart td {
-    width: 100px;
+.home-report-link {
+  display: block;
+  text-align: center;
+}
+
+.barchart {
+  display: inline-block;
+  height: 110px;
+}
+
+.chart-spot {
+    width: 225px;
     padding: 1px 1px 1px 5px;
     margin: 0;
 }
 
-.barchart div {
-    background-color: #2A7FFF;
-    color: white;
-    /*font-weight: bold;*/
-    white-space: nowrap;
-    /*overflow: hidden;*/
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    padding-left: 5px;
+.chart-bar {
+  background-color: #2A7FFF;
+  color: white;
+  white-space: nowrap;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  padding-left: 5px;
 }
 
-.neg-barchart div {
+.red {
   background-color: red;
 }
-
 
 nav {
   background-color: #449D44;
@@ -402,6 +413,10 @@ h5 {
 
 .log-in h4 {
   margin: 5px;
+}
+
+.right-align {
+  text-align: right;
 }
 
 @media all and (min-width: 627px){

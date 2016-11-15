@@ -1,15 +1,19 @@
 angular.module('strainKeeper')
   .controller('mainController', mainController);
 
-mainController.$inject = ['usersFactory', '$http'];
+mainController.$inject = ['usersFactory', '$http', '$location'];
 
 
-function mainController(usersFactory, $http) {
+function mainController(usersFactory, $http, $location) {
 
   var main = this;
 
   // FIND OUT ABOUT THE USER WHO LOGGED IN
   main.userData = usersFactory.getUserData();
+
+    if (!main.userData._id) {
+      $location.url('/login')
+    }
 
   // LOADING GIF WILL ONLY DISPLAY WHEN TRUE
   main.loading = false;

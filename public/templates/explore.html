@@ -1,67 +1,16 @@
 <main>
-  <h1>Explore all strains</h1>
-  <div class='strain green' ng-repeat="strain in home.exploreStrains track by $index">
-      <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
-      <!-- <h3 class="t-shadow">Avg. Rating: {{ strain.avgRating }}</h3> -->
-
-      <table class="barchart t-shadow">
-          <tr ng-show="strain.goodEffectsValues.happy > 0">
-            <!-- <th>Happy: </th> -->
-            <td><div style="width: {{strain.effectsPercentage.happy}}%">{{strain.effectsPercentage.happy}}% Happy</div></td>
-          </tr>
-          <tr ng-show="strain.goodEffectsValues.hungry > 0">
-            <!-- <th>Hungry: </th> -->
-            <td><div style="width: {{strain.effectsPercentage.hungry}}%">{{strain.effectsPercentage.hungry}}% Hungry</div></td>
-          </tr>
-          <tr ng-show="strain.goodEffectsValues.energetic > 0">
-            <!-- <th>Energetic: </th> -->
-            <td><div style="width: {{strain.effectsPercentage.energetic}}%">{{strain.effectsPercentage.energetic}}% Energetic</div></td>
-          </tr>
-          <tr ng-show="strain.goodEffectsValues.relaxed > 0">
-            <!-- <th>Relaxed: </th> -->
-            <td><div style="width: {{strain.effectsPercentage.relaxed}}%">{{strain.effectsPercentage.relaxed}}% Relaxed</div></td>
-          </tr>
-          <tr ng-show="strain.goodEffectsValues.creative > 0">
-            <!-- <th>Creative: </th> -->
-            <td><div style="width: {{strain.effectsPercentage.creative}}%">{{strain.effectsPercentage.creative}}% Creative</div></td>
-          </tr>
-          <tr ng-show="strain.goodEffectsValues.flavorful > 0">
-            <!-- <th>Flavorful: </th> -->
-            <td><div style="width: {{strain.effectsPercentage.flavorful}}%">{{strain.effectsPercentage.flavorful}}% Flavorful</div></td>
-          </tr>
-        </table>
-
-        <table class="barchart t-shadow neg-barchart">
-            <tr ng-show="strain.badEffectsValues.dryMouth > 0">
-              <!-- <th>Happy: </th> -->
-              <td><div style="width: {{strain.effectsPercentage.dryMouth}}%">{{strain.effectsPercentage.dryMouth}}% Dry Mouth</div></td>
-            </tr>
-            <tr ng-show="strain.badEffectsValues.redEyes > 0">
-              <!-- <th>Hungry: </th> -->
-              <td><div style="width: {{strain.effectsPercentage.redEyes}}%">{{strain.effectsPercentage.redEyes}}% Red Eyes</div></td>
-            </tr>
-            <tr  ng-show="strain.badEffectsValues.paranoid > 0">
-              <!-- <th>Energetic: </th> -->
-              <td><div style="width: {{strain.effectsPercentage.paranoid}}%">{{strain.effectsPercentage.paranoid}}% Paranoid</div></td>
-            </tr>
-            <tr  ng-show="strain.badEffectsValues.anxious > 0">
-              <!-- <th>Relaxed: </th> -->
-              <td><div style="width: {{strain.effectsPercentage.anxious}}%">{{strain.effectsPercentage.anxious}}% Anxious</div></td>
-            </tr>
-            <tr  ng-show="strain.badEffectsValues.tired > 0">
-              <!-- <th>Creative: </th> -->
-              <td><div style="width: {{strain.effectsPercentage.tired}}%">{{strain.effectsPercentage.tired}}% Tired</div></td>
-            </tr>
-            <tr ng-show="strain.badEffectsValues.foggy > 0">
-              <!-- <th>Flavorful: </th> -->
-              <td><div style="width: {{strain.effectsPercentage.foggy}}%">{{strain.effectsPercentage.foggy}}% Foggy</div></td>
-            </tr>
-          </table>
-
-
-
-</div>
-<div>
-  <a href="#/">Return Home</a>
-</div>
+  <h1 class="text-blue myFont">Explore all strains</h1>
+  <a class="get-started" href="#/home">Return Home</a><a class="get-started" href="#/profile">My Strains</a><br>
+  <div class='strain green' ng-repeat="strain in home.exploreStrains">
+    <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
+    <h4 class="t-shadow">Rating - {{ strain.avgRating }} &nbsp;&nbsp;&nbsp; {{ strain.type }} </h4>
+    <img class="display-strain-pic" ng-srcset="{{ strain.image }}">
+    <table class="barchart t-shadow">
+      <tr ng-repeat="effect in strain.effectsArray | orderBy: '-percent' | limitTo: 5" ng-show="effect.value > 0">
+        <td class="right-align">{{ effect.effectName }}</td>
+        <td class="chart-spot"><div class="chart-bar" style="width: {{ effect.percent }}%" ng-class="{red: effect.isBad }">{{ effect.percent }}% </div></td>
+      </tr>
+    </table>
+    <a class="t-shadow home-report-link" href="{{ strain.dataUrl }}">Read the Cannabis Report</a>
+  </div>
 </main>
