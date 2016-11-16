@@ -5,7 +5,7 @@ homeController.$inject = ['$http', 'strainFactory', 'usersFactory', '$location']
 
 function homeController($http, strainFactory, usersFactory, $location) {
   var home = this;
-  // home.greeting = "WTF!";
+
   home.displayStrains = [];
   // home.allStrains = [];
   var viewWidth = $(window).width();
@@ -412,7 +412,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
             if (doYouAlreadyHaveThat) {
               alert('You have already tried this strain. Please edit the existing strain.');
             } else {
-            // OTHERWISE ADD STRAIN LIKE NORMAL  
+            // OTHERWISE ADD STRAIN LIKE NORMAL
             userToUpdate.strainArray.push(home.strainFromDB);
 
             userToUpdate.strainArray.sort(function(obj1, obj2){

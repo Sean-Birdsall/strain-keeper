@@ -35,37 +35,11 @@ function usersFactory ($http, $location) {
         return $http.post('/register', newUser)
           .then(function(res){
             userData = res.data;
-            $location.url('/profile');
+            $location.url('/login');
+            alert('Thank you for Registering, Please Log-in to get started');
           }, function(err){
             console.log(err);
           });
-    },
-
-    getUserData: function() {
-
-      // var idToGet;
-      //
-      // $http.get('/api/me')
-      //   .then(function(res) {
-      //      idToGet = res.data;
-      //
-      //     $http.get(`/user?id=${idToGet}`)
-      //        .then(function(res){
-      //          console.log('Getting User Data For Profile');
-      //          currentUser = res.data;
-      //          console.log('User Data Retrieved:', currentUser);
-      //          currentUser;
-      //        }, function(err){
-      //          if (err){
-      //            console.log(err);
-      //          }
-      //        })
-      //   }, function(err) {
-      //     if (err){
-      //       console.log(err);
-      //     }
-      //   })
-
     },
 
     userProfile: currentUser

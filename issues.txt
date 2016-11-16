@@ -1,1 +1,1 @@
--User currently is not re-directed to their profile page after registering for the site
+-Need to sort explore strains ng-repeat by selected effect

@@ -29,6 +29,8 @@ function loginController(usersFactory, $http, $location) {
 
   login.register = function() {
     // Calls the register function in the factory
+    console.log('WTGF');
     usersFactory.register(login.newUser);
+    $('#regModal').modal('hide');
   }
 }

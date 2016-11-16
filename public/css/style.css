@@ -124,13 +124,17 @@ nav h1 {
 }
 
 .filter-drop {
-  color: grey;
+  /*color: #999;*/
   width: 80%;
   margin: 10px;
 }
 
-.form-control::-webkit-input-placeholder {
-  color: grey;
+.form-group {
+ margin: 15px;
+}
+
+.form-control {
+  border: none;
 }
 
 .links {
@@ -146,6 +150,26 @@ nav h1 {
 
 .intro {
   padding: 5px;
+}
+
+.strain a {
+  color: #2A7FFF;
+  font-size: 125%;
+}
+
+#nav-menu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 200%;
+}
+
+#nav-bar-links {
+    display: none;
+}
+
+.show {
+    display: inline-block;
 }
 
 .t-shadow {
@@ -446,6 +470,19 @@ h5 {
 
 .log-in h4 {
   margin: 5px;
+}
+
+.log-info {
+  background-color: #449D44;
+}
+
+.log-sec {
+  display: inline-block;
+  width: 80%;
+  border-radius: 15px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: white;
 }
 
 .right-align {
