@@ -1,10 +1,23 @@
 angular.module('strainKeeper')
   .controller('loginController', loginController);
 
-loginController.$inject = ['usersFactory'];
+loginController.$inject = ['usersFactory', '$http', '$location'];
 
-function loginController(usersFactory) {
+function loginController(usersFactory, $http, $location) {
   var login = this;
+
+  $http.get('/api/me')
+    .then(function(res){
+      if (res.data){
+          // THIS CREATES A RE-DIRECT LOOP if there is no session
+          $location.url('/profile')
+      }
+
+    }, function(err){
+      if (err){
+        console.log(err);
+      }
+    })
 
   login.newUser = {};
 

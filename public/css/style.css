@@ -2,6 +2,12 @@ body {
   text-align: center;
 }
 
+.log-head {
+  margin-top: 0;
+  padding-top: 5px;
+  text-decoration: underline;
+}
+
 .get-started {
   display: inline-block;
   background-color: #449D44;

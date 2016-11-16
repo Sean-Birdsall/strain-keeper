@@ -1,7 +1,9 @@
 <main>
+
+  <a class="get-started" href="#/home">Return Home</a><a class="get-started" href="#/profile">My Strains</a>
   <h1 class="text-blue myFont">Explore all strains</h1>
-  <a class="get-started" href="#/home">Return Home</a><a class="get-started" href="#/profile">My Strains</a><br>
   <div class="strainList">
+    <input class="input" type="text" placeholder="Search by name..." ng-model="home.strainFilter.name">
     <ul>
       <li id="All" ng-model="home.strainFilter.type" ng-class="{active: home.typeFilter == 1}" ng-click="home.setActive($event)">ALL</li>
       <li id="Sativa" ng-model="home.strainFilter.type" ng-class="{active: home.typeFilter == 2}" ng-click="home.setActive($event)">SATIVA</li>
@@ -19,8 +21,8 @@
         <td class="chart-spot"><div class="chart-bar" style="width: {{ effect.percent }}%" ng-class="{red: effect.isBad }">{{ effect.percent }}% </div></td>
       </tr>
     </table>
-    <a class="t-shadow home-report-link" href="{{ strain.dataUrl }}">Read the Cannabis Report</a>
-    <span class="add-strain" data-toggle="modal" data-target="#modal{{ strain._id }}">Add</span>
+    <a class="home-report-link" href="{{ strain.dataUrl }}">Read the Cannabis Report</a>
+    <span class="add-strain" data-toggle="modal" data-target="#modal{{ strain._id }}" ng-if="home.isThereUser">Add</span>
     <!-- ADDITIONAL INFO MODAL -->
     <div class="modal fade" id="modal{{ strain._id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">

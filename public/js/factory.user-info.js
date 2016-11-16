@@ -31,11 +31,9 @@ function usersFactory ($http, $location) {
     },
 
     register: function(newUser) {
-        console.log('did we get here?');
+
         return $http.post('/register', newUser)
           .then(function(res){
-            console.log('where is this');
-            console.log('res.data from login controller', res.data);
             userData = res.data;
             $location.url('/profile');
           }, function(err){

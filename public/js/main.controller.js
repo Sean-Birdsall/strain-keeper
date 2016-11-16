@@ -14,22 +14,16 @@ function mainController(usersFactory, $http, $location) {
   $http.get('/api/me')
     .then(function(res) {
        idToGet = res.data;
-       console.log(idToGet);
+
+       if (!res.data){
+         $location.url('/login')
+       }
 
       $http.get(`/user?id=${idToGet}`)
          .then(function(res){
-           console.log('Getting User Data For Profile');
            main.userData = res.data;
           //  console.log('User Data Retrieved:', main.userData);
 
-
-  // main.userData = usersFactory.getUserData();
-  //
-  // console.log(main.userData);
-
-    if (!main.userData._id) {
-      $location.url('/login')
-    }
 
   // LOADING GIF WILL ONLY DISPLAY WHEN TRUE
   main.loading = false;

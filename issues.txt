@@ -1,0 +1,4 @@
+-If the user tries to add a strain to their profile that already exist, prompt
+them to edit the current one. No duplicate strains - causes problems with delete function
+
+-User currently is not re-directed to their profile page after registering for the site 

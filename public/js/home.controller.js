@@ -10,6 +10,20 @@ function homeController($http, strainFactory, usersFactory, $location) {
   // home.allStrains = [];
   var viewWidth = $(window).width();
 
+  $http.get('/api/me')
+    .then(function(res){
+      if (!res.data){
+          home.isThereUser = false;
+      } else {
+        home.isThereUser = true;
+      }
+
+    }, function(err){
+      if (err){
+        console.log(err);
+      }
+    })
+
     strainFactory.getStrains()
     .then(function(res) {
       // home.allStrains = res.data;
@@ -383,7 +397,8 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
             home.strainFromDB.name = strainName;
             home.strainFromDB.type = strainType;
-            home.strainFromDB.strainId = userToUpdate.strainCount + 1;
+            userToUpdate.strainCount++;
+            home.strainFromDB.strainId = userToUpdate.strainCount;
             home.strainFromDB.dataName = strainDataName;
             home.strainFromDB.image = strainImage;
             home.strainFromDB.dataUrl = strainDataUrl;
