@@ -55,18 +55,20 @@ body {
 }
 
 .chart-spot {
-    width: 225px;
+    width: 215px;
     padding: 1px 1px 1px 5px;
     margin: 0;
 }
 
 .chart-bar {
+
   background-color: #2A7FFF;
   color: white;
   white-space: nowrap;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   padding-left: 5px;
+
 }
 
 .red {
@@ -121,6 +123,16 @@ nav h1 {
   margin-left: -6px;
 }
 
+.filter-drop {
+  color: grey;
+  width: 80%;
+  margin: 10px;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: grey;
+}
+
 .links {
  width: 95%;
  margin: auto;
@@ -158,7 +170,7 @@ nav h1 {
   padding: 10px;
   text-align: left;
   position: relative;
-  width: 320px;
+  width: 310px;
   height: 230px;
   font-family: 'Permanent Marker', cursive;
   box-shadow: 0 4px 8px 0 rgba(0, 0 , 0, 0.3), 0 6px 20px 0

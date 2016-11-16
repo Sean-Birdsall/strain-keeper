@@ -6,7 +6,7 @@
         strain.
       </p> -->
       <div class="user myFont">
-        <img class="profile-pic" src="//placehold.it/200x200">
+        <img class="profile-pic" src="../resources/logo1.jpg">
         <h2 class="text-green">{{main.userData.username}}'s strains</h2>
       </div>
       <div class="text-blue links myFont">
@@ -15,13 +15,23 @@
 
       <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
       <div class="strainList">
-        <input class="input" type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
+
 
         <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
         <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
           Add New Strain
         </button>
-        <input class="input" type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
+        <input class="form-control input" type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
+        <select class="input filter-drop" type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
+          <option value="" disabled selected>Filter by positive effect</option>
+          <option value="">Show All</option>
+          <option value="Happy">Happy</option>
+          <option value="Hungry">Hungry</option>
+          <option value="Energetic">Energetic</option>
+          <option value="Relaxed">Relaxed</option>
+          <option value="Creative">Creative</option>
+          <option value="Flavorful">Flavorful</option>
+        </select>
         <!-- TYPE FILTERS -->
         <ul>
           <li id="All" ng-model="main.strainFilter.type" ng-class="{active: main.typeFilter == 1}" ng-click="main.setActive($event)">ALL</li>

@@ -182,6 +182,16 @@ catch(err) {
 }
     // PUSH THE NEW STRAIN OBJECT ONTO THE STRAIN ARRAY
     if (strainFound != false){
+
+      // CHECK TO SEE IF STRAIN ALREADY EXIST IN USER STRAIN ARRAY
+      var doYouAlreadyHaveThat = main.userData.strainArray.find(function(element){ return element.name == newStrain.name});
+      // IF IT DOES EXIST ALERT THE USER TO EDIT THE EXISTING STRAIN
+      if (doYouAlreadyHaveThat) {
+        main.userData.strainCount--;
+        alert('You have already tried this strain. Please edit the existing strain.');
+      } else {
+      // OTHERWISE ADD STRAIN LIKE NORMAL
+
     main.userData.strainArray.push(newStrain);
 
     $http.post('/strains', newStrain)
@@ -192,7 +202,7 @@ catch(err) {
         function(err){
           console.error('post strain error:', err);
         });
-
+      }
     }
 
     main.sortAndSave();

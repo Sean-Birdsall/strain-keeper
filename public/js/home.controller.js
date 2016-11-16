@@ -405,8 +405,14 @@ function homeController($http, strainFactory, usersFactory, $location) {
             home.strainFromDB.reviewCount = strainReviewCount;
             home.strainFromDB.createdBy = home.updateId;
 
-            console.log(home.strainFromDB);
 
+            // CHECK TO SEE IF STRAIN ALREADY EXIST IN USER STRAIN ARRAY
+            var doYouAlreadyHaveThat = userToUpdate.strainArray.find(function(element){ return element.name == home.strainFromDB.name});
+            // IF IT DOES EXIST ALERT THE USER TO EDIT THE EXISTING STRAIN
+            if (doYouAlreadyHaveThat) {
+              alert('You have already tried this strain. Please edit the existing strain.');
+            } else {
+            // OTHERWISE ADD STRAIN LIKE NORMAL  
             userToUpdate.strainArray.push(home.strainFromDB);
 
             userToUpdate.strainArray.sort(function(obj1, obj2){
@@ -435,6 +441,8 @@ function homeController($http, strainFactory, usersFactory, $location) {
               })
 
               $location.url('#/explore');
+
+            }
 
           }, function(err){
             if (err){

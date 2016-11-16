@@ -11,7 +11,7 @@
       <li id="Indica" ng-model="home.strainFilter.type" ng-class="{active: home.typeFilter == 4}" ng-click="home.setActive($event)">INDICA</li>
     </ul>
   </div>
-  <div class='strain green' ng-repeat="strain in home.exploreStrains | filter: home.strainFilter">
+  <div class='strain green' ng-repeat="strain in home.exploreStrains | filter: home.strainFilter | orderBy: effectsArray.percent">
     <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
     <h4 class="t-shadow">Rating - {{ strain.avgRating }} &nbsp;&nbsp;&nbsp; {{ strain.type }} </h4>
     <img class="display-strain-pic" ng-srcset="{{ strain.image }}">
