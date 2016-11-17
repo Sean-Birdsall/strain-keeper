@@ -14,7 +14,7 @@ module.exports = {
       }
       if (!user) {
         console.warn('No user found!');
-        res.status(403).json({ message: 'Nope' });
+        res.status(403).json({ message: 'No User Found' });
       } else {
         console.info('auth.login', user);
 
@@ -25,7 +25,7 @@ module.exports = {
           }
           else if (!matched) {
             console.warn('Password mismatch');
-            res.status(403).json({ message: 'Nope' });
+            res.status(403).json({ message: 'Username/Password Missmatch' });
           } else {
             req.session.userId = user._id;
             res.send(user);

@@ -6,6 +6,52 @@ homeController.$inject = ['$http', 'strainFactory', 'usersFactory', '$location']
 function homeController($http, strainFactory, usersFactory, $location) {
   var home = this;
 
+  // console.log(home.effectFilter);
+
+  home.dynamicOrder = function() {
+    switch(home.effectFilter){
+      case 'Happy':
+        return '-effectsArray[0].percent';
+        break;
+      case 'Hungry':
+        return '-effectsArray[1].percent';
+        break;
+      case 'Energetic':
+        return '-effectsArray[2].percent';
+        break;
+      case 'Relaxed':
+        return '-effectsArray[3].percent';
+        break;
+      case 'Creative':
+        return '-effectsArray[4].percent';
+        break;
+      case 'Flavorful':
+        return '-effectsArray[5].percent';
+        break;
+      case 'Dry Mouth':
+        return '-effectsArray[6].percent';
+        break;
+      case 'Red Eyes':
+        return '-effectsArray[7].percent';
+        break;
+      case 'Paranoid':
+        return '-effectsArray[8].percent';
+        break;
+     case 'Anxious':
+        return '-effectsArray[9].percent';
+        break;
+     case 'Tired':
+        return '-effectsArray[10].percent';
+        break;
+     case 'Foggy':
+        return '-effectsArray[11].percent';
+        break;
+    default:
+        return '-avgRating'
+    }
+  }
+
+
   home.displayStrains = [];
   // home.allStrains = [];
   var viewWidth = $(window).width();
@@ -35,6 +81,8 @@ function homeController($http, strainFactory, usersFactory, $location) {
       var seen = {};
     home.homeStrains = home.homeStrains.filter(function(strain) {
       var previous;
+
+      home.strainFromDB.rating = 'Click Here to Add Your Rating';
 
       // Have we seen this strain before?
       if (seen.hasOwnProperty(strain.dataName)) {
@@ -386,6 +434,10 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
   home.addFromDB = function(strainName, strainType, strainDataName, strainDataUrl, strainImage, strainReviewCount) {
 
+    if (home.strainFromDB.rating == 'Click Here to Add Your Rating') {
+      alert('Please Add Rating');
+    } else {
+
     $http.get('/api/me')
       .then(function(res){
         home.updateId = res.data;
@@ -419,12 +471,10 @@ function homeController($http, strainFactory, usersFactory, $location) {
               return obj2.rating - obj1.rating;
             });
 
-            console.log(userToUpdate);
-
             $http.post('/strains', home.strainFromDB)
               .then(
                 function(response){
-                  console.log('Sent new strain to strain database');
+
                   home.strainFromDB = {};
                 },
                 function(err){
@@ -433,7 +483,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
             $http.put('/users', userToUpdate)
               .then(function(res){
-                console.log("User Update Request Sent");
+
               }, function(err){
                 if (err){
                   console.log(err);
@@ -455,7 +505,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
           console.log(err);
         }
       })
-
+    }
 
   }
 

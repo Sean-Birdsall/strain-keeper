@@ -1,9 +1,27 @@
 <main>
-
-  <a class="get-started" href="#/home">Return Home</a><a class="get-started" href="#/profile">Go to My Strains</a>
   <h1 class="text-blue myFont">Explore Strain Database</h1>
+  <a class="get-started" href="#/home">Return Home</a><a class="get-started" href="#/profile">Go to My Strains</a>
+
   <div class="strainList">
-    <input class="input" type="text" placeholder="Search by name..." ng-model="home.strainFilter.name">
+    <div class="search-filter">
+      <input class="input" type="text" placeholder="Search by name..." ng-model="home.strainFilter.name">
+      <select class="input" ng-model="home.effectFilter">
+        <option value="" disabled selected>Sort by effect</option>
+        <option value="">Sort by Rating</option>
+        <option value="Happy">Happy</option>
+        <option value="Hungry">Hungry</option>
+        <option value="Energetic">Energetic</option>
+        <option value="Relaxed">Relaxed</option>
+        <option value="Creative">Creative</option>
+        <option value="Flavorful">Flavorful</option>
+        <option value="Dry Mouth">Dry Mouth</option>
+        <option value="Red Eyes">Red Eyes</option>
+        <option value="Paranoid">Paranoid</option>
+        <option value="Anxious">Anxious</option>
+        <option value="Tired">Tired</option>
+        <option value="Foggy">Foggy</option>
+      </select>
+    </div>
     <ul>
       <li id="All" ng-model="home.strainFilter.type" ng-class="{active: home.typeFilter == 1}" ng-click="home.setActive($event)">ALL</li>
       <li id="Sativa" ng-model="home.strainFilter.type" ng-class="{active: home.typeFilter == 2}" ng-click="home.setActive($event)">SATIVA</li>
@@ -11,7 +29,7 @@
       <li id="Indica" ng-model="home.strainFilter.type" ng-class="{active: home.typeFilter == 4}" ng-click="home.setActive($event)">INDICA</li>
     </ul>
   </div>
-  <div class='strain green' ng-repeat="strain in home.exploreStrains | filter: home.strainFilter | orderBy: avgRating">
+  <div class='strain green' ng-repeat="strain in home.exploreStrains | filter: home.strainFilter | orderBy: home.dynamicOrder()">
     <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
     <h4 class="t-shadow">Rating - {{ strain.avgRating }} &nbsp;&nbsp;&nbsp; {{ strain.type }} </h4>
     <img class="display-strain-pic" ng-srcset="{{ strain.image }}">
@@ -37,7 +55,7 @@
           <div class="modal-body">
             <div class="text-green">
             <!-- EDIT STRAIN RATING -->
-            <h3>Rating : </h3><h3 ng-if="!home.editingRating" ng-click="home.hideText($event, $index)">Click to add your rating: {{home.strainFromDB.rating}}</h3>
+            <h3>Rating : </h3><h3 ng-if="!home.editingRating" ng-click="home.hideText($event, $index)">{{home.strainFromDB.rating}}</h3>
             <select name="rating" ng-model="home.strainFromDB.rating" ng-if="home.editingRating" ng-blur="home.blurText($event)">
               <option>1</option>
               <option>2</option>

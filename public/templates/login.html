@@ -1,7 +1,7 @@
     <div class="log-back">
     <div class="log-container">
       <h4 class="text-blue myFont log-head">Log-in</h4>
-      <form class="form-inline" ng-submit="login.auth()">
+      <form ng-submit="login.auth()">
         <div class="form-group">
           <label class="sr-only">Email</label>
           <input type="email" class="form-control input" ng-model="login.email"placeholder="Enter email">
@@ -10,11 +10,13 @@
           <label class="sr-only">Password</label>
           <input type="password" class="form-control input" ng-model="login.password"placeholder="Password">
         </div>
+        <div>
           <button class="get-started" type="submit">Log in</button>
           <!-- Button trigger modal -->
       <button type="button" class="get-started" data-toggle="modal" data-target="#regModal">
         Sign up
       </button>
+    </div>
     </form>
     </div>
 

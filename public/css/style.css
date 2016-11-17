@@ -8,6 +8,11 @@ body {
   text-decoration: underline;
 }
 
+.search-filter{
+
+}
+
+
 .get-started {
   display: inline-block;
   background-color: #449D44;
@@ -121,10 +126,12 @@ nav h1 {
   border-radius: 15px;
   float: left;
   margin-left: -6px;
+  position: relative;
+  top: 5px;
 }
 
 .filter-drop {
-  /*color: #999;*/
+  color: #999;
   width: 80%;
   margin: 10px;
 }
@@ -138,7 +145,7 @@ nav h1 {
 }
 
 .links {
- width: 95%;
+ /*width: 95%;*/
  margin: auto;
  clear: left;
 }
@@ -448,10 +455,14 @@ h5 {
   margin: auto;
   border-radius: 15px;
   top: 25%;
-  left: 25%;
+  left: 0;
   z-index: 10000;
   position: absolute;
 
+}
+
+.load-gif {
+  margin: auto;
 }
 
 .screenshot {

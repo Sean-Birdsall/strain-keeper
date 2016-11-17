@@ -27,6 +27,7 @@ function usersFactory ($http, $location) {
                   // DO NOT FORGET!!!! an error callback
                   // when things go bad, you need this!!!!!!!!
                   console.error(err);
+                  alert(err.data.message)
               });
     },
 
