@@ -12,6 +12,9 @@ body {
 
 }
 
+.mission {
+  margin: 15px;
+}
 
 .get-started {
   display: inline-block;
@@ -39,7 +42,7 @@ body {
 .home-card-head {
   /*height: 78px;*/
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 .display-strain-pic {
@@ -160,7 +163,7 @@ nav h1 {
 }
 
 .strain a {
-  color: #2A7FFF;
+  color: #f46b6b;
   font-size: 125%;
 }
 
@@ -180,7 +183,7 @@ nav h1 {
 }
 
 .t-shadow {
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 1px 1px 3px black;
 }
 
 .intro span {

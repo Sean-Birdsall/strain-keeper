@@ -1,1 +1,3 @@
--Need to sort explore strains ng-repeat by selected effect
+-User should not be able to add more than 5 effects when adding a strain
+
+-Home and Explore Strains do not show up on Safari & possibly other browsers

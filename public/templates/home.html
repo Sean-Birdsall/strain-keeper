@@ -7,6 +7,13 @@
      <h4 class="home-head text-blue myFont">Click button below to start tracking your strains</h4>
      <a class="get-started" href="#/login">Get Started</a>
      <h4 class="home-head text-blue myFont">Explore the different strains our users have tried and see their effects</h4>
+      <p class="mission">
+        We believe cannabis makes this world a better place because of the effects
+        that different strains have. To better understand these effects we are taking
+        input from the people who have tried them, our users, and recording our results
+        for the world to see. Hopefully the information we gather will help to further
+        cannabis research in the world.
+      </p>
       <a class="get-started" href="#/explore">See All Strains</a>
       <h6 class="home-head text-blue myFont">View Sample Below...</h6>
       <!-- STRAIN ITEM  -->
@@ -20,7 +27,7 @@
               <td class="chart-spot"><div class="chart-bar" style="width: {{ effect.percent }}%" ng-class="{red: effect.isBad }">{{ effect.percent }}% </div></td>
             </tr>
   			  </table>
-          <a class="home-report-link" href="{{ strain.dataUrl }}">Read the Cannabis Report</a>
+          <a class="home-report-link t-shadow" href="{{ strain.dataUrl }}" target="_blank">Read the Cannabis Report</a>
 
     </div>
 

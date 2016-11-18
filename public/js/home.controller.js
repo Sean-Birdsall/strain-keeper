@@ -10,7 +10,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
   home.dynamicOrder = function() {
     switch(home.effectFilter){
-      case 'Happy':
+      case 'Uplifting':
         return '-effectsArray[0].percent';
         break;
       case 'Hungry':
@@ -31,13 +31,13 @@ function homeController($http, strainFactory, usersFactory, $location) {
       case 'Dry Mouth':
         return '-effectsArray[6].percent';
         break;
-      case 'Red Eyes':
+      case 'Dry Eyes':
         return '-effectsArray[7].percent';
         break;
-      case 'Paranoid':
+      case 'Anxiety':
         return '-effectsArray[8].percent';
         break;
-     case 'Anxious':
+     case 'Lazy':
         return '-effectsArray[9].percent';
         break;
      case 'Tired':
@@ -112,7 +112,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
  });
 // FUNCTION USED IN STRAIN EFFECT ARRAYS TO DETERMINE IF IT IS A POSITIVE OR NEGATIVE EFFECT
  function checkToSeeIfGood(effectName) {
-   if (effectName === "Dry Mouth" || effectName === "Red Eyes" || effectName === "Paranoid" || effectName === "Anxious" || effectName === "Tired" || effectName === "Foggy") {
+   if (effectName === "Dry Mouth" || effectName === "Dry Eyes" || effectName === "Anxiety" || effectName === "Lazy" || effectName === "Tired" || effectName === "Foggy") {
      return true;
    } else {
      return false;
@@ -126,7 +126,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
           // Declare new effects objects
           var goodEffectsObj = {
-              happy : 0,
+              uplifting : 0,
               hungry : 0,
               energetic : 0,
               relaxed : 0,
@@ -136,9 +136,9 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
             var badEffectsObj = {
                 dryMouth : 0,
-                redEyes : 0,
-                paranoid : 0,
-                anxious : 0,
+                dryEyes : 0,
+                anxiety : 0,
+                lazy : 0,
                 tired : 0,
                 foggy : 0
               }
@@ -147,8 +147,8 @@ function homeController($http, strainFactory, usersFactory, $location) {
         home.homeStrains[i].goodEffects.forEach(function(element){
 
           switch (element){
-            case "Happy":
-              goodEffectsObj.happy++;
+            case "Uplifting":
+              goodEffectsObj.uplifting++;
               break;
             case "Hungry":
               goodEffectsObj.hungry++;
@@ -175,14 +175,14 @@ function homeController($http, strainFactory, usersFactory, $location) {
             case "Dry Mouth":
               badEffectsObj.dryMouth++;
               break;
-            case "Red Eyes":
-              badEffectsObj.redEyes++;
+            case "Dry Eyes":
+              badEffectsObj.dryEyes++;
               break;
-            case "Paranoid":
-              badEffectsObj.paranoid++;
+            case "Anxiety":
+              badEffectsObj.anxiety++;
               break;
-            case "Anxious":
-              badEffectsObj.anxious++;
+            case "Lazy":
+              badEffectsObj.lazy++;
               break;
             case "Tired":
               badEffectsObj.tired++;
@@ -201,7 +201,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
                   var effectsVotesSum = goodEffectsVotes + badEffectsVotes;
 
-                  var happyPercent = Math.round((goodEffectsObj.happy/effectsVotesSum)*100);
+                  var upliftingPercent = Math.round((goodEffectsObj.uplifting/effectsVotesSum)*100);
                   var hungryPercent = Math.round((goodEffectsObj.hungry/effectsVotesSum)*100);
                   var energeticPercent = Math.round((goodEffectsObj.energetic/effectsVotesSum)*100);
                   var relaxedPercent = Math.round((goodEffectsObj.relaxed/effectsVotesSum)*100);
@@ -209,18 +209,18 @@ function homeController($http, strainFactory, usersFactory, $location) {
                   var flavorfulPercent = Math.round((goodEffectsObj.flavorful/effectsVotesSum)*100);
 
                   var dryMouthPercent = Math.round((badEffectsObj.dryMouth/effectsVotesSum)*100);
-                  var redEyesPercent = Math.round((badEffectsObj.redEyes/effectsVotesSum)*100);
-                  var paranoidPercent = Math.round((badEffectsObj.paranoid/effectsVotesSum)*100);
-                  var anxiousPercent = Math.round((badEffectsObj.anxious/effectsVotesSum)*100);
+                  var dryEyesPercent = Math.round((badEffectsObj.dryEyes/effectsVotesSum)*100);
+                  var anxietyPercent = Math.round((badEffectsObj.anxiety/effectsVotesSum)*100);
+                  var lazyPercent = Math.round((badEffectsObj.lazy/effectsVotesSum)*100);
                   var tiredPercent = Math.round((badEffectsObj.tired/effectsVotesSum)*100);
                   var foggyPercent = Math.round((badEffectsObj.foggy/effectsVotesSum)*100);
 
 
                   home.homeStrains[i].effectsArray = [{
-                    effectName: 'Happy',
-                    percent: happyPercent,
-                    value: goodEffectsObj.happy,
-                    isBad: checkToSeeIfGood('Happy')
+                    effectName: 'Uplifting',
+                    percent: upliftingPercent,
+                    value: goodEffectsObj.uplifting,
+                    isBad: checkToSeeIfGood('Uplifting')
                   }, {
                     effectName: 'Hungry',
                     percent: hungryPercent,
@@ -252,20 +252,20 @@ function homeController($http, strainFactory, usersFactory, $location) {
                     value: badEffectsObj.dryMouth,
                     isBad: checkToSeeIfGood('Dry Mouth')
                   }, {
-                    effectName: 'Red Eyes',
-                    percent: redEyesPercent,
-                    value: badEffectsObj.redEyes,
-                    isBad: checkToSeeIfGood('Red Eyes')
+                    effectName: 'Dry Eyes',
+                    percent: dryEyesPercent,
+                    value: badEffectsObj.dryEyes,
+                    isBad: checkToSeeIfGood('Dry Eyes')
                   }, {
-                    effectName: 'Paranoid',
-                    percent: paranoidPercent,
-                    value: badEffectsObj.paranoid,
-                    isBad: checkToSeeIfGood('Paranoid')
+                    effectName: 'Anxiety',
+                    percent: anxietyPercent,
+                    value: badEffectsObj.anxiety,
+                    isBad: checkToSeeIfGood('Anxiety')
                   }, {
-                    effectName: 'Anxious',
-                    percent: anxiousPercent,
-                    value: badEffectsObj.anxious,
-                    isBad: checkToSeeIfGood('Anxious')
+                    effectName: 'Lazy',
+                    percent: lazyPercent,
+                    value: badEffectsObj.lazy,
+                    isBad: checkToSeeIfGood('Lazy')
                   }, {
                     effectName: 'Tired',
                     percent: tiredPercent,
@@ -379,7 +379,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
   // GOOD EFFECTS USERS CAN CHOOSE FROM ADD NEW STRAIN FORM
   home.effects = [
-    'Happy',
+    'Uplifting',
     'Hungry',
     'Energetic',
     'Relaxed',
@@ -390,9 +390,9 @@ function homeController($http, strainFactory, usersFactory, $location) {
   // BAD EFFECTS TO CHOOSE FROM ADD NEW STRAIN FORM
   home.negEffects = [
     'Dry Mouth',
-    'Red Eyes',
-    'Paranoid',
-    'Anxious',
+    'Dry Eyes',
+    'Anxiety',
+    'Lazy',
     'Tired',
     'Foggy'
   ]
@@ -432,11 +432,13 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
   home.strainFromDB = {};
 
-  home.addFromDB = function(strainName, strainType, strainDataName, strainDataUrl, strainImage, strainReviewCount) {
+  home.addFromDB = function(strainName, strainType, strainDataName, strainDataUrl, strainImage, strainReviewCount, strain_id) {
 
     if (home.strainFromDB.rating == 'Click Here to Add Your Rating') {
       alert('Please Add Rating');
     } else {
+
+    $(`#modal${strain_id}`).modal('hide');  
 
     $http.get('/api/me')
       .then(function(res){

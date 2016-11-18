@@ -1,23 +1,30 @@
 <main>
   <h1 class="text-blue myFont">Explore Strain Database</h1>
+  <p class="mission">
+    Each card represents a strain a user has added to their keeper. If two or more
+    users add the same strain, the rating and effects are merged and calculated. The card
+    displays the average rating, a link to its report from cannabisreports.com,
+    and the top five effects chosen by our users. You can add strains directly from the
+    database if you are logged-in.
+  </p>
   <a class="get-started" href="#/home">Return Home</a><a class="get-started" href="#/profile">Go to My Strains</a>
 
   <div class="strainList">
     <div class="search-filter">
       <input class="input" type="text" placeholder="Search by name..." ng-model="home.strainFilter.name">
-      <select class="input" ng-model="home.effectFilter">
+      <select class="input filter-drop" ng-model="home.effectFilter">
         <option value="" disabled selected>Sort by effect</option>
         <option value="">Sort by Rating</option>
-        <option value="Happy">Happy</option>
+        <option value="Uplifting">Uplifting</option>
         <option value="Hungry">Hungry</option>
         <option value="Energetic">Energetic</option>
         <option value="Relaxed">Relaxed</option>
         <option value="Creative">Creative</option>
         <option value="Flavorful">Flavorful</option>
         <option value="Dry Mouth">Dry Mouth</option>
-        <option value="Red Eyes">Red Eyes</option>
-        <option value="Paranoid">Paranoid</option>
-        <option value="Anxious">Anxious</option>
+        <option value="Dry Eyes">Dry Eyes</option>
+        <option value="Anxiety">Anxiety</option>
+        <option value="Lazy">Lazy</option>
         <option value="Tired">Tired</option>
         <option value="Foggy">Foggy</option>
       </select>
@@ -39,7 +46,7 @@
         <td class="chart-spot"><div class="chart-bar" style="width: {{ effect.percent }}%" ng-class="{red: effect.isBad }">{{ effect.percent }}% </div></td>
       </tr>
     </table>
-    <a class="home-report-link" href="{{ strain.dataUrl }}">Read the Cannabis Report</a>
+    <a class="home-report-link t-shadow" href="{{ strain.dataUrl }}" target="_blank">Read the Cannabis Report</a>
     <span class="add-strain" data-toggle="modal" data-target="#modal{{ strain._id }}" ng-if="home.isThereUser">Add</span>
     <!-- ADDITIONAL INFO MODAL -->
     <div class="modal fade" id="modal{{ strain._id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -81,7 +88,7 @@
               <img ng-srcset="{{ strain.image }}">
               <div class="report-info">
                 <h6>There are {{ strain.reviewCount }} reviews online</h6>
-                <a href="{{strain.dataUrl}}">Read the Cannabis Report</a>
+                <a href="{{strain.dataUrl}}" target="_blank">Read the Cannabis Report</a>
               </div>
             </div>
 
@@ -92,7 +99,7 @@
               Cancel
             </button>
             <button type="button" class="btn btn-success"
-             data-dismiss="modal"  ng-click="home.addFromDB(strain.name, strain.type, strain.dataName, strain.dataUrl, strain.image, strain.reviewCount)">
+             ng-click="home.addFromDB(strain.name, strain.type, strain.dataName, strain.dataUrl, strain.image, strain.reviewCount, strain._id)">
              Add to My Strains
           </button>
           </div>

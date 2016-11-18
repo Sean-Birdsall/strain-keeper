@@ -8,6 +8,11 @@ function mainController(usersFactory, $http, $location) {
 
   var main = this;
 
+  main.goodEffects = [];
+  main.badEffects = [];
+
+  $('.effect-check').prop('disabled', true);
+
   // FIND OUT ABOUT THE USER WHO LOGGED IN
   var idToGet;
 
@@ -22,7 +27,7 @@ function mainController(usersFactory, $http, $location) {
       $http.get(`/user?id=${idToGet}`)
          .then(function(res){
            main.userData = res.data;
-          //  console.log('User Data Retrieved:', main.userData);
+
 
 
   // LOADING GIF WILL ONLY DISPLAY WHEN TRUE
@@ -36,7 +41,7 @@ function mainController(usersFactory, $http, $location) {
 
   // GOOD EFFECTS USERS CAN CHOOSE FROM ADD NEW STRAIN FORM
   main.effects = [
-    'Happy',
+    'Uplifting',
     'Hungry',
     'Energetic',
     'Relaxed',
@@ -47,12 +52,14 @@ function mainController(usersFactory, $http, $location) {
   // BAD EFFECTS TO CHOOSE FROM ADD NEW STRAIN FORM
   main.negEffects = [
     'Dry Mouth',
-    'Red Eyes',
-    'Paranoid',
-    'Anxious',
+    'Dry Eyes',
+    'Anxiety',
+    'Lazy',
     'Tired',
     'Foggy'
   ]
+
+
 
   // CONSTRUCTOR FOR A NEW STRAIN OBJECT
   function NewStrain(name, type, rating, goodEffects, badEffects, dataName, image,
@@ -135,6 +142,9 @@ function mainController(usersFactory, $http, $location) {
       alert("Please select a type.")
     } else if (main.rating == undefined) {
       alert("Please select a rating");
+    }
+    else if (main.goodEffects.length + main.badEffects.length > 5){
+      alert("Please select FIVE effects or less");
     }
     else {
     main.loading = true;
@@ -350,10 +360,7 @@ catch(err) {
             return true;
           } else {
             main.strainToDelete = e.name;
-            console.log(main.strainToDelete);
             main.strainCreatedBy = e.createdBy;
-            console.log(main.strainCreatedBy);
-
             return false;
           }
 
