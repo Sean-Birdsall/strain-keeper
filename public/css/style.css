@@ -451,16 +451,17 @@ h5 {
 }
 
 .loading {
+  text-align: center;
   display: inline-block;
   background-color: black;
   opacity: 0.7;
-  width: 50%;
-  margin: auto;
+  width: 400px;
   border-radius: 15px;
   top: 25%;
-  left: 0;
-  z-index: 10000;
+  margin-left:-200px;
+  left:50%;
   position: absolute;
+  z-index: 100000000;
 
 }
 
@@ -501,6 +502,20 @@ h5 {
 
 .right-align {
   text-align: right;
+}
+
+.screen-flash {
+  width: 100%;
+  height: 1000px;
+  background-color: #449D44;
+  position: fixed;
+  z-index: 3;
+  transition: all 3s;
+}
+
+.screen-fade {
+  opacity: 0;
+  z-index: -1;
 }
 
 @media all and (min-width: 627px){

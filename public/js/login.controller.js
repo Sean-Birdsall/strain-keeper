@@ -6,6 +6,11 @@ loginController.$inject = ['usersFactory', '$http', '$location'];
 function loginController(usersFactory, $http, $location) {
   var login = this;
 
+  setTimeout(function(){
+    $('.screen-flash').addClass("screen-fade")
+
+  }, 1000);
+
   $http.get('/api/me')
     .then(function(res){
       if (res.data){
@@ -29,8 +34,11 @@ function loginController(usersFactory, $http, $location) {
 
   login.register = function() {
     // Calls the register function in the factory
-    console.log('WTGF');
+    if(login.passConfirm != login.newUser.password){
+      alert("Passwords do not match")
+    } else {
     usersFactory.register(login.newUser);
     $('#regModal').modal('hide');
+    }
   }
 }

@@ -1,3 +1,4 @@
+<div class="screen-flash"></div>
 <main>
   <h1 class="text-blue myFont">Explore Strain Database</h1>
   <p class="mission">
@@ -11,7 +12,7 @@
 
   <div class="strainList">
     <div class="search-filter">
-      <input class="input" type="text" placeholder="Search by name..." ng-model="home.strainFilter.name">
+      <input class="input form-control" type="text" placeholder="Search by name..." ng-model="home.strainFilter.name">
       <select class="input filter-drop" ng-model="home.effectFilter">
         <option value="" disabled selected>Sort by effect</option>
         <option value="">Sort by Rating</option>
@@ -63,7 +64,7 @@
             <div class="text-green">
             <!-- EDIT STRAIN RATING -->
             <h3>Rating : </h3><h3 ng-if="!home.editingRating" ng-click="home.hideText($event, $index)">{{home.strainFromDB.rating}}</h3>
-            <select name="rating" ng-model="home.strainFromDB.rating" ng-if="home.editingRating" ng-blur="home.blurText($event)">
+            <select name="rating" ng-model="home.strainFromDB.rating" ng-if="home.editingRating" ng-blur="home.blurText($event)" required>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -108,4 +109,7 @@
     </div>
     <!-- END MODAL -->
   </div>
+
+  <img class="loading" src="../resources/loading1.gif" dynsrc="../resources/loading1.gif" loop="infinite" ng-if="home.loading">
+
 </main>

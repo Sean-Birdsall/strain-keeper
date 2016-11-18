@@ -8,6 +8,11 @@ function mainController(usersFactory, $http, $location) {
 
   var main = this;
 
+  setTimeout(function(){
+    $('.screen-flash').addClass("screen-fade")
+
+  }, 1000);
+
   main.goodEffects = [];
   main.badEffects = [];
 
@@ -27,11 +32,8 @@ function mainController(usersFactory, $http, $location) {
       $http.get(`/user?id=${idToGet}`)
          .then(function(res){
            main.userData = res.data;
+           main.loading = false;
 
-
-
-  // LOADING GIF WILL ONLY DISPLAY WHEN TRUE
-  main.loading = false;
 
   // EDITING FEATURE VARIABLES
   main.editingName = false;
@@ -161,7 +163,7 @@ function mainController(usersFactory, $http, $location) {
       .then(function(res){
         // THIS MAKES SURE THAT THE API DATA EXIST BEFORE THE CONSTRUCTOR IS CALLED
         main.addStrain(res.data.data[0]);
-        console.log('Success');
+        console.log('Successfully Added Strain from Cannabis Reports');
         main.loading = false;
       }, function(err) {
         console.log("API Failure:", err);
@@ -322,7 +324,7 @@ catch(err) {
         $http.put('/users', main.userData)
           .then(
             function(response){
-              console.log('Strain Update Request Sent by sortAndSave Function');
+              console.log('Strain Update Request Sent');
             },
             function(err){
               if (err) {
@@ -356,7 +358,6 @@ catch(err) {
         var remainingStrains = main.userData.strainArray.filter(function(e){
 
           if (e.strainId != strainToTrash) {
-            console.log(e);
             return true;
           } else {
             main.strainToDelete = e.name;
@@ -368,7 +369,7 @@ catch(err) {
 
         $http.delete(`/strains?strainToDelete=${main.strainToDelete}&strainCreatedBy=${main.strainCreatedBy}`)
           .then(function(response){
-              console.log('Delete request was successful', response);
+              console.log(response);
             }, function(err){
               console.log('Error with delete request:', err);
             });

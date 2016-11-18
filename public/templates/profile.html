@@ -1,3 +1,4 @@
+     <div class="screen-flash"></div>
     <main>
 
       <div class="user myFont">
@@ -56,11 +57,11 @@
                 </div>
                 <div>
                 <label>Name</label>
-                <input type="text" ng-model="main.strain" placeholder="Enter strain name..."></input>
+                <input type="text" ng-model="main.strain" placeholder="Enter strain name..." required></input>
                 </div>
                 <div>
                 <label>Rating</label>
-                <select ng-model="main.rating">
+                <select ng-model="main.rating" required>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -185,7 +186,7 @@
       <!-- END MODAL -->
 
     </div>
-      <div class="loading" ng-if="main.loading">
-        <img class="load-gif" src="../resources/loading1.gif" dynsrc="../resources/loading1.gif" loop="infinite">
-      </div>
+
+        <img class="loading" src="../resources/loading1.gif" dynsrc="../resources/loading1.gif" loop="infinite" ng-if="main.loading">
+
     </main>

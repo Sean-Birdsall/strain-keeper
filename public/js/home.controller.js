@@ -6,7 +6,10 @@ homeController.$inject = ['$http', 'strainFactory', 'usersFactory', '$location']
 function homeController($http, strainFactory, usersFactory, $location) {
   var home = this;
 
-  // console.log(home.effectFilter);
+  setTimeout(function(){
+    $('.screen-flash').addClass("screen-fade")
+
+  }, 1000);
 
   home.dynamicOrder = function() {
     switch(home.effectFilter){
@@ -72,7 +75,8 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
     strainFactory.getStrains()
     .then(function(res) {
-      // home.allStrains = res.data;
+
+
       home.homeStrains = res.data;
 
       // home.filteredStrains = [];
@@ -194,10 +198,19 @@ function homeController($http, strainFactory, usersFactory, $location) {
         })
 
                   // Total up the number of good effects that were chosen for that strain
-                  var goodEffectsVotes = Object.values(goodEffectsObj).reduce(function(a, b){return a+b;});
+
+                  var goodEffectVoteArray = Object.keys(goodEffectsObj).map(function(key) {
+                        return goodEffectsObj[key];
+                      });
+
+                  var goodEffectsVotes = goodEffectVoteArray.reduce(function(a, b){return a+b;});
 
                   // Total up the number of bad effects that were chosen for that strain
-                  var badEffectsVotes = Object.values(badEffectsObj).reduce(function(a, b){return a+b;});
+                  var badEffectVoteArray = Object.keys(badEffectsObj).map(function(key) {
+                        return badEffectsObj[key];
+                      });
+
+                  var badEffectsVotes = badEffectVoteArray.reduce(function(a, b){return a+b;});
 
                   var effectsVotesSum = goodEffectsVotes + badEffectsVotes;
 
@@ -431,14 +444,19 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
 
   home.strainFromDB = {};
+  home.strainFromDB.goodEffects = [];
+  home.strainFromDB.badEffects = [];
 
   home.addFromDB = function(strainName, strainType, strainDataName, strainDataUrl, strainImage, strainReviewCount, strain_id) {
 
     if (home.strainFromDB.rating == 'Click Here to Add Your Rating') {
       alert('Please Add Rating');
-    } else {
+    } else if (home.strainFromDB.goodEffects.length + home.strainFromDB.badEffects.length > 5){
+      alert('Please only select FIVE effects');
+    }
+    else {
 
-    $(`#modal${strain_id}`).modal('hide');  
+    $(`#modal${strain_id}`).modal('hide');
 
     $http.get('/api/me')
       .then(function(res){

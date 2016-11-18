@@ -1,3 +1,4 @@
 -User should not be able to add more than 5 effects when adding a strain
 
--Home and Explore Strains do not show up on Safari & possibly other browsers
+-Add feature where on profile page user can click on effect on a strain card and it
+ will add that value to the sort by effect feature.
