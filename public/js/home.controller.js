@@ -6,10 +6,25 @@ homeController.$inject = ['$http', 'strainFactory', 'usersFactory', '$location']
 function homeController($http, strainFactory, usersFactory, $location) {
   var home = this;
 
+  home.quoteArray = [
+    '“When you smoke the herb, it reveals you to yourself.”―Bob Marley',
+    '“The biggest killer on the planet is stress and I still think the best medicine is and always has been cannabis.”-Willie Nelson',
+    '““Make the most of the Indian Hemp Seed and sow it everywhere.”-George Washington',
+    '"Of course I know how to roll a joint."―Martha Stewart',
+    '“When I was a kid I inhaled frequently. That was the point.”―Barack Obama',
+    '“Marijuana is a flower. God put it here…”―Willie Nelson',
+    '"It makes me feel the way I need to feel."―Snoop Dogg',
+    '“If you substitute marijuana for tobacco and alcohol, you’ll add 8 to 24 years to your life.”-Jack Herer',
+    '“Is marijuana addictive? Yes, in the sense that most of the really pleasant things in life are worth endlessly repeating.”-Richard Neville',
+    '“It is a thousand times better than whiskey. It is an assistant and a friend.”-Louis Armstrong'
+  ];
+
+  home.displayQuote = home.quoteArray[getRandomInt(0,9)];
+
   setTimeout(function(){
     $('.screen-flash').addClass("screen-fade")
 
-  }, 1000);
+  }, 3000);
 
   home.dynamicOrder = function() {
     switch(home.effectFilter){
@@ -503,14 +518,14 @@ function homeController($http, strainFactory, usersFactory, $location) {
 
             $http.put('/users', userToUpdate)
               .then(function(res){
-
+                $location.url('#/profile');
               }, function(err){
                 if (err){
                   console.log(err);
                 }
               })
 
-              $location.url('#/explore');
+
 
             }
 

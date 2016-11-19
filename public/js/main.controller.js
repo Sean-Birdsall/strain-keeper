@@ -8,10 +8,7 @@ function mainController(usersFactory, $http, $location) {
 
   var main = this;
 
-  setTimeout(function(){
-    $('.screen-flash').addClass("screen-fade")
 
-  }, 1000);
 
   main.goodEffects = [];
   main.badEffects = [];
@@ -32,6 +29,10 @@ function mainController(usersFactory, $http, $location) {
       $http.get(`/user?id=${idToGet}`)
          .then(function(res){
            main.userData = res.data;
+           setTimeout(function(){
+             $('.screen-flash').addClass("screen-fade")
+
+           }, 1000);
            main.loading = false;
 
 

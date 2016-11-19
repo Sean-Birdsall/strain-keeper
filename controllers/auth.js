@@ -16,7 +16,7 @@ module.exports = {
         console.warn('No user found!');
         res.status(403).json({ message: 'No User Found' });
       } else {
-        console.info('auth.login', user);
+
 
         bcrypt.compare(req.body.password, user.password, (compareErr, matched) =>{
           if(compareErr){
@@ -71,8 +71,7 @@ module.exports = {
   },
 
   findUser: (req, res) => {
-    console.log(req.query.id);
-    console.log('findUser route working');
+
     if(req.query.id == ""){ res.redirect('/');}
     User.findOne({_id: req.query.id}, (err, user) =>{
       if (err) {

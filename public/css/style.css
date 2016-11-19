@@ -147,6 +147,10 @@ nav h1 {
   border: none;
 }
 
+.little-blurb {
+  margin: 0 10px;
+}
+
 .links {
  /*width: 95%;*/
  margin: auto;
@@ -506,16 +510,35 @@ h5 {
 
 .screen-flash {
   width: 100%;
-  height: 1000px;
+  height: 1200px;
+  color: white;
+  padding-top: 370px;
+  margin-top: -320px;
   background-color: #449D44;
   position: fixed;
   z-index: 3;
-  transition: all 3s;
+  transition: all 1s;
+}
+
+.screen-flash h2 {
+  font-family: cursive;
+  margin: 0 15px;
+}
+
+.screen-flash img {
+  width: 70%;
+  max-width: 600px;
+  border-radius: 5px;
+
 }
 
 .screen-fade {
   opacity: 0;
   z-index: -1;
+}
+
+.reg-form label {
+  text-align: left;
 }
 
 @media all and (min-width: 627px){
