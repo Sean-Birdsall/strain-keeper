@@ -30,7 +30,7 @@ app.use(bodyParser.json(), bodyParser.urlencoded({extended: true}));
 Routes(app);
 
 // listen for connections
-app.listen(PORT, '192.168.173.116', (error) => {
+app.listen(PORT, (error) => {
   if (error){
     console.log('Server Error: ', error);
   } else {
