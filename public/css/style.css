@@ -526,7 +526,7 @@ h5 {
 }
 
 .screen-flash img {
-  width: 70%;
+  width: 50%;
   max-width: 600px;
   border-radius: 5px;
 
@@ -553,31 +553,6 @@ h5 {
 
   .report-info h6, .report-info a {
     font-size: 125%;
-  }
-
-  .zoom {
-  -webkit-transition: all 0.35s ease-in-out;
-  -moz-transition: all 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
-  cursor: -webkit-zoom-in;
-  cursor: -moz-zoom-in;
-  cursor: zoom-in;
-  }
-
-  .zoom:hover,
-  .zoom:active,
-  .zoom:focus {
-  /**adjust scale to desired size,
-  add browser prefixes**/
-  -ms-transform: scale(2.95);
-  -moz-transform: scale(2.95);
-  -webkit-transform: scale(2.95);
-  -o-transform: scale(2.95);
-  transform: scale(2.95);
-  position:relative;
-  /*margin-bottom: 55px;*/
-  margin-left: 70px;
-  z-index:100;
   }
 
   .links {

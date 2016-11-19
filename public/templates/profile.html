@@ -6,17 +6,20 @@
         <h2 class="text-green">{{main.userData.username}}'s strains</h2>
       </div>
       <div class="text-blue links myFont">
-        <a href="#/explore">Explore Strains</a> | <a href="/logout">Log-out</a>
+        <a href="/logout">Log-out</a>
       </div>
 
       <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
       <div class="strainList">
 
-        <h6 class="little-blurb">Click "Add Strain" button or explore strain database to add strains.</h6>
+        <h6 class="little-blurb">Click "Add New Strain" button to add a specific strain or "Explore Strain Database" to add strains.</h6>
         <!-- ADD NEW STRAIN BUTTON TRIGGERS MODAL -->
-        <button type="button" class="btn btn-success btn-lg green new-strain t-shadow" data-toggle="modal" data-target="#myModal">
+        <a type="button" class="get-started" data-toggle="modal" data-target="#myModal" href="">
           Add New Strain
-        </button>
+        </a>
+        <a type="button" class="get-started" href="#/explore">
+          Explore Strain Database
+        </a>
         <input class="form-control input" type="text" placeholder="Search by name..." ng-model="main.strainFilter.name">
         <select class="input filter-drop" type="text" placeholder="Search positive effects..." ng-model="main.strainFilter.goodEffects">
           <option value="" disabled selected>Filter by positive effect</option>

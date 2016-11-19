@@ -9,7 +9,7 @@ function homeController($http, strainFactory, usersFactory, $location) {
   home.quoteArray = [
     '“When you smoke the herb, it reveals you to yourself.”―Bob Marley',
     '“The biggest killer on the planet is stress and I still think the best medicine is and always has been cannabis.”-Willie Nelson',
-    '““Make the most of the Indian Hemp Seed and sow it everywhere.”-George Washington',
+    '“Make the most of the Indian Hemp Seed and sow it everywhere.”-George Washington',
     '"Of course I know how to roll a joint."―Martha Stewart',
     '“When I was a kid I inhaled frequently. That was the point.”―Barack Obama',
     '“Marijuana is a flower. God put it here…”―Willie Nelson',
