@@ -4,7 +4,7 @@ var Routes = require('./routes.js');
 var mongoose = require('mongoose');
 // create an express APP object
 var app = express();
-var PORT = process.env.PORT || 80;
+var PORT = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
 var sessions = require('client-sessions')({
         cookieName: "strains-session",  // front-end cookie name, currently pulled from package.json, feel free to change

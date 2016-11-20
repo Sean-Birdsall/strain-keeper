@@ -1,5 +1,7 @@
 body {
   text-align: center;
+  font-size: 11px;
+  min-width: 320px;
 }
 
 .log-head {
@@ -14,6 +16,7 @@ body {
 
 .mission {
   margin: 15px;
+  font-size: 125%;
 }
 
 .get-started {
@@ -21,7 +24,7 @@ body {
   background-color: #449D44;
   border-radius: 5px;
   color: white;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Michroma', cursive;
   box-sizing: border-box;
   margin: 5px 15px;
   padding: 10px;
@@ -42,11 +45,11 @@ body {
 .home-card-head {
   /*height: 78px;*/
   text-align: center;
-  font-size: 28px;
+  font-size: 21px;
 }
 
 .display-strain-pic {
-  height: 65px;
+  height: 75px;
   border-radius: 5px;
   position: absolute;
   right: 20px;
@@ -55,6 +58,8 @@ body {
 .home-report-link {
   display: block;
   text-align: center;
+  position: relative;
+  bottom: 5px;
 }
 
 .barchart {
@@ -73,6 +78,7 @@ body {
   background-color: #2A7FFF;
   color: white;
   white-space: nowrap;
+  font-family: sans-serif;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   padding-left: 5px;
@@ -101,12 +107,12 @@ body {
 nav {
   background-color: #449D44;
   color: white;
-  height: 50px;
+  height: 35px;
 }
 
 nav h1 {
   margin: 0;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Michroma', cursive;
 
 }
 
@@ -136,6 +142,7 @@ nav h1 {
 .filter-drop {
   color: #999;
   width: 80%;
+  font-size: 125%;
   margin: 10px;
 }
 
@@ -148,7 +155,8 @@ nav h1 {
 }
 
 .little-blurb {
-  margin: 0 10px;
+  margin: 10px 10px;
+  font-size: 125%;
 }
 
 .links {
@@ -164,11 +172,11 @@ nav h1 {
 
 .intro {
   padding: 5px;
+  font-size: 130%;
 }
 
 .strain a {
   color: #f46b6b;
-  font-size: 125%;
 }
 
 #nav-menu {
@@ -191,8 +199,8 @@ nav h1 {
 }
 
 .intro span {
-  font-size: 150%;
-  font-family: 'Permanent Marker', cursive;
+  font-size: 120%;
+  font-family: 'Michroma', cursive;
   color: #449D44;
 }
 
@@ -205,14 +213,26 @@ nav h1 {
   border-radius: 15px;
   box-sizing: border-box;
   margin: 5px auto;
-  padding: 10px;
+  padding: 8px;
   text-align: left;
   position: relative;
   width: 310px;
-  height: 230px;
-  font-family: 'Permanent Marker', cursive;
+  height: 198px;
+  font-family: 'Michroma', cursive;
   box-shadow: 0 4px 8px 0 rgba(0, 0 , 0, 0.3), 0 6px 20px 0
 	rgba(0, 0, 0, 0.19);
+}
+
+h1 {
+  font-size: 25px;
+}
+
+h3 {
+  font-size: 17px;
+}
+
+h4 {
+  font-size: 14px;
 }
 
 .green {
@@ -256,7 +276,7 @@ h5 {
   margin: 0;
   color: #449D44;
   border-bottom: solid 1px #449D44;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Michroma', cursive;
 }
 
 .eff {
@@ -282,7 +302,7 @@ h5 {
 }
 
 .strainList {
-  margin-top: 20px;
+  margin-top: 10px;
   clear: both;
 }
 
@@ -294,7 +314,7 @@ h5 {
 .strainList button {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Michroma', cursive;
   width: 250px;
 }
 
@@ -318,12 +338,12 @@ h5 {
 }
 
 .strainHead {
-  height: 165px;
-  margin-right: 75px;
+  height: 136px;
+  margin-right: 85px;
 }
 
 .myFont {
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Michroma', cursive;
 }
 
 .triangle {
@@ -368,6 +388,10 @@ h5 {
 
 .edit-strain h2, .edit-strain h4, .edit-strain h1 {
   margin: 0;
+}
+
+h2 {
+  font-size: 20px;
 }
 
 .modal-header input {
@@ -523,6 +547,7 @@ h5 {
 .screen-flash h2 {
   font-family: cursive;
   margin: 0 15px;
+  font-size: 400%;
 }
 
 .screen-flash img {
@@ -541,6 +566,15 @@ h5 {
   text-align: left;
 }
 
+@media all and (min-width: 416px){
+
+  .links {
+    clear: none;
+    text-align: left;
+  }
+
+}
+
 @media all and (min-width: 627px){
   .strain {
     display: inline-block;
@@ -555,10 +589,7 @@ h5 {
     font-size: 125%;
   }
 
-  .links {
-    clear: none;
-    text-align: left;
-  }
+
 }
 
 @media all and (min-width: 1005px){
