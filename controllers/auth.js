@@ -43,6 +43,7 @@ module.exports = {
     // when this function fires it is going to hit the pre save middleware
     newUser.save((err, user) => {
       if(err){
+        console.log('Heres your error!!!!!!!!!!');
         return res.send(err);
       }
       res.send(user);

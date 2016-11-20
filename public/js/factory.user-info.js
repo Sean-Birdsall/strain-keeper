@@ -35,9 +35,13 @@ function usersFactory ($http, $location) {
 
         return $http.post('/register', newUser)
           .then(function(res){
-            userData = res.data;
-            $location.url('/login');
-            alert('Thank you for Registering, Please Log-in to get started');
+            console.log(res.data);
+            if(res.data.errmsg){
+              alert('There is already a user with that username or email address. Please try again');
+            } else {
+              $location.url('/login');
+              alert('Thank you for Registering, Please Log-in to get started');
+            }
           }, function(err){
             console.log(err);
           });

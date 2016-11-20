@@ -103,7 +103,7 @@
     <div class='strain green' ng-show="main.isThereStrains" ng-repeat="strain in main.userData.strainArray | filter: main.strainFilter track by $index">
       <div class="strainHead t-shadow">
         <h1>{{ strain.name }}</h1>
-        <img class="strain-img zoom" ng-click="main.showInfo()" ng-srcset="{{ strain.image }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">
+        <img class="strain-img" ng-click="main.showInfo()" ng-srcset="{{ strain.image }}" alt="marijuana strain {{ strain.name }}" data-toggle="modal" data-target="#modal{{ strain.strainId }}">
         <h3>- {{ strain.type }}</h3>
       </div>
 

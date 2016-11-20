@@ -86,7 +86,7 @@
 
             <div class="data-report margin-center">
               <h4>{{ strain.dataName }}</h4>
-              <img ng-srcset="{{ strain.image }}">
+              <img ng-srcset="{{ strain.image }}" alt="marijuana strain {{ strain.name }}">
               <div class="report-info">
                 <h6>There are {{ strain.reviewCount }} reviews online</h6>
                 <a href="{{strain.dataUrl}}" target="_blank">Read the Cannabis Report</a>
@@ -109,6 +109,8 @@
     </div>
     <!-- END MODAL -->
   </div>
+
+  <h2>Don't see the strain you're looking for? Add it from your <a href="#/profile">'My Strains'</a> page.</h2>
 
   <img class="loading" src="../resources/loading1.gif" dynsrc="../resources/loading1.gif" loop="infinite" ng-if="home.loading">
 

@@ -21,7 +21,7 @@
       <div class='strain green' ng-repeat="strain in home.displayStrains track by $index">
           <h1 class="home-card-head t-shadow">{{ strain.name }}</h1>
           <h4 class="t-shadow">Rating - {{ strain.avgRating }} &nbsp;&nbsp;&nbsp; {{ strain.type }} </h4>
-          <img class="display-strain-pic" ng-srcset="{{ strain.image }}">
+          <img class="display-strain-pic" ng-srcset="{{ strain.image }}" alt="marijuana strain {{ strain.name }}">
           <table class="barchart t-shadow">
             <tr ng-repeat="effect in strain.effectsArray | orderBy: '-percent' | limitTo: 5" ng-show="effect.value > 0">
               <td class="right-align">{{ effect.effectName }}</td>
