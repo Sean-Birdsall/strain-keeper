@@ -8,6 +8,26 @@ function mainController(usersFactory, $http, $location) {
 
   var main = this;
 
+  main.quoteArray = [
+    'https://cdn.pixabay.com/photo/2016/07/27/16/47/marijuana-1545759_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2015/11/25/20/42/cannabis-1062904_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2015/05/09/17/29/weed-759987_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2016/09/30/23/51/plant-1706651_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2016/09/30/23/53/plant-1706657_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2016/05/10/02/45/cannabis-1382955_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2016/09/06/04/59/green-1648353_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2015/11/25/20/43/seedling-1062908_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2016/05/26/20/44/cannabis-1418325_960_720.jpg',
+    'https://cdn.pixabay.com/photo/2013/04/08/14/22/marijuana-101796_960_720.jpg'
+  ];
+
+  main.displayQuote = main.quoteArray[getRandomInt(0,9)];
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 
 
   main.goodEffects = [];
@@ -32,7 +52,7 @@ function mainController(usersFactory, $http, $location) {
            setTimeout(function(){
              $('.screen-flash').addClass("screen-fade")
 
-           }, 1000);
+           }, 3000);
            main.loading = false;
 
 
