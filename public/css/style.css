@@ -107,7 +107,7 @@ body {
 nav {
   background-color: #449D44;
   color: white;
-  height: 35px;
+  height: 100px;
 }
 
 nav h1 {
@@ -121,22 +121,17 @@ nav h1 {
   margin: auto;
   padding-top: 5px;
   max-width: 693px;
-  text-align: left;
 }
 
 .user h2 {
   padding-bottom: 5px;
-  padding-left: 100px;
   border-bottom: solid 3px #2A7FFF;
 }
 
 .profile-pic {
-  width: 100px;
+  width: 150px;
   border-radius: 15px;
-  float: left;
-  margin-left: -6px;
-  position: relative;
-  top: 5px;
+  margin: 10px;
 }
 
 .filter-drop {
@@ -160,9 +155,8 @@ nav h1 {
 }
 
 .links {
- /*width: 95%;*/
  margin: auto;
- clear: left;
+ clear: both;
 }
 
 .links a {
@@ -551,7 +545,7 @@ h2 {
 }
 
 .screen-flash img {
-  width: 95%;
+  width: 75%;
   max-width: 600px;
   border-radius: 5px;
 
@@ -560,15 +554,6 @@ h2 {
 .screen-fade {
   opacity: 0;
   z-index: -1;
-}
-
-@media all and (min-width: 416px){
-
-  .links {
-    clear: none;
-    text-align: left;
-  }
-
 }
 
 @media all and (min-width: 627px){
