@@ -107,7 +107,7 @@ body {
 nav {
   background-color: #449D44;
   color: white;
-  height: 100px;
+  height: 95px;
 }
 
 nav h1 {
@@ -131,7 +131,7 @@ nav h1 {
 .profile-pic {
   width: 150px;
   border-radius: 15px;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .filter-drop {
@@ -147,6 +147,7 @@ nav h1 {
 
 .form-control {
   border: none;
+  box-shadow: none;
 }
 
 .little-blurb {
