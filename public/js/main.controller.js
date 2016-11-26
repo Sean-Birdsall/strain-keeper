@@ -11,8 +11,6 @@ function mainController(usersFactory, $http, $location) {
   main.goodEffects = [];
   main.badEffects = [];
 
-  $('.effect-check').prop('disabled', true);
-
   // FIND OUT ABOUT THE USER WHO LOGGED IN
   var idToGet;
 
@@ -296,12 +294,10 @@ catch(err) {
           return element.name == $event.srcElement.dataset.name;
         });
 
-        console.log(updatedStrain);
-
 
         $http.put('/strains', updatedStrain)
           .then(function(response){
-            console.log('StrainDB update request sent');
+
           }, function(err){
             console.log(err);
           })
@@ -323,7 +319,7 @@ catch(err) {
         $http.put('/users', main.userData)
           .then(
             function(response){
-              console.log('Strain Update Request Sent');
+
             },
             function(err){
               if (err) {

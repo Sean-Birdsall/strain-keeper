@@ -1,6 +1,6 @@
      <div class="screen-flash"><img src="../resources/logo2.png" alt="Strain keeper logo"><p class="myFont" style="font-size: 18px;">Getting your strains</p></div>
     <main>
-      
+
       <div class="user myFont">
         <h2 class="text-green">{{main.userData.username}}'s strains</h2>
       </div>
@@ -116,9 +116,9 @@
 
       <!-- EFFECTS DIV INSIDE STRAIN ITEM -->
       <div class='eff t-shadow'>
-        <h5 class="eff-head">The Good:</h5>
+        <h5 class="eff-head">Positive:</h5>
         <aside ng-repeat="goodEffect in strain.goodEffects">{{ goodEffect }}</aside>
-        <h5 class="eff-head">The Bad:</h5>
+        <h5 class="eff-head">Negative:</h5>
         <aside ng-repeat="badEffect in strain.badEffects">{{ badEffect }}</aside>
       </div>
 
