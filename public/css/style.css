@@ -4,14 +4,16 @@ body {
   min-width: 320px;
 }
 
+.beta {
+	position: absolute;
+	top: 40px;
+	margin-left: 10px;
+}
+
 .log-head {
   margin-top: 0;
   padding-top: 5px;
   text-decoration: underline;
-}
-
-.search-filter{
-
 }
 
 .mission {
@@ -36,6 +38,25 @@ body {
 .get-started:hover {
   color: white;
   text-decoration: none;
+}
+
+.get-started:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.profile-edit {
+	display: inline-block;
+	width: 80%;
+}
+
+.glyphicon-pencil {
+	position: absolute;
+	top: 10px;
+	right: 50px;
+	font-size: 125%;
+	cursor: pointer;
+
 }
 
 .home-head {
@@ -78,6 +99,7 @@ body {
   background-color: #2A7FFF;
   color: white;
   white-space: nowrap;
+	height: 13px;
   font-family: sans-serif;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
@@ -368,6 +390,7 @@ h5 {
 .input {
     border: none;
     border-bottom: 2px solid #449D44;
+		font-size: 125%;
 }
 
 .edit-strain {

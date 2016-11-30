@@ -61,7 +61,7 @@ module.exports = {
   },
   updateUser: (req, res) => {
     // console.log(req.body);
-    User.update({ username: req.body.username}, req.body, (err, user) => {
+    User.update({ _id: req.body._id}, req.body, (err, user) => {
       if (err) {
         console.error(err);
       } else {

@@ -5,8 +5,47 @@
         <h2 class="text-green">{{main.userData.username}}'s strains</h2>
       </div>
       <div class="text-blue links myFont">
-        <a href="/logout">Log-out</a>
+        <a href="/logout">Log-out</a> | <a data-target="#profileModal" data-toggle="modal">Profile Info</a>
       </div>
+      
+      <!-- MODAL -->
+      <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title myFont" id="myModalLabel">Profile Information</h4>
+            </div>
+            <div class="modal-body">
+
+              <!-- NEW STRAIN FORM -->
+              <form>
+                <div class="profile-edit">
+                  <h4>Username:</h4>
+                  <h4 class="myFont text-blue" ng-show="!main.editingProfile">{{ main.userData.username }}</h4>
+                  <input type="text" placeholder="Username" ng-model="main.userData.username" class="myFont input"
+                         ng-show="main.editingProfile" ng-blur="main.editingProfile = false">
+                  <h4>Email:</h4>
+                  <h4 class="myFont text-blue" ng-show="!main.editingProfile">{{ main.userData.email }}</h4>
+                  <input type="text" placeholder="Email" ng-model="main.userData.email" class="myFont input"
+                         ng-show="main.editingProfile"  ng-blur="main.editingProfile = false">
+                  <span class="glyphicon glyphicon-pencil"  ng-click="main.editingProfile = !main.editingProfile"></span>
+                </div>
+                  <h4>Strains Added:</h4>
+                  <h4 class="myFont text-blue">{{ main.userData.strainArray.length }}</h4>  
+              </form>
+              <!-- END STRAIN FORM -->
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success green" ng-click="main.updateProfile()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL -->
+
 
       <!-- SEARCH AND FILTER THROUGH YOUR STRAINS -->
       <div class="strainList">

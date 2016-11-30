@@ -42,7 +42,7 @@
     <table class="barchart t-shadow">
       <tr ng-repeat="effect in strain.effectsArray | orderBy: '-percent' | limitTo: 5" ng-show="effect.value > 0">
         <td class="right-align">{{ effect.effectName }}</td>
-        <td class="chart-spot"><div class="chart-bar" style="width: {{ effect.percent }}%" ng-class="{red: effect.isBad }">{{ effect.percent }}% </div></td>
+        <td class="chart-spot"><div class="chart-bar" style="width: {{ effect.percent }}%" ng-class="{red: effect.isBad }"> </div></td>
       </tr>
     </table>
     <a class="home-report-link t-shadow" href="{{ strain.dataUrl }}" target="_blank">Read the Cannabis Report</a>

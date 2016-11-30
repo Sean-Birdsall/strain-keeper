@@ -37,6 +37,7 @@ function mainController(usersFactory, $http, $location) {
   main.editingType = false;
   main.editingRating = false;
   main.editingGoodEffects = false;
+  main.editingProfile = false;
 
   // GOOD EFFECTS USERS CAN CHOOSE FROM ADD NEW STRAIN FORM
   main.effects = [
@@ -91,6 +92,27 @@ function mainController(usersFactory, $http, $location) {
   ///////////////////////////////////////////////////////////////////////////
   ////////////////////     FUNCTIONS     ////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////
+        
+  ///////////////////////////////////////////////////////////////////////////
+  ////////////////////     UPDATE PROFILE    ////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+        
+  main.updateProfile = function() {
+    console.log(main.userData);
+    $("#profileModal").modal('hide');
+    
+    $http.put('/users', main.userData)
+          .then(
+            function(response){
+              console.log('request from front-end worked');
+            },
+            function(err){
+              if (err) {
+                console.log(err);
+              }
+            }
+          );
+  }
 
   ///////////////////////////////////////////////////////////////////////////
   ////////////////////     ACTIVE TYPE FILTER     ///////////////////////////
