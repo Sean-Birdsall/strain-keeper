@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var lame = require('./lame.js');
 // create an express APP object
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 80;
 var bodyParser = require('body-parser');
 var sessions = require('client-sessions')({
         cookieName: "strains-session",  // front-end cookie name, currently pulled from package.json, feel free to change
@@ -31,7 +31,7 @@ app.use(bodyParser.json(), bodyParser.urlencoded({extended: true}));
 Routes(app);
 
 // listen for connections
-app.listen(PORT, '0.0.0.0', (error) => {
+app.listen(PORT, (error) => {
   if (error){
     console.log('Server Error: ', error);
   } else {
