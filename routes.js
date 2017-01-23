@@ -30,8 +30,6 @@ module.exports = (app) => {
     res.send(req.session.userId);
   })
 
-  app.get('/users', Auth.getUsers);
-
   app.get('/api/strains', (req, res) => {
     // set up options object to add api key
     var options = {

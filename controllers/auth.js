@@ -70,15 +70,6 @@ module.exports = {
     });
     res.send('Profile updated');
   },
-  getUsers: (req, res) => {
-    User.find({}, (err, users) => {
-      if (err){
-        console.error(err);
-      } else {
-        res.send(users);
-      }
-    });
-  },
 
   findUser: (req, res) => {
 
